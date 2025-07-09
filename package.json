@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prepare": "husky && chmod ug+x .husky/*",
+    "prepare": "husky install && chmod ug+x .husky/*",
     "format:fix": "prettier --write ."
   },
   "dependencies": {
@@ -31,6 +31,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "prettier": "3.6.2",
+    "sass": "^1.89.2",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.35.1",
     "vite": "^7.0.3"
