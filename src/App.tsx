@@ -1,10 +1,14 @@
 import s from './styles/App.module.scss';
 import SearchForm from './components/SearchForm/SearchForm.tsx';
 import React from 'react';
-import type { Item } from './models/item.ts';
+import type {
+  AllItems,
+  ResultsProperties,
+  SearchItems,
+} from './models/index.ts';
 
-interface AppState {
-  items: Item[];
+export interface AppState {
+  items: ResultsProperties[];
 }
 
 type AppProps = Record<string, never>;
@@ -15,14 +19,21 @@ class App extends React.Component<AppProps, AppState> {
     this.state = { items: [] };
   }
 
-  handleSubmit = () => {
-    fetch(`https://swapi.tech/api/people/?page=1`)
+  handleSubmit = (search: string) => {
+    fetch(`https://swapi.tech/api/people/?limit=10&name=${search}`)
       .then((res) => res.json())
-      .then((res) => {
-        this.setState({ items: res.results }, () => {
-          console.log('Updated state:', this.state);
-        });
-      });
+      .then((res: SearchItems | AllItems) => {
+        const items =
+          'result' in res
+            ? res.result.map((item) => ({
+                ...item.properties,
+                uid: item.uid,
+              }))
+            : res.results;
+
+        this.setState({ items: items });
+      })
+      .catch((err) => console.error(err));
   };
 
   render() {

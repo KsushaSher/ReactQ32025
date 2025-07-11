@@ -12,7 +12,7 @@ interface State {
 class SearchForm extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = { search: '' };
+    this.state = { search: localStorage.getItem('search') || '' };
   }
 
   componentDidMount(): void {
@@ -22,12 +22,24 @@ class SearchForm extends React.Component<Props, State> {
   handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     this.props.onSubmit(this.state.search);
+    localStorage.setItem('search', this.state.search);
   };
+
+  handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ search: e.target.value }, () => {
+      localStorage.setItem('search', this.state.search);
+    });
+  };
+
   render() {
     return (
       <form className={s['search-form']} onSubmit={this.handleOnSubmit}>
-        <input placeholder="search" defaultValue={this.state.search} />
-        <button type="button">Search</button>
+        <input
+          placeholder="search"
+          value={this.state.search}
+          onChange={this.handleOnChange}
+        />
+        <button type="submit">Search</button>
       </form>
     );
   }
