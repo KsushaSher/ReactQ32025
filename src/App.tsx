@@ -7,9 +7,11 @@ import type {
 } from './models/index.ts';
 import React from 'react';
 import { CardList } from './components/CardList';
+import Spinner from './components/Spinner/Spinner.tsx';
 
 export interface AppState {
   items: ResultsProperties[];
+  loading: boolean;
 }
 
 type AppProps = Record<string, never>;
@@ -17,11 +19,12 @@ type AppProps = Record<string, never>;
 class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
-    this.state = { items: [] };
+    this.state = { items: [], loading: false };
   }
 
   handleSubmit = (search: string) => {
-    fetch(`https://swapi.tech/api/people/?limit=10&name=${search}`)
+    this.setState({ loading: true });
+    fetch(`https://swapi.tech/api/people/?page=1&limit=10&name=${search}`)
       .then((res) => res.json())
       .then((res: SearchItems | AllItems) => {
         const items =
@@ -32,14 +35,15 @@ class App extends React.Component<AppProps, AppState> {
               }))
             : res.results;
 
-        this.setState({ items: items });
+        this.setState({ items: items, loading: false });
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        this.setState({ loading: false });
+        console.error(err);
+      });
   };
 
   render() {
-    console.log(this.state.items);
-
     return (
       <main>
         <header className={s.header}>
@@ -48,7 +52,11 @@ class App extends React.Component<AppProps, AppState> {
           </div>
         </header>
         <section>
-          <CardList items={this.state.items} />
+          {this.state.loading ? (
+            <Spinner />
+          ) : (
+            <CardList items={this.state.items} />
+          )}
         </section>
       </main>
     );
