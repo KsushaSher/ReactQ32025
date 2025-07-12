@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './SearchForm.module.scss';
+import s from './Search.module.scss';
 
 interface Props {
   onSubmit: (search: string) => void;
@@ -9,7 +9,7 @@ interface State {
   search: string;
 }
 
-class SearchForm extends React.Component<Props, State> {
+class Search extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { search: localStorage.getItem('search') || '' };
@@ -45,4 +45,4 @@ class SearchForm extends React.Component<Props, State> {
   }
 }
 
-export default SearchForm;
+export default Search;

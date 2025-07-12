@@ -1,11 +1,12 @@
 import s from './styles/App.module.scss';
-import SearchForm from './components/SearchForm/SearchForm.tsx';
-import React from 'react';
+import { Search } from './components/Search';
 import type {
   AllItems,
   ResultsProperties,
   SearchItems,
 } from './models/index.ts';
+import React from 'react';
+import { CardList } from './components/CardList';
 
 export interface AppState {
   items: ResultsProperties[];
@@ -37,27 +38,17 @@ class App extends React.Component<AppProps, AppState> {
   };
 
   render() {
+    console.log(this.state.items);
+
     return (
       <main>
         <header className={s.header}>
           <div className={s.wrapper}>
-            <SearchForm onSubmit={this.handleSubmit} />
+            <Search onSubmit={this.handleSubmit} />
           </div>
         </header>
         <section>
-          <div className={s.wrapper}>
-            {this.state.items.length === 0 ? (
-              <p>No results found</p>
-            ) : (
-              <ul>
-                {this.state.items.map((item) => (
-                  <li key={item.url}>
-                    <strong>{item.name}</strong>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+          <CardList items={this.state.items} />
         </section>
       </main>
     );
