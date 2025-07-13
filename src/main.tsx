@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client';
-import './index.css';
 import App from './App.tsx';
 import React from 'react';
+import './styles/normalize.css';
 
 const rootElement = document.getElementById('root');
 

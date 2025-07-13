@@ -1,3 +1,21 @@
+@use './constants' as *;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Montserrat, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $color-tag-purple;
+
+  background-color: rgb(238 198 134);
+}
+
 .input {
   width: 200px;
   padding: 6px 8px;
