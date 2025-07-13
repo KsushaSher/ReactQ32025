@@ -26,6 +26,10 @@ class ErrorBoundary extends React.Component<IProps, IState> {
     console.error('Error caught in boundary: ', error, errorInfo);
   }
 
+  handleClick = () => {
+    this.setState({ hasError: false });
+  };
+
   render() {
     if (this.state.hasError) {
       return (
@@ -38,6 +42,9 @@ class ErrorBoundary extends React.Component<IProps, IState> {
             {this.state.errorInfo?.componentStack}
           </details>
           <a href="/">Home</a>
+          <button className="button light" onClick={this.handleClick}>
+            Clear error
+          </button>
         </div>
       );
     }

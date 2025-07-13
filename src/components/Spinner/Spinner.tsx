@@ -6,7 +6,11 @@ type State = Record<string, never>;
 
 class Spinner extends React.Component<Props, State> {
   render() {
-    return <div className={s.loader}></div>;
+    return (
+      <div className={s['loader-wrapper']}>
+        <div className={s.loader}></div>
+      </div>
+    );
   }
 }
 

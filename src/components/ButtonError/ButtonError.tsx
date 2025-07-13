@@ -1,5 +1,4 @@
 import React from 'react';
-import s from './ButtonError.module.scss';
 
 interface State {
   hasError: boolean;
@@ -21,7 +20,7 @@ class ButtonError extends React.Component<Props, State> {
       throw new Error('Test error from button "Throw error"');
     }
     return (
-      <button className={s['button-error']} onClick={this.handleClick}>
+      <button className="button error" onClick={this.handleClick}>
         Throw error
       </button>
     );

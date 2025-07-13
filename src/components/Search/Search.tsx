@@ -35,11 +35,14 @@ class Search extends React.Component<Props, State> {
     return (
       <form className={s['search-form']} onSubmit={this.handleOnSubmit}>
         <input
+          className="input"
           placeholder="search"
           value={this.state.search}
           onChange={this.handleOnChange}
         />
-        <button type="submit">Search</button>
+        <button className="button default" type="submit">
+          Search
+        </button>
       </form>
     );
   }
