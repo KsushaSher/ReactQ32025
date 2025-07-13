@@ -1,5 +1,11 @@
 @use './constants' as *;
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: Montserrat, sans-serif;
   font-size: 18px;
@@ -7,7 +13,7 @@ body {
   line-height: 1.5;
   color: $color-tag-purple;
 
-  background-color: rgb(214 210 230);
+  background-color: rgb(238 198 134);
 }
 
 main {
@@ -35,23 +41,32 @@ main {
   width: 100%;
   height: 100px;
 
-  background-color: rgb(193 188 209);
+  background-color: rgb(215 136 57);
 }
 
 section {
+  overflow-x: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 
   width: 100vw;
-  height: calc(100vh - 100px);
-  padding-top: 110px;
+  margin: 0;
+  padding-top: 100px;
 }
 
 .wrapper {
+  display: flex;
+  align-items: flex-start;
+
   width: 1200px;
   margin: 0 auto;
   padding: 0 16px;
+
+  @media (width <= 480px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 
 .wrapper-header {

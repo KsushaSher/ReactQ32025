@@ -1,6 +1,22 @@
-.wrapper-cards {
-  height: 200px;
+.card {
+  width: 220px;
+  height: 220px;
   padding: 10px;
-  border-radius: 2px;
-  background-color: rgb(81 96 213);
+  background-color: rgb(243 237 191);
+}
+
+.img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+}
+
+.accent {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.neutral {
+  font-size: 16px;
+  font-weight: 300;
 }

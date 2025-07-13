@@ -1,10 +1,6 @@
 import s from './styles/App.module.scss';
 import { Search } from './components/Search';
-import type {
-  AllItems,
-  ResultsProperties,
-  SearchItems,
-} from './models/index.ts';
+import type { Item, Response } from './models';
 import React from 'react';
 import { CardList } from './components/CardList';
 import Spinner from './components/Spinner/Spinner.tsx';
@@ -12,7 +8,7 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { ButtonError } from './components/ButtonErrorBoundary';
 
 export interface AppState {
-  items: ResultsProperties[];
+  items: Item[];
   loading: boolean;
 }
 
@@ -26,18 +22,10 @@ class App extends React.Component<AppProps, AppState> {
 
   handleSubmit = (search: string) => {
     this.setState({ loading: true });
-    fetch(`https://swapi.tech/api/people/?page=1&limit=10&name=${search}`)
+    fetch(`https://rickandmortyapi.com/api/character/?name=${search}`)
       .then((res) => res.json())
-      .then((res: SearchItems | AllItems) => {
-        const items =
-          'result' in res
-            ? res.result.map((item) => ({
-                ...item.properties,
-                uid: item.uid,
-              }))
-            : res.results;
-
-        this.setState({ items: items, loading: false });
+      .then((res: Response) => {
+        this.setState({ items: res.results, loading: false }, () => {});
       })
       .catch((err) => {
         this.setState({ loading: false });

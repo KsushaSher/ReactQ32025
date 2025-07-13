@@ -1,12 +1,12 @@
 import React from 'react';
-import type { ResultsProperties } from '../../models';
+import type { Item } from '../../models';
 import { Card } from '../Card';
 import s from './CardList.module.scss';
 
 type State = Record<string, never>;
 
 export interface Props {
-  items: ResultsProperties[];
+  items: Item[];
 }
 
 class CardList extends React.Component<Props, State> {
@@ -18,7 +18,7 @@ class CardList extends React.Component<Props, State> {
         ) : (
           <div className={s['wrapper-cards']}>
             {this.props.items.map((item) => (
-              <Card item={item} key={item.url} />
+              <Card item={item} key={item.id} />
             ))}
           </div>
         )}
