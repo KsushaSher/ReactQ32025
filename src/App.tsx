@@ -8,6 +8,8 @@ import type {
 import React from 'react';
 import { CardList } from './components/CardList';
 import Spinner from './components/Spinner/Spinner.tsx';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { ButtonError } from './components/ButtonErrorBoundary';
 
 export interface AppState {
   items: ResultsProperties[];
@@ -45,20 +47,23 @@ class App extends React.Component<AppProps, AppState> {
 
   render() {
     return (
-      <main>
-        <header className={s.header}>
-          <div className={s.wrapper}>
-            <Search onSubmit={this.handleSubmit} />
-          </div>
-        </header>
-        <section>
-          {this.state.loading ? (
-            <Spinner />
-          ) : (
-            <CardList items={this.state.items} />
-          )}
-        </section>
-      </main>
+      <ErrorBoundary>
+        <main>
+          <header className={s.header}>
+            <div className={`${s.wrapper} ${s['wrapper-header']}`}>
+              <Search onSubmit={this.handleSubmit} />
+              <ButtonError />
+            </div>
+          </header>
+          <section>
+            {this.state.loading ? (
+              <Spinner />
+            ) : (
+              <CardList items={this.state.items} />
+            )}
+          </section>
+        </main>
+      </ErrorBoundary>
     );
   }
 }
