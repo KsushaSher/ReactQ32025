@@ -4,7 +4,6 @@ import s from './ErrorBoundary.module.scss';
 interface IProps {
   children: React.ReactNode;
 }
-
 interface IState {
   hasError: boolean;
   error: Error | null;
