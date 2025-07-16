@@ -1,9 +1,9 @@
-import { Header } from '../Header';
-import { Section } from '../Section';
+import { Header } from '../../components/Header';
+import { Section } from '../../components/Section';
 import type { Item } from '../../models';
 import React from 'react';
-import { Search } from '../Search';
-import { CardList } from '../CardList';
+import { Search } from '../../components/Search';
+import { CardList } from '../../components/CardList';
 
 type Props = Record<string, never>;
 
@@ -13,7 +13,7 @@ interface State {
   error: string;
 }
 
-class Main extends React.Component<Props, State> {
+class MainPage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { items: [], loading: false, error: '' };
@@ -44,16 +44,18 @@ class Main extends React.Component<Props, State> {
 
   render() {
     return (
-      <main>
+      <>
         <Header>
           <Search onSubmit={this.handleSubmit} />
         </Header>
-        <Section loading={this.state.loading} error={this.state.error}>
-          <CardList items={this.state.items} />
-        </Section>
-      </main>
+        <main>
+          <Section loading={this.state.loading} error={this.state.error}>
+            <CardList items={this.state.items} />
+          </Section>
+        </main>
+      </>
     );
   }
 }
 
-export default Main;
+export default MainPage;
