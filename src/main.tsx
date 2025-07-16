@@ -8,6 +8,7 @@ const rootElement = document.getElementById('root');
 if (!rootElement) {
   throw new Error('There is no such element');
 }
+
 createRoot(rootElement).render(
   <React.StrictMode>
     <App />

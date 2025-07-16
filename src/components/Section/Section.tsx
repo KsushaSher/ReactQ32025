@@ -15,6 +15,7 @@ interface State {
 class Section extends React.Component<Props, State> {
   render() {
     const { children, loading, error } = this.props;
+
     return (
       <section>
         {loading ? (

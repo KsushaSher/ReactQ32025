@@ -25,10 +25,13 @@ class Main extends React.Component<Props, State> {
       const response = await fetch(
         `https://rickandmortyapi.com/api/character/?page=1&name=${search}`
       );
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+
       const data = await response.json();
+
       this.setState({ items: data.results, loading: false });
     } catch (error) {
       this.setState({

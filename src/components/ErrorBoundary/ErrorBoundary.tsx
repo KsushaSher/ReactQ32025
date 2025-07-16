@@ -47,6 +47,7 @@ class ErrorBoundary extends React.Component<IProps, IState> {
         </div>
       );
     }
+
     return this.props.children;
   }
 }

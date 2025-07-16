@@ -19,6 +19,7 @@ class ButtonError extends React.Component<Props, State> {
     if (this.state?.hasError) {
       throw new Error('Test error from button "Throw error"');
     }
+
     return (
       <button className="button error" onClick={this.handleClick}>
         Throw error
