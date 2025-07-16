@@ -1,9 +1,9 @@
 import { Header } from '../../components/Header';
 import { Section } from '../../components/Section';
 import type { Item } from '../../models';
-import React from 'react';
 import { Search } from '../../components/Search';
 import { CardList } from '../../components/CardList';
+import React from 'react';
 
 type Props = Record<string, never>;
 
@@ -25,6 +25,10 @@ class MainPage extends React.Component<Props, State> {
       const response = await fetch(
         `https://rickandmortyapi.com/api/character/?page=1&name=${search}`
       );
+
+      if (!response.ok && response.status === 404) {
+        throw new Error(`No results found`);
+      }
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
