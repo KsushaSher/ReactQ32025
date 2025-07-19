@@ -1,7 +1,11 @@
 import { vi } from 'vitest';
-import type { Item } from '../models';
+import type { Item } from '../../models';
 
 export const mockOnSubmit = vi.fn();
+export const consoleError = vi
+  .spyOn(console, 'error')
+  .mockImplementation(() => {});
+
 export const mockItems: Item[] = [
   {
     id: 1,

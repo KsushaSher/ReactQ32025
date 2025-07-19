@@ -21,7 +21,9 @@ class Section extends React.Component<Props, State> {
         {loading ? (
           <Spinner data-testid="spinner" />
         ) : error ? (
-          <div className={s['error-message']}>{error}</div>
+          <div className={s['error-message']} data-testid="error">
+            {error}
+          </div>
         ) : (
           children
         )}

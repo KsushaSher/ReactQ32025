@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import Search from './Search';
 import userEvent from '@testing-library/user-event';
-import { mockOnSubmit } from '../../__tests__/mock';
+import { mockOnSubmit } from '../../__tests__/mocks/mock';
 
 describe('Rendering Tests', () => {
   afterEach(() => {

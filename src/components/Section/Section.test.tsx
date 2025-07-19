@@ -21,3 +21,16 @@ describe('Rendering Tests', () => {
     expect(screen.getByText('Children')).toBeInTheDocument();
   });
 });
+
+describe('Error Handling Tests', () => {
+  it('Displays error message when API call fails', () => {
+    render(
+      <Section loading={false} error={'error'}>
+        <div>Children</div>
+      </Section>
+    );
+
+    expect(screen.getByTestId('error')).toBeInTheDocument();
+    expect(screen.queryByText('Children')).not.toBeInTheDocument();
+  });
+});
