@@ -4,7 +4,6 @@ import * as matchers from '@testing-library/jest-dom/matchers';
 
 expect.extend(matchers);
 import { server } from './mocks/node.js';
-import { consoleError } from './mocks/mock.js';
 
 beforeAll(() => {
   server.listen();
@@ -12,7 +11,6 @@ beforeAll(() => {
 
 afterEach(() => {
   server.resetHandlers();
-  consoleError.mockRestore();
 });
 
 afterAll(() => {

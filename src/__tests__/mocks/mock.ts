@@ -3,10 +3,6 @@ import type { Item } from '../../models';
 
 export const mockOnSubmit = vi.fn();
 
-export const consoleError = vi
-  .spyOn(console, 'error')
-  .mockImplementation(() => {});
-
 export const BrokenComponent = () => {
   throw new Error('Error!');
 };

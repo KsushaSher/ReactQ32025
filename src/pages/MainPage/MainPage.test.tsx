@@ -3,19 +3,19 @@ import { http, HttpResponse } from 'msw';
 import { server } from '../../__tests__/mocks/node';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { consoleError } from '../../__tests__/mocks/mock';
 
 describe('Error Handling Tests', () => {
   let user: ReturnType<typeof userEvent.setup>;
+  let consoleErrorMock: ReturnType<typeof vi.spyOn>;
 
   beforeEach(() => {
+    consoleErrorMock = vi.spyOn(console, 'error').mockImplementation(() => {});
     user = userEvent.setup();
     localStorage.clear();
-    vi.restoreAllMocks();
   });
 
   afterEach(() => {
-    consoleError.mockRestore();
+    consoleErrorMock.mockRestore();
   });
 
   it('Shows appropriate error for 500 status code', async () => {
