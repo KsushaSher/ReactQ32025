@@ -21,7 +21,11 @@ class ButtonError extends React.Component<Props, State> {
     }
 
     return (
-      <button className="button error" onClick={this.handleClick}>
+      <button
+        className="button error"
+        onClick={this.handleClick}
+        data-testid="error-boundary"
+      >
         Throw error
       </button>
     );
