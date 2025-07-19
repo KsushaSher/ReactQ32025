@@ -19,7 +19,7 @@ class Section extends React.Component<Props, State> {
     return (
       <section>
         {loading ? (
-          <Spinner />
+          <Spinner data-testid="spinner" />
         ) : error ? (
           <div className={s['error-message']}>{error}</div>
         ) : (

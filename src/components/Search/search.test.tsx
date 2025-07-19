@@ -1,8 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import Search from './Search';
 import userEvent from '@testing-library/user-event';
-
-const mockOnSubmit = vi.fn();
+import { mockOnSubmit } from '../../__tests__/mock';
 
 describe('Rendering Tests', () => {
   afterEach(() => {

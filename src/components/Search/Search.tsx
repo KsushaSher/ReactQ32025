@@ -39,12 +39,12 @@ class Search extends React.Component<Props, State> {
           placeholder="search"
           value={this.state.search}
           onChange={this.handleOnChange}
-          data-testId="input"
+          data-testid="input"
         />
         <button
           className="button default"
           type="submit"
-          data-testId="button-search"
+          data-testid="button-search"
         >
           Search
         </button>
