@@ -5,7 +5,7 @@ interface State {
 }
 type Props = Record<string, never>;
 
-class ButtonError extends React.Component<Props, State> {
+class ErrorButton extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { hasError: false };
@@ -32,4 +32,4 @@ class ButtonError extends React.Component<Props, State> {
   }
 }
 
-export default ButtonError;
+export default ErrorButton;

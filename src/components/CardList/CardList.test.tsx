@@ -1,6 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
 import CardList from './CardList';
-import { mockItems } from '../../__tests__/mocks/mock';
+import { mockItems } from '../../test-utils/mocks/data';
 
 describe('CardList Rendering', () => {
   it('Renders correct number of items when data is provided', () => {

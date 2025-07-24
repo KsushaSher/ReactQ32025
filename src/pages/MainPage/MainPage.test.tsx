@@ -1,6 +1,6 @@
 import MainPage from './MainPage';
 import { http, HttpResponse } from 'msw';
-import { server } from '../../__tests__/mocks/node';
+import { server } from '../../test-utils/mocks/setup-server';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 

@@ -1,4 +1,4 @@
-import { BrokenComponent } from '../../__tests__/mocks/mock';
+import { BrokenComponent } from '../../test-utils/mocks/data';
 import ErrorBoundary from './ErrorBoundary';
 import { render, screen } from '@testing-library/react';
 

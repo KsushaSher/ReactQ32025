@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import ButtonError from './ButtonError';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import ErrorButton from './ErrorButton';
 import '@testing-library/jest-dom';
 import { describe, vi, afterEach, afterAll, test, expect } from 'vitest';
+import { ErrorBoundary } from '../ErrorBoundary';
 
 describe('Error Button Tests', () => {
   const user = userEvent.setup();
@@ -20,13 +20,13 @@ describe('Error Button Tests', () => {
   test('Throws error when test button is clicked', async () => {
     render(
       <ErrorBoundary>
-        <ButtonError />
+        <ErrorButton />
       </ErrorBoundary>
     );
 
-    const buttonErrorBoundary = screen.getByTestId('error-boundary');
+    const errorButtonBoundary = screen.getByTestId('error-boundary');
 
-    await user.click(buttonErrorBoundary);
+    await user.click(errorButtonBoundary);
 
     expect(screen.getByText(/something went wrong/i)).toBeInTheDocument();
     expect(consoleError).toHaveBeenCalled();

@@ -1,6 +1,6 @@
 import React from 'react';
-import Spinner from '../Spinner/Spinner';
 import s from './Section.module.scss';
+import { Spinner } from '../Spinner';
 
 interface Props {
   error?: string;

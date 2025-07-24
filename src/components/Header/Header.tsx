@@ -1,6 +1,6 @@
-import { ButtonError } from '../ButtonError';
 import React from 'react';
 import s from './Header.module.scss';
+import { ErrorButton } from '../ErrorButton';
 
 interface Props {
   children: React.ReactNode;
@@ -16,7 +16,7 @@ class Header extends React.Component<Props, State> {
       <header className={s.header}>
         <div className={`${s.wrapper} ${s['wrapper-header']}`}>
           {this.props.children}
-          <ButtonError />
+          <ErrorButton />
         </div>
       </header>
     );
