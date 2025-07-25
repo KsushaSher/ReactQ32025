@@ -1,56 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './Search.module.scss';
 
 interface Props {
   onSubmit: (search: string) => void;
 }
 
-interface State {
-  search: string;
-}
+const Search: React.FC<Props> = ({ onSubmit }) => {
+  const [search, setSearch] = useState(localStorage.getItem('search') || '');
 
-class Search extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { search: localStorage.getItem('search') || '' };
-  }
+  useEffect(() => {
+    onSubmit(search);
+  }, [onSubmit, search]);
 
-  componentDidMount(): void {
-    this.props.onSubmit(this.state.search);
-  }
-
-  handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    this.props.onSubmit(this.state.search);
-    localStorage.setItem('search', this.state.search.trim());
+    onSubmit(search);
+    localStorage.setItem('search', search.trim());
   };
 
-  handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ search: e.target.value }, () => {
-      localStorage.setItem('search', this.state.search.trim());
-    });
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+    localStorage.setItem('search', search.trim());
   };
 
-  render() {
-    return (
-      <form className={s['search-form']} onSubmit={this.handleOnSubmit}>
-        <input
-          className="input"
-          placeholder="search"
-          value={this.state.search}
-          onChange={this.handleOnChange}
-          data-testid="input"
-        />
-        <button
-          className="button default"
-          type="submit"
-          data-testid="button-search"
-        >
-          Search
-        </button>
-      </form>
-    );
-  }
-}
+  return (
+    <form className={s['search-form']} onSubmit={handleOnSubmit}>
+      <input
+        className="input"
+        placeholder="search"
+        value={search}
+        onChange={handleOnChange}
+        data-testid="input"
+      />
+      <button
+        className="button default"
+        type="submit"
+        data-testid="button-search"
+      >
+        Search
+      </button>
+    </form>
+  );
+};
 
 export default Search;

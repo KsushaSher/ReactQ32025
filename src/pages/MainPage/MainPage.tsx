@@ -1,27 +1,19 @@
 import { Header } from '../../components/Header';
 import { Section } from '../../components/Section';
-import type { Item } from '../../models';
 import { Search } from '../../components/Search';
 import { CardList } from '../../components/CardList';
-import React from 'react';
+import { useCallback, useState } from 'react';
 
-type Props = Record<string, never>;
+const MainPage: React.FC = () => {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-interface State {
-  items: Item[];
-  loading: boolean;
-  error: string;
-}
-
-class MainPage extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { items: [], loading: false, error: '' };
-  }
-
-  handleSubmit = async (search: string) => {
+  const handleSubmit = useCallback(async (search: string) => {
     try {
-      this.setState({ loading: true, error: '' });
+      setLoading(true);
+      setError('');
+
       const response = await fetch(
         `https://rickandmortyapi.com/api/character/?page=1&name=${search}`
       );
@@ -36,30 +28,27 @@ class MainPage extends React.Component<Props, State> {
 
       const data = await response.json();
 
-      this.setState({ items: data.results, loading: false });
+      setItems(data.results);
+      setLoading(false);
     } catch (error) {
-      this.setState({
-        loading: false,
-        error: error instanceof Error ? error.message : String(error),
-      });
+      setError(error instanceof Error ? error.message : String(error));
       console.error(error);
+      setLoading(false);
     }
-  };
+  }, []);
 
-  render() {
-    return (
-      <>
-        <Header>
-          <Search onSubmit={this.handleSubmit} />
-        </Header>
-        <main>
-          <Section loading={this.state.loading} error={this.state.error}>
-            <CardList items={this.state.items} />
-          </Section>
-        </main>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <Header>
+        <Search onSubmit={handleSubmit} />
+      </Header>
+      <main>
+        <Section loading={loading} error={error}>
+          <CardList items={items} />
+        </Section>
+      </main>
+    </>
+  );
+};
 
 export default MainPage;
