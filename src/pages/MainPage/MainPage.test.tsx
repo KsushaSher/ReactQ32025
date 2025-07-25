@@ -3,6 +3,7 @@ import { http, HttpResponse } from 'msw';
 import { server } from '../../test-utils/mocks/setup-server';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { BrowserRouter } from 'react-router';
 
 describe('Error Handling Tests', () => {
   let user: ReturnType<typeof userEvent.setup>;
@@ -25,7 +26,11 @@ describe('Error Handling Tests', () => {
       })
     );
 
-    render(<MainPage />);
+    render(
+      <BrowserRouter>
+        <MainPage />
+      </BrowserRouter>
+    );
 
     const buttonElement = screen.getByTestId('button-search');
     const inputElement = screen.getByRole('textbox');
@@ -46,7 +51,11 @@ describe('Error Handling Tests', () => {
       })
     );
 
-    render(<MainPage />);
+    render(
+      <BrowserRouter>
+        <MainPage />
+      </BrowserRouter>
+    );
 
     const buttonElement = screen.getByTestId('button-search');
     const inputElement = screen.getByRole('textbox');
@@ -61,7 +70,11 @@ describe('Error Handling Tests', () => {
   });
 
   it('Displays the spinner and characters after a successful search', async () => {
-    render(<MainPage />);
+    render(
+      <BrowserRouter>
+        <MainPage />
+      </BrowserRouter>
+    );
 
     const buttonElement = screen.getByTestId('button-search');
     const inputElement = screen.getByRole('textbox');

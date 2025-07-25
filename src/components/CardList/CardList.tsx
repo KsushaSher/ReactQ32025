@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Item } from '../../models';
-import { Card } from '../Card';
 import s from './CardList.module.scss';
+import Card from '../Card';
 
 export interface Props {
   items: Item[];
