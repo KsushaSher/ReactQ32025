@@ -24,9 +24,9 @@ describe('Error Button Tests', () => {
       </ErrorBoundary>
     );
 
-    const errorButtonBoundary = screen.getByTestId('error-boundary');
+    const buttonErrorBoundary = screen.getByTestId('error-boundary');
 
-    await user.click(errorButtonBoundary);
+    await user.click(buttonErrorBoundary);
 
     expect(screen.getByText(/something went wrong/i)).toBeInTheDocument();
     expect(consoleError).toHaveBeenCalled();
