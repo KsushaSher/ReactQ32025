@@ -8,28 +8,20 @@ interface Props {
   children: React.ReactNode;
 }
 
-interface State {
-  search: string;
-}
-
-class Section extends React.Component<Props, State> {
-  render() {
-    const { children, loading, error } = this.props;
-
-    return (
-      <section>
-        {loading ? (
-          <Spinner data-testid="spinner" />
-        ) : error ? (
-          <div className={s['error-message']} data-testid="error">
-            {error}
-          </div>
-        ) : (
-          children
-        )}
-      </section>
-    );
-  }
-}
+const Section: React.FC<Props> = ({ loading, error, children }) => {
+  return (
+    <section>
+      {loading ? (
+        <Spinner data-testid="spinner" />
+      ) : error ? (
+        <div className={s['error-message']} data-testid="error">
+          {error}
+        </div>
+      ) : (
+        children
+      )}
+    </section>
+  );
+};
 
 export default Section;
