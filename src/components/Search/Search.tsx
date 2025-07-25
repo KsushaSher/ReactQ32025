@@ -22,6 +22,7 @@ class Search extends React.Component<Props, State> {
   handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     this.props.onSubmit(this.state.search);
+    localStorage.setItem('search', this.state.search.trim());
   };
 
   handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,8 +39,13 @@ class Search extends React.Component<Props, State> {
           placeholder="search"
           value={this.state.search}
           onChange={this.handleOnChange}
+          data-testid="input"
         />
-        <button className="button default" type="submit">
+        <button
+          className="button default"
+          type="submit"
+          data-testid="button-search"
+        >
           Search
         </button>
       </form>

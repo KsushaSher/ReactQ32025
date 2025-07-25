@@ -1,6 +1,6 @@
 import React from 'react';
-import Spinner from '../Spinner/Spinner';
 import s from './Section.module.scss';
+import { Spinner } from '../Spinner';
 
 interface Props {
   error?: string;
@@ -19,9 +19,11 @@ class Section extends React.Component<Props, State> {
     return (
       <section>
         {loading ? (
-          <Spinner />
+          <Spinner data-testid="spinner" />
         ) : error ? (
-          <div className={s['error-message']}>{error}</div>
+          <div className={s['error-message']} data-testid="error">
+            {error}
+          </div>
         ) : (
           children
         )}
