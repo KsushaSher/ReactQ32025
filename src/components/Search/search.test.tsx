@@ -3,7 +3,6 @@ import Search from './Search';
 import userEvent from '@testing-library/user-event';
 import { mockOnChange, mockOnSubmit } from '../../test-utils/mocks/data';
 import { useState } from 'react';
-import React from 'react';
 
 describe('Rendering Tests', () => {
   afterEach(() => {

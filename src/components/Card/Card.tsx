@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Item } from '../../models';
 import s from './Card.module.scss';
-
+import { NavLink } from 'react-router';
 export interface Props {
   item: Item;
 }
@@ -22,7 +22,7 @@ const Card: React.FC<Props> = ({ item }) => {
       <div className={`${s.species} ${s.neutral}`}>
         Species: <span className={s['accent']}>{item.species}</span>
       </div>
-      <button className="button light">Details</button>
+      <NavLink to={`/character/${item.id}`}>detail</NavLink>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { Search } from '../../components/Search';
 import { CardList } from '../../components/CardList';
 import { useCallback, useEffect, useState } from 'react';
 import Pagination from '../../components/Pagination';
-import { useSearchParams } from 'react-router';
+import { Outlet, useSearchParams } from 'react-router';
 import type React from 'react';
 import { fetchCharacters } from '../../services/api';
 
@@ -52,6 +52,7 @@ const MainPage: React.FC = () => {
         <Section loading={loading} error={error}>
           <Pagination />
           <CardList items={items} />
+          <Outlet />
         </Section>
       </main>
     </>

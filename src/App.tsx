@@ -3,15 +3,21 @@ import './styles/constants.scss';
 import './styles//normalize.css';
 import { Route, Routes } from 'react-router';
 import AboutPage from './pages/AboutPage';
-import ErrorPage from './pages/ErrorPage';
 import { MainPage } from './pages/MainPage';
+import NotFoundPage from './pages/NotFoundPage';
+import Layout from './pages/Layout';
+import CardDetail from './components/CardDetail';
 
 const App: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<MainPage />} />
-      <Route path="/about" element={<AboutPage />} />
-      <Route path="*" element={<ErrorPage />} />
+      <Route path="/" element={<Layout />}>
+        <Route path="/" element={<MainPage />}>
+          <Route path="character/:id" element={<CardDetail />} />
+        </Route>
+        <Route path="about" element={<AboutPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
     </Routes>
   );
 };
