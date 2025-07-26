@@ -1,35 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import s from './Search.module.scss';
 
 interface Props {
+  search: string;
+  onChange: (value: string) => void;
   onSubmit: (search: string) => void;
 }
 
-const Search: React.FC<Props> = ({ onSubmit }) => {
-  const [search, setSearch] = useState(localStorage.getItem('search') || '');
-
-  useEffect(() => {
-    onSubmit(search);
-  }, [onSubmit, search]);
-
-  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSubmit(search);
-    localStorage.setItem('search', search.trim());
+const Search: React.FC<Props> = ({ search, onChange, onSubmit }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(e.target.value);
   };
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-    localStorage.setItem('search', search.trim());
+  const handleSubmit = () => {
+    onSubmit(search);
   };
 
   return (
-    <form className={s['search-form']} onSubmit={handleOnSubmit}>
+    <form className={s['search-form']} onSubmit={handleSubmit}>
       <input
         className="input"
         placeholder="search"
         value={search}
-        onChange={handleOnChange}
+        onChange={handleChange}
         data-testid="input"
       />
       <button
