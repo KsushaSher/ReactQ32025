@@ -22,6 +22,7 @@ const Card: React.FC<Props> = ({ item }) => {
       <div className={`${s.species} ${s.neutral}`}>
         Species: <span className={s['accent']}>{item.species}</span>
       </div>
+      <button className="button light">Details</button>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Pagination from '../../components/Pagination';
 import { useSearchParams } from 'react-router';
 import type React from 'react';
+import { fetchCharacters } from '../../services/api';
 
 const MainPage: React.FC = () => {
   const [items, setItems] = useState([]);
@@ -25,20 +26,7 @@ const MainPage: React.FC = () => {
       try {
         setLoading(true);
         setError('');
-
-        const response = await fetch(
-          `https://rickandmortyapi.com/api/character/?page=${currentPage || 1}&name=${search}`
-        );
-
-        if (!response.ok && response.status === 404) {
-          throw new Error(`No results found`);
-        }
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
+        const data = await fetchCharacters(currentPage || '1', search);
 
         setItems(data.results);
         setLoading(false);
@@ -62,8 +50,8 @@ const MainPage: React.FC = () => {
       </Header>
       <main>
         <Section loading={loading} error={error}>
-          <CardList items={items} />
           <Pagination />
+          <CardList items={items} />
         </Section>
       </main>
     </>
