@@ -1,12 +1,14 @@
 import React from 'react';
 import type { Item } from '../../models';
 import s from './Card.module.scss';
-import { NavLink } from 'react-router';
+import { NavLink, useSearchParams } from 'react-router';
 export interface Props {
   item: Item;
 }
 
 const Card: React.FC<Props> = ({ item }) => {
+  const [searchParams] = useSearchParams();
+
   return (
     <div className={s['card']} data-testid="card">
       <div className={s['img-wrapper']}>
@@ -24,7 +26,10 @@ const Card: React.FC<Props> = ({ item }) => {
       </div>
       <NavLink
         className={s['details-button']}
-        to={`/character/${item.id}`}
+        to={{
+          pathname: `/character/${item.id}`,
+          search: searchParams.toString(),
+        }}
         onMouseDown={(e) => e.stopPropagation()}
       ></NavLink>
     </div>

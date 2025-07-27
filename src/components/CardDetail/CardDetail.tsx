@@ -4,7 +4,7 @@ import { fetchCharacterById } from '../../services/api';
 import s from './CardDetail.module.scss';
 import { Spinner } from '../Spinner';
 import type { Item } from '../../models';
-import { NavLink, useNavigate, useParams } from 'react-router';
+import { NavLink, useNavigate, useParams, useSearchParams } from 'react-router';
 
 const CardDetail: React.FC = () => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -14,6 +14,8 @@ const CardDetail: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [item, setItem] = useState<Item | null>();
+  const [searchParams] = useSearchParams();
+  const search = searchParams.toString();
 
   const getCharacterData = useCallback(async (id: string) => {
     try {
@@ -39,7 +41,7 @@ const CardDetail: React.FC = () => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
-        navigate('/');
+        navigate({ pathname: '/', search });
       }
     };
 
@@ -48,7 +50,7 @@ const CardDetail: React.FC = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [navigate]);
+  }, [navigate, search]);
 
   if (loading)
     return (
@@ -68,7 +70,10 @@ const CardDetail: React.FC = () => {
 
   return (
     <div className={s['card-detail']} ref={cardRef} data-testid="card-detail">
-      <NavLink className={s['close-button']} to={`/`}></NavLink>
+      <NavLink
+        className={s['close-button']}
+        to={{ pathname: `/`, search }}
+      ></NavLink>
       <div className={s['img-wrapper']}>
         <img
           src={item.image}
