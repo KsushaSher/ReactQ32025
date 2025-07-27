@@ -7,7 +7,7 @@ const NotFoundPage: React.FC = () => {
       <h1>Oops!</h1>
       <div className={s.error404}>404</div>
       <div>Sorry, but no such page was found.</div>
-      <Link className={s.link} to="/">
+      <Link className={s.link} to="/" data-testid="link-to-home">
         Return to home
       </Link>
     </div>

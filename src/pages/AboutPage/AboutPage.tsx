@@ -3,7 +3,7 @@ import s from './AboutPage.module.scss';
 
 const AboutPage: React.FC = () => {
   return (
-    <div className={s['about-page']}>
+    <div className={s['about-page']} data-testid="about-page">
       <div className={s.content}>
         <img
           src="../../../public/images/ava3.jpg"
@@ -27,6 +27,7 @@ const AboutPage: React.FC = () => {
         <img
           className={s['rs-logo']}
           src="https://rs.school/_next/static/media/rss-logo.c19ce1b4.svg"
+          data-testid="rs-logo"
         ></img>
       </a>
     </div>

@@ -20,6 +20,7 @@ const NavigationLinks: React.FC = () => {
         className={({ isActive }) =>
           isActive ? `${s.link} ${s.active}` : s.link
         }
+        data-testid="about-link"
       >
         About
       </NavLink>
