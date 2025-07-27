@@ -1,14 +1,25 @@
-main {
-  scroll-behavior: smooth;
-
-  overflow-y: auto;
+.error-page {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  box-sizing: border-box;
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
+  padding-top: 30px;
 
-  background-color: rgb(232 144 96);
+  color: rgb(79 65 59);
+}
+
+.error404 {
+  font-size: 30px;
+}
+
+.link {
+  padding-top: 20px;
+  color: rgb(79 65 59);
+  text-decoration: none;
+  text-decoration: underline;
+
+  &:hover {
+    color: rgb(196 111 1);
+  }
 }

@@ -3,7 +3,7 @@ import { Search } from '../../components/Search';
 import { CardList } from '../../components/CardList';
 import { useCallback, useEffect, useState } from 'react';
 import Pagination from '../../components/Pagination';
-import { Outlet, useSearchParams } from 'react-router';
+import { Navigate, Outlet, useSearchParams } from 'react-router';
 import type React from 'react';
 import { fetchCharacters } from '../../services/api';
 import s from './MainPage.module.scss';
@@ -44,6 +44,10 @@ const MainPage: React.FC = () => {
   useEffect(() => {
     handleSubmit(localStorage.getItem('search') || '');
   }, [handleSubmit]);
+
+  if (currentPage && !/^\d+$/.test(currentPage)) {
+    return <Navigate to="*" />;
+  }
 
   return (
     <>

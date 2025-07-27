@@ -16,8 +16,8 @@ const App: React.FC = () => {
           <Route path="character/:id" element={<CardDetail />} />
         </Route>
         <Route path="about" element={<AboutPage />} />
-        <Route path="*" element={<NotFoundPage />} />
       </Route>
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };
