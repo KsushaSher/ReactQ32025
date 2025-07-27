@@ -7,6 +7,8 @@ import { Navigate, Outlet, useNavigate, useSearchParams } from 'react-router';
 import type React from 'react';
 import { fetchCharacters } from '../../services/api';
 import s from './MainPage.module.scss';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { LS_SEARCH_KEY } from '../../utils/constants';
 
 const MainPage: React.FC = () => {
   const [items, setItems] = useState([]);
@@ -15,21 +17,20 @@ const MainPage: React.FC = () => {
   const [error, setError] = useState('');
   const [searchParams] = useSearchParams();
   const currentPage = searchParams.get('page');
-  const [search, setSearch] = useState(localStorage.getItem('search') || '');
+  const [searchLS, setSearchLS] = useLocalStorage(LS_SEARCH_KEY);
   const navigate = useNavigate();
 
   const onChange = (value: string) => {
-    localStorage.setItem('search', value.trim());
-    setSearch(value);
+    setSearchLS(value.trim());
   };
 
   const handleSubmit = useCallback(
-    async (search: string) => {
+    async (searchLS: string) => {
       if (currentPage)
         try {
           setLoading(true);
           setError('');
-          const data = await fetchCharacters(currentPage, search);
+          const data = await fetchCharacters(currentPage, searchLS);
 
           setItems(data.results);
           setPages(data.info.pages);
@@ -50,7 +51,7 @@ const MainPage: React.FC = () => {
   }, [currentPage, navigate]);
 
   useEffect(() => {
-    handleSubmit(localStorage.getItem('search') || '');
+    handleSubmit(localStorage.getItem(LS_SEARCH_KEY) || '');
   }, [handleSubmit]);
 
   if (currentPage && !/^\d+$/.test(currentPage)) {
@@ -61,7 +62,11 @@ const MainPage: React.FC = () => {
     <>
       <main>
         <Section loading={loading} error={error}>
-          <Search search={search} onChange={onChange} onSubmit={handleSubmit} />
+          <Search
+            search={searchLS}
+            onChange={onChange}
+            onSubmit={handleSubmit}
+          />
           <Pagination pages={pages} />
           <div className={s['content-wrapper']}>
             <CardList items={items} />

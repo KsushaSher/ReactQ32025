@@ -66,7 +66,9 @@ const CardDetail: React.FC = () => {
       </div>
     );
 
-  if (!item) return null;
+  if (!item) {
+    return <div>No result</div>;
+  }
 
   return (
     <div className={s['card-detail']} ref={cardRef} data-testid="card-detail">
