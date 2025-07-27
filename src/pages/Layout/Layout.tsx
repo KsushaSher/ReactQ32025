@@ -1,12 +1,14 @@
 import type React from 'react';
-import { Link, Outlet } from 'react-router';
+import { Outlet } from 'react-router';
+import { NavigationLinks } from '../../components/NavigationLinks';
+import s from './Layout.module.scss';
 
 const Layout: React.FC = () => {
   return (
     <>
-      <header>
-        <nav>
-          <Link to="/">Home</Link> | <Link to="/about">About</Link>
+      <header className={s.header}>
+        <nav className={s.wrapper}>
+          <NavigationLinks />
         </nav>
       </header>
       <Outlet />

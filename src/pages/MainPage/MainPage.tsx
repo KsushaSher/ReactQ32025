@@ -1,4 +1,3 @@
-import { Header } from '../../components/Header';
 import { Section } from '../../components/Section';
 import { Search } from '../../components/Search';
 import { CardList } from '../../components/CardList';
@@ -11,6 +10,7 @@ import s from './MainPage.module.scss';
 
 const MainPage: React.FC = () => {
   const [items, setItems] = useState([]);
+  const [pages, setPages] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [searchParams] = useSearchParams();
@@ -30,6 +30,7 @@ const MainPage: React.FC = () => {
         const data = await fetchCharacters(currentPage || '1', search);
 
         setItems(data.results);
+        setPages(data.info.pages);
         setLoading(false);
       } catch (error) {
         setError(error instanceof Error ? error.message : String(error));
@@ -46,12 +47,10 @@ const MainPage: React.FC = () => {
 
   return (
     <>
-      <Header>
-        <Search search={search} onChange={onChange} onSubmit={handleSubmit} />
-      </Header>
       <main>
         <Section loading={loading} error={error}>
-          <Pagination />
+          <Search search={search} onChange={onChange} onSubmit={handleSubmit} />
+          <Pagination pages={pages} />
           <div className={s['content-wrapper']}>
             <CardList items={items} />
             <Outlet />

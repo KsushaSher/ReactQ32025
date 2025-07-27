@@ -2,7 +2,11 @@ import React from 'react';
 import s from './Pagination.module.scss';
 import { useSearchParams } from 'react-router';
 
-const Pagination: React.FC = () => {
+interface Props {
+  pages: number | null;
+}
+
+const Pagination: React.FC<Props> = ({ pages }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
 
@@ -15,11 +19,13 @@ const Pagination: React.FC = () => {
 
   return (
     <div className={s['pagination-wrapper']}>
-      <button className={s.prev} onClick={handlePrev}>
+      <button className="button light" onClick={handlePrev}>
         Prev
       </button>
-      <span className={s['current-page']}>Page: {currentPage}</span>
-      <button className={s.next} onClick={handleNext}>
+      <span className={s['current-page']}>
+        {currentPage}/{pages}
+      </span>
+      <button className="button light" onClick={handleNext}>
         Next
       </button>
     </div>

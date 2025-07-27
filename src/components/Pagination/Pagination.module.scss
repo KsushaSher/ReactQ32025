@@ -1,4 +1,8 @@
 .pagination-wrapper {
   display: flex;
-  padding-top: 20px;
+  gap: 10px;
+}
+
+.current-page {
+  color: rgb(105 97 91);
 }

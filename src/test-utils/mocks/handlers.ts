@@ -11,6 +11,7 @@ export const handlers = [
         await new Promise((r) => setTimeout(r, 300));
 
         return HttpResponse.json({
+          info: { count: 1, next: null, prev: null, pages: 1 },
           results: [
             {
               id: 1,
@@ -25,7 +26,29 @@ export const handlers = [
         });
       }
 
-      return new HttpResponse(null, { status: 404 });
+      return HttpResponse.json({
+        info: { count: 2, next: null, prev: null, pages: 1 },
+        results: [
+          {
+            id: 1,
+            name: 'Rick Sanchez',
+            status: 'Alive',
+            species: 'Human',
+            gender: 'Male',
+            image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+            url: 'https://rickandmortyapi.com/api/character/1',
+          },
+          {
+            id: 2,
+            name: 'Morty Smith',
+            status: 'Alive',
+            species: 'Human',
+            gender: 'Male',
+            image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
+            url: 'https://rickandmortyapi.com/api/character/2',
+          },
+        ],
+      });
     }
   ),
 ];

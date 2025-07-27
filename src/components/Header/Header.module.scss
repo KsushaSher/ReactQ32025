@@ -6,7 +6,8 @@
 
 .wrapper {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
 
   width: 1200px;
   margin: 0 auto;
@@ -16,11 +17,6 @@
     flex-direction: column;
     gap: 10px;
   }
-}
-
-.wrapper-header {
-  display: flex;
-  justify-content: space-between;
 }
 
 .header {

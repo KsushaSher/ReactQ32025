@@ -6,12 +6,10 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
 
 describe('Error Handling Tests', () => {
-  let user: ReturnType<typeof userEvent.setup>;
   let consoleErrorMock: ReturnType<typeof vi.spyOn>;
 
   beforeEach(() => {
     consoleErrorMock = vi.spyOn(console, 'error').mockImplementation(() => {});
-    user = userEvent.setup();
     localStorage.clear();
   });
 
@@ -32,12 +30,6 @@ describe('Error Handling Tests', () => {
       </MemoryRouter>
     );
 
-    const buttonElement = screen.getByTestId('button-search');
-    const inputElement = screen.getByRole('textbox');
-
-    await user.type(inputElement, 'rick');
-    await user.click(buttonElement);
-
     const errorElement = await screen.findByTestId('error');
 
     expect(errorElement).toBeInTheDocument();
@@ -57,12 +49,6 @@ describe('Error Handling Tests', () => {
       </MemoryRouter>
     );
 
-    const buttonElement = screen.getByTestId('button-search');
-    const inputElement = screen.getByRole('textbox');
-
-    await userEvent.type(inputElement, 'sdfsdf');
-    await userEvent.click(buttonElement);
-
     const errorElement = await screen.findByTestId('error');
 
     expect(errorElement).toBeInTheDocument();
@@ -76,17 +62,16 @@ describe('Error Handling Tests', () => {
       </MemoryRouter>
     );
 
-    const buttonElement = screen.getByTestId('button-search');
-    const inputElement = screen.getByRole('textbox');
+    const buttonElement = await screen.findByTestId('button-search');
+    const inputElement = await screen.findByRole('textbox');
 
     await userEvent.type(inputElement, 'rick');
     await userEvent.click(buttonElement);
 
-    expect(screen.getByTestId('spinner')).toBeInTheDocument();
-
-    await waitFor(() => {
-      expect(screen.getByTestId('card')).toBeInTheDocument();
-      expect(screen.getByText(/Rick Sanchez/i)).toBeInTheDocument();
+    expect(await screen.findByTestId('spinner')).toBeInTheDocument();
+    await waitFor(async () => {
+      expect(await screen.findByTestId('card')).toBeInTheDocument();
+      expect(await screen.findByText(/Rick Sanchez/i)).toBeInTheDocument();
     });
 
     expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
