@@ -22,7 +22,11 @@ const Card: React.FC<Props> = ({ item }) => {
       <div className={`${s.species} ${s.neutral}`}>
         Species: <span className={s['accent']}>{item.species}</span>
       </div>
-      <NavLink to={`/character/${item.id}`}>detail</NavLink>
+      <NavLink
+        className={s['details-button']}
+        to={`/character/${item.id}`}
+        onMouseDown={(e) => e.stopPropagation()}
+      ></NavLink>
     </div>
   );
 };

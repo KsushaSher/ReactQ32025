@@ -1,3 +1,72 @@
-.card-details {
-  background-color: orangered;
+@use '../../styles/constants.scss' as *;
+
+.card-detail {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 330px;
+  height: 330px;
+  padding: 10px;
+  border-radius: 8px;
+
+  background-color: rgb(243 237 191);
+  box-shadow: 3px 3px 4px rgb(189 183 137);
+}
+
+.img-wrapper {
+  height: 170px;
+}
+
+.img {
+  width: 160px;
+  height: 160px;
+  border: 1px solid rgb(144 142 121);
+  border-radius: 50%;
+}
+
+.accent {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgb(111 102 91);
+}
+
+.neutral {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgb(124 120 115);
+}
+
+.name {
+  width: 180px;
+  text-align: center;
+}
+
+.close-button {
+  position: absolute;
+  z-index: 40;
+  top: 3%;
+  right: 3%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 3px;
+
+  background-image: $close-button-light;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  &:not(:disabled):hover {
+    cursor: pointer;
+    background-image: $close-button;
+  }
 }

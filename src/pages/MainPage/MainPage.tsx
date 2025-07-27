@@ -7,6 +7,7 @@ import Pagination from '../../components/Pagination';
 import { Outlet, useSearchParams } from 'react-router';
 import type React from 'react';
 import { fetchCharacters } from '../../services/api';
+import s from './MainPage.module.scss';
 
 const MainPage: React.FC = () => {
   const [items, setItems] = useState([]);
@@ -51,8 +52,10 @@ const MainPage: React.FC = () => {
       <main>
         <Section loading={loading} error={error}>
           <Pagination />
-          <CardList items={items} />
-          <Outlet />
+          <div className={s['content-wrapper']}>
+            <CardList items={items} />
+            <Outlet />
+          </div>
         </Section>
       </main>
     </>
