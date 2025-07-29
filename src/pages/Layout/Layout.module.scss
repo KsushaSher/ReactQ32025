@@ -14,8 +14,8 @@
 }
 
 .header {
-  position: fixed;
-  z-index: 20;
+  position: sticky;
+  z-index: 1;
   top: 0;
 
   display: flex;

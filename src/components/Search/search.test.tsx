@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import Search from './Search';
 import userEvent from '@testing-library/user-event';
-import { mockOnChange, mockOnSubmit } from '../../test-utils/mocks/data';
+import { mockOnSubmit } from '../../test-utils/mocks/data';
 import { useState } from 'react';
 
 describe('Rendering Tests', () => {
@@ -11,9 +11,7 @@ describe('Rendering Tests', () => {
   });
 
   it('Renders search input and search button', () => {
-    render(
-      <Search onSubmit={mockOnSubmit} onChange={mockOnChange} search={''} />
-    );
+    render(<Search onSubmit={mockOnSubmit} search={''} />);
     const inputElement = screen.getByRole('textbox');
     const buttonElement = screen.getByTestId('button-search');
 
@@ -23,9 +21,7 @@ describe('Rendering Tests', () => {
 
   it('Displays previously saved search term from localStorage on mount', () => {
     localStorage.setItem('search', 'Rick');
-    render(
-      <Search onSubmit={mockOnSubmit} onChange={mockOnChange} search={'Rick'} />
-    );
+    render(<Search onSubmit={mockOnSubmit} search={'Rick'} />);
 
     const inputElement = screen.getByRole('textbox');
 
@@ -34,9 +30,7 @@ describe('Rendering Tests', () => {
 
   it('Shows empty input when no saved term exists', () => {
     localStorage.removeItem('search');
-    render(
-      <Search onSubmit={mockOnSubmit} onChange={mockOnChange} search={''} />
-    );
+    render(<Search onSubmit={mockOnSubmit} search={''} />);
 
     const inputElement = screen.getByRole('textbox');
 
@@ -57,9 +51,7 @@ describe('User Interaction Tests', () => {
     const Wrapper = () => {
       const [search, setSearch] = useState('');
 
-      return (
-        <Search search={search} onChange={setSearch} onSubmit={() => {}} />
-      );
+      return <Search search={search} onSubmit={setSearch} />;
     };
 
     render(<Wrapper />);
@@ -73,14 +65,12 @@ describe('User Interaction Tests', () => {
     const Wrapper = () => {
       const [search, setSearch] = useState('');
 
-      const onChange = (value: string) => {
+      const onSubmit = (value: string) => {
         localStorage.setItem('search', value.trim());
         setSearch(value);
       };
 
-      return (
-        <Search search={search} onChange={onChange} onSubmit={mockOnSubmit} />
-      );
+      return <Search search={search} onSubmit={onSubmit} />;
     };
 
     render(<Wrapper />);
@@ -98,14 +88,12 @@ describe('User Interaction Tests', () => {
     const Wrapper = () => {
       const [search, setSearch] = useState('');
 
-      const onChange = (value: string) => {
+      const onSubmit = (value: string) => {
         localStorage.setItem('search', value.trim());
         setSearch(value);
       };
 
-      return (
-        <Search search={search} onChange={onChange} onSubmit={mockOnSubmit} />
-      );
+      return <Search search={search} onSubmit={onSubmit} />;
     };
 
     render(<Wrapper />);
@@ -121,16 +109,7 @@ describe('User Interaction Tests', () => {
 
   it('Triggers search callback with correct parameters', async () => {
     const Wrapper = () => {
-      const [search, setSearch] = useState('');
-
-      const onChange = (value: string) => {
-        localStorage.setItem('search', value.trim());
-        setSearch(value);
-      };
-
-      return (
-        <Search search={search} onChange={onChange} onSubmit={mockOnSubmit} />
-      );
+      return <Search search={''} onSubmit={mockOnSubmit} />;
     };
 
     render(<Wrapper />);
