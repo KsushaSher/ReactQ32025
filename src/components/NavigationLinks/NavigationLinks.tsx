@@ -1,3 +1,4 @@
+import { ROUTES } from '../../shared/constants/apiRoutes';
 import s from './NavigationLinks.module.scss';
 import { NavLink } from 'react-router';
 
@@ -5,7 +6,7 @@ const NavigationLinks = () => {
   return (
     <nav className={s.nav}>
       <NavLink
-        to="/"
+        to={ROUTES.ROOT}
         end
         className={({ isActive }) =>
           isActive ? `${s.link} ${s.active}` : s.link
@@ -14,7 +15,7 @@ const NavigationLinks = () => {
         Home
       </NavLink>
       <NavLink
-        to="/about"
+        to={ROUTES.ABOUT}
         end
         className={({ isActive }) =>
           isActive ? `${s.link} ${s.active}` : s.link

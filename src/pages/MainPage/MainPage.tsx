@@ -8,6 +8,7 @@ import s from './MainPage.module.scss';
 import { useLocalStorage } from '../../shared/utils/hooks/useLocalStorage';
 import { LS_SEARCH_KEY } from '../../shared/constants/constants';
 import { characterAPI } from '../../services/api';
+import { ROUTES } from '../../shared/constants/apiRoutes';
 
 const MainPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -62,7 +63,7 @@ const MainPage = () => {
   }, [search, currentPage]);
 
   if (currentPage && !/^\d+$/.test(currentPage)) {
-    return <Navigate to="*" />;
+    return <Navigate to={ROUTES.NOT_FOUND} />;
   }
 
   return (
