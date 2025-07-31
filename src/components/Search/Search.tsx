@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import s from './Search.module.scss';
 
-interface Props {
+interface Search {
   search: string;
   onSubmit: (search: string) => void;
 }
 
-const Search: React.FC<Props> = ({ search, onSubmit }) => {
+const Search = ({ search, onSubmit }: Search) => {
   const [value, setValue] = useState(search);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

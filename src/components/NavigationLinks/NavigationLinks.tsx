@@ -1,8 +1,7 @@
-import React from 'react';
 import s from './NavigationLinks.module.scss';
 import { NavLink } from 'react-router';
 
-const NavigationLinks: React.FC = () => {
+const NavigationLinks = () => {
   return (
     <nav className={s.nav}>
       <NavLink

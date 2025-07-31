@@ -1,16 +1,20 @@
-import App from './App.tsx';
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './styles/normalize.css';
-import { BrowserRouter } from 'react-router';
+import { createRoot } from 'react-dom/client';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { RouterProvider } from 'react-router';
+import router from './routes/router';
+import './styles//main.scss';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const rootElement = document.getElementById('root');
+
+if (!rootElement) {
+  throw new Error('Root element not found!');
+}
+
+createRoot(rootElement).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ErrorBoundary>
-        <App />
-      </ErrorBoundary>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <RouterProvider router={router} />
+    </ErrorBoundary>
   </React.StrictMode>
 );

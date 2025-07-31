@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import s from './NotFoundPage.module.scss';
 
-const NotFoundPage: React.FC = () => {
+const NotFoundPage = () => {
   return (
     <div className={s['error-page']}>
       <h1>Oops!</h1>

@@ -1,7 +1,6 @@
-import React from 'react';
 import s from './AboutPage.module.scss';
 
-const AboutPage: React.FC = () => {
+const AboutPage = () => {
   return (
     <div className={s['about-page']} data-testid="about-page">
       <div className={s.content}>
