@@ -2,7 +2,6 @@ import { vi } from 'vitest';
 import type { Item } from '../../models';
 
 export const mockOnSubmit = vi.fn();
-export const mockOnChange = vi.fn();
 
 export const BrokenComponent = () => {
   throw new Error('Error!');

@@ -1,7 +1,7 @@
-import React from 'react';
+import { REACT_COURSE } from '../../shared/constants/urls';
 import s from './AboutPage.module.scss';
 
-const AboutPage: React.FC = () => {
+const AboutPage = () => {
   return (
     <div className={s['about-page']} data-testid="about-page">
       <div className={s.content}>
@@ -19,14 +19,10 @@ const AboutPage: React.FC = () => {
           full confidence.
         </div>
       </div>
-      <a
-        href="https://rs.school/courses/reactjs"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href={REACT_COURSE} target="_blank" rel="noopener noreferrer">
         <img
           className={s['rs-logo']}
-          src="https://rs.school/_next/static/media/rss-logo.c19ce1b4.svg"
+          src="../../../public/images/svg/rss-logo.svg"
           data-testid="rs-logo"
         ></img>
       </a>

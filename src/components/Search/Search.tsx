@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import s from './Search.module.scss';
 
-interface Props {
+interface Search {
   search: string;
-  onChange: (value: string) => void;
   onSubmit: (search: string) => void;
 }
 
-const Search: React.FC<Props> = ({ search, onChange, onSubmit }) => {
+const Search = ({ search, onSubmit }: Search) => {
+  const [value, setValue] = useState(search);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value);
+    setValue(e.target.value);
   };
 
-  const handleSubmit = () => {
-    onSubmit(search);
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    onSubmit(value);
   };
 
   return (
@@ -21,7 +23,7 @@ const Search: React.FC<Props> = ({ search, onChange, onSubmit }) => {
       <input
         className="input"
         placeholder="search"
-        value={search}
+        value={value}
         onChange={handleChange}
         data-testid="input"
       />

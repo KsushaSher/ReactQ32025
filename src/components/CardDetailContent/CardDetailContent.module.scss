@@ -1,4 +1,4 @@
-@use '../../styles/constants.scss' as *;
+@use '../../styles/variables' as *;
 
 .card-detail {
   position: relative;
@@ -47,7 +47,6 @@
 
 .close-button {
   position: absolute;
-  z-index: 40;
   top: 3%;
   right: 3%;
 

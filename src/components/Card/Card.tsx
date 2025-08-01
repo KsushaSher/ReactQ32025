@@ -1,12 +1,12 @@
-import React from 'react';
 import type { Item } from '../../models';
+import { ROUTES } from '../../shared/constants/routes';
 import s from './Card.module.scss';
 import { NavLink, useSearchParams } from 'react-router';
-export interface Props {
+export interface Card {
   item: Item;
 }
 
-const Card: React.FC<Props> = ({ item }) => {
+const Card = ({ item }: Card) => {
   const [searchParams] = useSearchParams();
 
   return (
@@ -27,7 +27,7 @@ const Card: React.FC<Props> = ({ item }) => {
       <NavLink
         className={s['details-button']}
         to={{
-          pathname: `/character/${item.id}`,
+          pathname: `${ROUTES.CHARACTER.ROOT}/${item.id}`,
           search: searchParams.toString(),
         }}
         onMouseDown={(e) => e.stopPropagation()}

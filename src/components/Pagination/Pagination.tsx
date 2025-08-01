@@ -1,12 +1,11 @@
-import React from 'react';
 import s from './Pagination.module.scss';
 import { useSearchParams } from 'react-router';
 
-interface Props {
+interface Pagination {
   pages: number | null;
 }
 
-const Pagination: React.FC<Props> = ({ pages }) => {
+const Pagination = ({ pages }: Pagination) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
 

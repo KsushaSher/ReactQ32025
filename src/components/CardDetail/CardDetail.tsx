@@ -1,47 +1,50 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import type React from 'react';
-import { fetchCharacterById } from '../../services/api';
-import s from './CardDetail.module.scss';
+import { useEffect, useRef, useState } from 'react';
+import { charactersAPI } from '../../services/characters-api';
+import '../../styles/main.scss';
 import { Spinner } from '../Spinner';
 import type { Item } from '../../models';
-import { NavLink, useNavigate, useParams, useSearchParams } from 'react-router';
+import { useNavigate, useParams, useSearchParams } from 'react-router';
+import CardDetailContent from '../CardDetailContent';
+import { ROUTES } from '../../shared/constants/routes';
 
-const CardDetail: React.FC = () => {
-  const cardRef = useRef<HTMLDivElement>(null);
+const CardDetail = () => {
+  const [searchParams] = useSearchParams();
+  const search = searchParams.toString();
+  const navigate = useNavigate();
   const params = useParams();
   const id = params.id;
-  const navigate = useNavigate();
+
+  const cardRef = useRef<HTMLDivElement>(null);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [item, setItem] = useState<Item | null>();
-  const [searchParams] = useSearchParams();
-  const search = searchParams.toString();
-
-  const getCharacterData = useCallback(async (id: string) => {
-    try {
-      setLoading(true);
-      setError('');
-      const data = await fetchCharacterById(id);
-
-      setItem(data);
-      setLoading(false);
-    } catch (error) {
-      setError(error instanceof Error ? error.message : String(error));
-      console.error(error);
-      setLoading(false);
-    }
-  }, []);
 
   useEffect(() => {
+    const getCharacterData = async (id: string) => {
+      try {
+        setLoading(true);
+        const data = await charactersAPI.fetchCharacterById(id);
+
+        setError('');
+        setItem(data);
+        setLoading(false);
+      } catch (error) {
+        setError(error instanceof Error ? error.message : String(error));
+        console.error(error);
+        setLoading(false);
+      }
+    };
+
     if (id) {
       getCharacterData(id);
     }
-  }, [id, getCharacterData]);
+  }, [id]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
-        navigate({ pathname: '/', search });
+        navigate({ pathname: ROUTES.ROOT, search });
       }
     };
 
@@ -52,50 +55,14 @@ const CardDetail: React.FC = () => {
     };
   }, [navigate, search]);
 
-  if (loading)
-    return (
-      <div className="item">
-        <Spinner />
-      </div>
-    );
-
-  if (error)
-    return (
-      <div className={s['error-message']} data-testid="error">
-        {error}
-      </div>
-    );
-
-  if (!item) {
-    return <div>No result</div>;
-  }
-
-  return (
-    <div className={s['card-detail']} ref={cardRef} data-testid="card-detail">
-      <NavLink
-        className={s['close-button']}
-        to={{ pathname: `/`, search }}
-      ></NavLink>
-      <div className={s['img-wrapper']}>
-        <img
-          src={item.image}
-          alt={`${item.name} avatar`}
-          className={s.img}
-        ></img>
-      </div>
-      <div className={`${s.name} ${s.neutral}`}>
-        Name: <span className={s['accent']}>{item.name}</span>
-      </div>
-      <div className={`${s.species} ${s.neutral}`}>
-        Species: <span className={s['accent']}>{item.species}</span>
-      </div>
-      <div className={`${s.species} ${s.neutral}`}>
-        Status: <span className={s['accent']}>{item.status}</span>
-      </div>
-      <div className={`${s.species} ${s.neutral}`}>
-        Gender: <span className={s['accent']}>{item.gender}</span>
-      </div>
-    </div>
+  return loading ? (
+    <Spinner />
+  ) : error ? (
+    <div data-testid="error">{error}</div>
+  ) : !item ? (
+    <div>No result</div>
+  ) : (
+    <CardDetailContent item={item} search={search} cardRef={cardRef} />
   );
 };
 
