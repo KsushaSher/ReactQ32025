@@ -79,3 +79,15 @@
     background-image: $details;
   }
 }
+
+.checkbox-card {
+  position: absolute;
+  top: 3%;
+  left: 3%;
+
+  flex-shrink: 0;
+
+  width: 18px;
+  height: 18px;
+  border-color: rgb(124 120 115);
+}

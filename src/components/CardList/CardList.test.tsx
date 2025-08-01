@@ -2,13 +2,18 @@ import { render, screen, within } from '@testing-library/react';
 import CardList from './CardList';
 import { mockItems } from '../../test-utils/mocks/data';
 import { MemoryRouter } from 'react-router';
+import { Provider } from 'react-redux';
+import React from 'react';
+import { store } from '../../store/store';
 
 describe('CardList Rendering', () => {
   it('Renders correct number of items when data is provided', () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <CardList items={mockItems} />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <CardList items={mockItems} />
+        </MemoryRouter>
+      </Provider>
     );
     const cardsElement = screen.getAllByTestId('card');
 
@@ -16,7 +21,11 @@ describe('CardList Rendering', () => {
   });
 
   it('Displays "no results" message when data array is empty', () => {
-    render(<CardList items={[]} />);
+    render(
+      <Provider store={store}>
+        <CardList items={[]} />
+      </Provider>
+    );
 
     expect(screen.queryByTestId('card')).not.toBeInTheDocument();
     expect(screen.getByText(/no results/i)).toBeInTheDocument();
@@ -26,9 +35,11 @@ describe('CardList Rendering', () => {
 describe('Data Display Tests', () => {
   it('Correctly displays item names and descriptions', () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <CardList items={mockItems} />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <CardList items={mockItems} />
+        </MemoryRouter>
+      </Provider>
     );
     const cardsElement = screen.getAllByTestId('card');
 
