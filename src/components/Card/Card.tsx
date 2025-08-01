@@ -2,6 +2,7 @@ import type { Item } from '../../models';
 import { ROUTES } from '../../shared/constants/routes';
 import { setSelected } from '../../store/charactersSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
+import { getIsSelected } from '../../store/selectors/selectors';
 import s from './Card.module.scss';
 import { NavLink, useSearchParams } from 'react-router';
 export interface Card {
@@ -12,9 +13,7 @@ const Card = ({ item }: Card) => {
   const [searchParams] = useSearchParams();
   const dispatch = useAppDispatch();
   const id = String(item.id);
-  const isSelected = useAppSelector((state) =>
-    state.characters.selected.includes(id)
-  );
+  const isSelected = useAppSelector((state) => getIsSelected(state, id));
   const handleToggle = () => dispatch(setSelected(id));
 
   return (

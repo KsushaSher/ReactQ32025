@@ -1,5 +1,5 @@
 import type { ErrorResponse } from 'react-router';
-import { ROUTES } from '../../shared/constants/apiRoutes';
+import { ROUTES } from '../../shared/constants/routes';
 import s from './ReactErrorBoundary.module.scss';
 
 interface RouteErrorProps {

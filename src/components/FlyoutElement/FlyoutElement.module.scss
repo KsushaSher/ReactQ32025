@@ -1,0 +1,27 @@
+@use '../../styles/variables' as *;
+
+.wrapper-flyout {
+  position: absolute;
+  z-index: 1;
+  right: 16px;
+  bottom: 16px;
+
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  padding: 12px;
+  border-radius: 8px;
+
+  color: rgb(112 49 21);
+
+  background-color: rgb(219 167 98);
+}
+
+.reset {
+  background-color: antiquewhite;
+}
+
+.download {
+  background-color: antiquewhite;
+}
