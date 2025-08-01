@@ -1,65 +1,85 @@
-import { Header } from '../../components/Header';
 import { Section } from '../../components/Section';
-import type { Item } from '../../models';
 import { Search } from '../../components/Search';
 import { CardList } from '../../components/CardList';
-import React from 'react';
+import { useEffect, useState } from 'react';
+import Pagination from '../../components/Pagination';
+import { Navigate, Outlet, useSearchParams } from 'react-router';
+import s from './MainPage.module.scss';
+import { useLocalStorage } from '../../utils/hooks/useLocalStorage';
+import { LS_SEARCH_KEY } from '../../shared/constants/ls-keys';
+import { charactersAPI } from '../../services/characters-api';
+import { ROUTES } from '../../shared/constants/routes';
 
-type Props = Record<string, never>;
+const MainPage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchLS, setSearchLS] = useLocalStorage(LS_SEARCH_KEY);
 
-interface State {
-  items: Item[];
-  loading: boolean;
-  error: string;
-}
+  const currentPage = searchParams.get('page');
+  const search = searchParams.get('search') || searchLS;
 
-class MainPage extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { items: [], loading: false, error: '' };
-  }
+  const [items, setItems] = useState([]);
+  const [pages, setPages] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  handleSubmit = async (search: string) => {
-    try {
-      this.setState({ loading: true, error: '' });
-      const response = await fetch(
-        `https://rickandmortyapi.com/api/character/?page=1&name=${search}`
-      );
+  const handleSubmit = (value: string) => {
+    const search = value.trim();
 
-      if (!response.ok && response.status === 404) {
-        throw new Error(`No results found`);
-      }
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      this.setState({ items: data.results, loading: false });
-    } catch (error) {
-      this.setState({
-        loading: false,
-        error: error instanceof Error ? error.message : String(error),
-      });
-      console.error(error);
-    }
+    setSearchLS(search);
+    setSearchParams({ page: '1', ...(search && { search }) });
   };
 
-  render() {
-    return (
-      <>
-        <Header>
-          <Search onSubmit={this.handleSubmit} />
-        </Header>
-        <main>
-          <Section loading={this.state.loading} error={this.state.error}>
-            <CardList items={this.state.items} />
-          </Section>
-        </main>
-      </>
-    );
+  useEffect(() => {
+    if (!currentPage)
+      setSearchParams(
+        { page: '1', ...(search && { search }) },
+        { replace: true }
+      );
+  }, [setSearchParams, currentPage, search]);
+
+  useEffect(() => {
+    const fetchResults = async () => {
+      if (currentPage) {
+        setLoading(true);
+        try {
+          const data = await charactersAPI.fetchCharacters(
+            currentPage,
+            search || ''
+          );
+
+          setError('');
+          setItems(data.results);
+          setPages(data.info.pages);
+        } catch (error) {
+          setError(error instanceof Error ? error.message : String(error));
+          console.error(error);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchResults();
+  }, [search, currentPage]);
+
+  if (currentPage && !/^\d+$/.test(currentPage)) {
+    return <Navigate to={ROUTES.NOT_FOUND} />;
   }
-}
+
+  return (
+    <>
+      <main>
+        <Search search={searchLS} onSubmit={handleSubmit} />
+        <Section loading={loading} error={error}>
+          <Pagination pages={pages} />
+          <div className={s['content-wrapper']}>
+            <CardList items={items} />
+            <Outlet />
+          </div>
+        </Section>
+      </main>
+    </>
+  );
+};
 
 export default MainPage;

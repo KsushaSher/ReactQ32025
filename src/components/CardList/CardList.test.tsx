@@ -1,10 +1,15 @@
 import { render, screen, within } from '@testing-library/react';
 import CardList from './CardList';
 import { mockItems } from '../../test-utils/mocks/data';
+import { MemoryRouter } from 'react-router';
 
 describe('CardList Rendering', () => {
   it('Renders correct number of items when data is provided', () => {
-    render(<CardList items={mockItems} />);
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <CardList items={mockItems} />
+      </MemoryRouter>
+    );
     const cardsElement = screen.getAllByTestId('card');
 
     expect(cardsElement).toHaveLength(mockItems.length);
@@ -20,7 +25,11 @@ describe('CardList Rendering', () => {
 
 describe('Data Display Tests', () => {
   it('Correctly displays item names and descriptions', () => {
-    render(<CardList items={mockItems} />);
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <CardList items={mockItems} />
+      </MemoryRouter>
+    );
     const cardsElement = screen.getAllByTestId('card');
 
     cardsElement.forEach((card, index) => {

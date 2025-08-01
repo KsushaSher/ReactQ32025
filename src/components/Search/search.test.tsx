@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import Search from './Search';
 import userEvent from '@testing-library/user-event';
 import { mockOnSubmit } from '../../test-utils/mocks/data';
+import { useState } from 'react';
 
 describe('Rendering Tests', () => {
   afterEach(() => {
@@ -10,7 +11,7 @@ describe('Rendering Tests', () => {
   });
 
   it('Renders search input and search button', () => {
-    render(<Search onSubmit={mockOnSubmit} />);
+    render(<Search onSubmit={mockOnSubmit} search={''} />);
     const inputElement = screen.getByRole('textbox');
     const buttonElement = screen.getByTestId('button-search');
 
@@ -20,22 +21,20 @@ describe('Rendering Tests', () => {
 
   it('Displays previously saved search term from localStorage on mount', () => {
     localStorage.setItem('search', 'Rick');
-    render(<Search onSubmit={mockOnSubmit} />);
+    render(<Search onSubmit={mockOnSubmit} search={'Rick'} />);
 
     const inputElement = screen.getByRole('textbox');
 
     expect(inputElement).toHaveValue('Rick');
-    expect(mockOnSubmit).toBeCalledWith('Rick');
   });
 
   it('Shows empty input when no saved term exists', () => {
     localStorage.removeItem('search');
-    render(<Search onSubmit={mockOnSubmit} />);
+    render(<Search onSubmit={mockOnSubmit} search={''} />);
 
     const inputElement = screen.getByRole('textbox');
 
     expect(inputElement).toHaveValue('');
-    expect(mockOnSubmit).toBeCalledWith('');
   });
 });
 
@@ -49,7 +48,13 @@ describe('User Interaction Tests', () => {
   });
 
   it('Updates input value when user types', async () => {
-    render(<Search onSubmit={mockOnSubmit} />);
+    const Wrapper = () => {
+      const [search, setSearch] = useState('');
+
+      return <Search search={search} onSubmit={setSearch} />;
+    };
+
+    render(<Wrapper />);
     const inputElement = screen.getByRole('textbox');
 
     await user.type(inputElement, 'Rick');
@@ -57,7 +62,18 @@ describe('User Interaction Tests', () => {
   });
 
   it('Saves search term to localStorage when search button is clicked', async () => {
-    render(<Search onSubmit={mockOnSubmit} />);
+    const Wrapper = () => {
+      const [search, setSearch] = useState('');
+
+      const onSubmit = (value: string) => {
+        localStorage.setItem('search', value.trim());
+        setSearch(value);
+      };
+
+      return <Search search={search} onSubmit={onSubmit} />;
+    };
+
+    render(<Wrapper />);
     const buttonElement = screen.getByTestId('button-search');
     const inputElement = screen.getByRole('textbox');
 
@@ -69,7 +85,18 @@ describe('User Interaction Tests', () => {
   });
 
   it('Trims whitespace from search input before saving', async () => {
-    render(<Search onSubmit={mockOnSubmit} />);
+    const Wrapper = () => {
+      const [search, setSearch] = useState('');
+
+      const onSubmit = (value: string) => {
+        localStorage.setItem('search', value.trim());
+        setSearch(value);
+      };
+
+      return <Search search={search} onSubmit={onSubmit} />;
+    };
+
+    render(<Wrapper />);
     const buttonElement = screen.getByTestId('button-search');
     const inputElement = screen.getByRole('textbox');
 
@@ -81,7 +108,11 @@ describe('User Interaction Tests', () => {
   });
 
   it('Triggers search callback with correct parameters', async () => {
-    render(<Search onSubmit={mockOnSubmit} />);
+    const Wrapper = () => {
+      return <Search search={''} onSubmit={mockOnSubmit} />;
+    };
+
+    render(<Wrapper />);
 
     const buttonElement = screen.getByTestId('button-search');
     const inputElement = screen.getByRole('textbox');
@@ -91,40 +122,5 @@ describe('User Interaction Tests', () => {
     await user.click(buttonElement);
 
     expect(mockOnSubmit).toHaveBeenCalledWith('Rick');
-  });
-});
-
-describe('LocalStorage Integration', () => {
-  let user: ReturnType<typeof userEvent.setup>;
-
-  beforeEach(() => {
-    user = userEvent.setup();
-    localStorage.clear();
-    vi.restoreAllMocks();
-  });
-
-  it('Retrieves saved search term on component mount', async () => {
-    localStorage.setItem('search', 'Rick');
-
-    render(<Search onSubmit={mockOnSubmit} />);
-    const inputElement = screen.getByRole('textbox');
-
-    expect(inputElement).toHaveValue('Rick');
-    expect(mockOnSubmit).toHaveBeenCalledWith('Rick');
-  });
-
-  it('Overwrites existing localStorage value when new search is performed', async () => {
-    localStorage.setItem('search', 'Rick');
-    user = userEvent.setup();
-
-    render(<Search onSubmit={mockOnSubmit} />);
-    const buttonElement = screen.getByTestId('button-search');
-    const inputElement = screen.getByRole('textbox');
-
-    await user.clear(inputElement);
-    await user.type(inputElement, 'Morty');
-    await user.click(buttonElement);
-
-    expect(localStorage.getItem('search')).toBe('Morty');
   });
 });

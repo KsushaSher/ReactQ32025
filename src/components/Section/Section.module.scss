@@ -1,10 +1,16 @@
-section {
+.section {
   overflow-x: hidden;
   display: flex;
+  flex-direction: column;
+  gap: 22px;
   align-items: center;
   justify-content: center;
 
-  width: 100vw;
-  margin: 0;
-  padding-top: 100px;
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+
+  @media (width <= 1200px) {
+    width: auto;
+  }
 }

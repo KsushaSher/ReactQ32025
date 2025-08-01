@@ -1,35 +1,24 @@
-import React from 'react';
 import s from './Section.module.scss';
 import { Spinner } from '../Spinner';
 
-interface Props {
+interface Section {
   error?: string;
   loading: boolean;
   children: React.ReactNode;
 }
 
-interface State {
-  search: string;
-}
-
-class Section extends React.Component<Props, State> {
-  render() {
-    const { children, loading, error } = this.props;
-
-    return (
-      <section>
-        {loading ? (
-          <Spinner data-testid="spinner" />
-        ) : error ? (
-          <div className={s['error-message']} data-testid="error">
-            {error}
-          </div>
-        ) : (
-          children
-        )}
-      </section>
-    );
-  }
-}
+const Section = ({ loading, error, children }: Section) => {
+  return (
+    <section className={s.section}>
+      {loading ? (
+        <Spinner data-testid="spinner" />
+      ) : error ? (
+        <div data-testid="error">{error}</div>
+      ) : (
+        children
+      )}
+    </section>
+  );
+};
 
 export default Section;

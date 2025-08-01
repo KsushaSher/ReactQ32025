@@ -1,56 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import s from './Search.module.scss';
 
-interface Props {
+interface Search {
+  search: string;
   onSubmit: (search: string) => void;
 }
 
-interface State {
-  search: string;
-}
+const Search = ({ search, onSubmit }: Search) => {
+  const [value, setValue] = useState(search);
 
-class Search extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { search: localStorage.getItem('search') || '' };
-  }
-
-  componentDidMount(): void {
-    this.props.onSubmit(this.state.search);
-  }
-
-  handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    this.props.onSubmit(this.state.search);
-    localStorage.setItem('search', this.state.search.trim());
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
   };
 
-  handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ search: e.target.value }, () => {
-      localStorage.setItem('search', this.state.search.trim());
-    });
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    onSubmit(value);
   };
 
-  render() {
-    return (
-      <form className={s['search-form']} onSubmit={this.handleOnSubmit}>
-        <input
-          className="input"
-          placeholder="search"
-          value={this.state.search}
-          onChange={this.handleOnChange}
-          data-testid="input"
-        />
-        <button
-          className="button default"
-          type="submit"
-          data-testid="button-search"
-        >
-          Search
-        </button>
-      </form>
-    );
-  }
-}
+  return (
+    <form className={s['search-form']} onSubmit={handleSubmit}>
+      <input
+        className="input"
+        placeholder="search"
+        value={value}
+        onChange={handleChange}
+        data-testid="input"
+      />
+      <button
+        className="button default"
+        type="submit"
+        data-testid="button-search"
+      >
+        Search
+      </button>
+    </form>
+  );
+};
 
 export default Search;

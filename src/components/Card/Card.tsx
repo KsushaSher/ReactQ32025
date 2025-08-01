@@ -1,36 +1,39 @@
-import React from 'react';
 import type { Item } from '../../models';
+import { ROUTES } from '../../shared/constants/routes';
 import s from './Card.module.scss';
-
-type State = Record<string, never>;
-
-export interface Props {
+import { NavLink, useSearchParams } from 'react-router';
+export interface Card {
   item: Item;
-  key: number;
-  'data-testid': string;
 }
 
-class Card extends React.Component<Props, State> {
-  render() {
-    return (
-      <div className={s['card']} data-testid="card">
-        <div className={s['img-wrapper']}>
-          <img
-            src={this.props.item.image}
-            alt={`${this.props.item.name} avatar`}
-            className={s.img}
-          ></img>
-        </div>
-        <div className={`${s.name} ${s.neutral}`}>
-          Name: <span className={s['accent']}>{this.props.item.name}</span>
-        </div>
-        <div className={`${s.species} ${s.neutral}`}>
-          Species:{' '}
-          <span className={s['accent']}>{this.props.item.species}</span>
-        </div>
+const Card = ({ item }: Card) => {
+  const [searchParams] = useSearchParams();
+
+  return (
+    <div className={s['card']} data-testid="card">
+      <div className={s['img-wrapper']}>
+        <img
+          src={item.image}
+          alt={`${item.name} avatar`}
+          className={s.img}
+        ></img>
       </div>
-    );
-  }
-}
+      <div className={`${s.name} ${s.neutral}`}>
+        Name: <span className={s['accent']}>{item.name}</span>
+      </div>
+      <div className={`${s.species} ${s.neutral}`}>
+        Species: <span className={s['accent']}>{item.species}</span>
+      </div>
+      <NavLink
+        className={s['details-button']}
+        to={{
+          pathname: `${ROUTES.CHARACTER.ROOT}/${item.id}`,
+          search: searchParams.toString(),
+        }}
+        onMouseDown={(e) => e.stopPropagation()}
+      ></NavLink>
+    </div>
+  );
+};
 
 export default Card;

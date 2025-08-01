@@ -1,10 +1,20 @@
-import App from './App.tsx';
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './styles/normalize.css';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { RouterProvider } from 'react-router';
+import router from './router/router';
+import './styles//main.scss';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+const rootElement = document.getElementById('root');
+
+if (!rootElement) {
+  throw new Error('Root element not found!');
+}
+
+createRoot(rootElement).render(
+  <StrictMode>
+    <ErrorBoundary>
+      <RouterProvider router={router} />
+    </ErrorBoundary>
+  </StrictMode>
 );

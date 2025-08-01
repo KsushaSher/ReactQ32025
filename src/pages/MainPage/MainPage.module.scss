@@ -1,12 +1,5 @@
-main {
-  scroll-behavior: smooth;
-
-  overflow-y: auto;
+.content-wrapper {
   display: flex;
-
-  box-sizing: border-box;
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
+  flex-direction: row;
+  gap: 16px;
 }

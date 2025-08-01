@@ -26,3 +26,13 @@ export const mockItems: Item[] = [
     url: 'https://rickandmortyapi.com/api/character/2',
   },
 ];
+
+export const mockItem: Item = {
+  id: 1,
+  name: 'Rick Sanchez',
+  status: 'Alive',
+  species: 'Human',
+  gender: 'Male',
+  image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+  url: 'https://rickandmortyapi.com/api/character/1',
+};
