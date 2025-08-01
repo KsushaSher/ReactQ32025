@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import s from './NotFoundPage.module.scss';
-import { ROUTES } from '../../shared/constants/apiRoutes';
+import { ROUTES } from '../../shared/constants/routes';
 
 const NotFoundPage = () => {
   return (

@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { characterAPI } from '../../services/api';
+import { useEffect, useRef, useState } from 'react';
+import { charactersAPI } from '../../services/characters-api';
 import '../../styles/main.scss';
 import { Spinner } from '../Spinner';
 import type { Item } from '../../models';
 import { useNavigate, useParams, useSearchParams } from 'react-router';
 import CardDetailContent from '../CardDetailContent';
-import { ROUTES } from '../../shared/constants/apiRoutes';
+import { ROUTES } from '../../shared/constants/routes';
 
 const CardDetail = () => {
   const [searchParams] = useSearchParams();
@@ -20,26 +20,26 @@ const CardDetail = () => {
   const [error, setError] = useState('');
   const [item, setItem] = useState<Item | null>();
 
-  const getCharacterData = useCallback(async (id: string) => {
-    try {
-      setLoading(true);
-      const data = await characterAPI.fetchCharacterById(id);
-
-      setError('');
-      setItem(data);
-      setLoading(false);
-    } catch (error) {
-      setError(error instanceof Error ? error.message : String(error));
-      console.error(error);
-      setLoading(false);
-    }
-  }, []);
-
   useEffect(() => {
+    const getCharacterData = async (id: string) => {
+      try {
+        setLoading(true);
+        const data = await charactersAPI.fetchCharacterById(id);
+
+        setError('');
+        setItem(data);
+        setLoading(false);
+      } catch (error) {
+        setError(error instanceof Error ? error.message : String(error));
+        console.error(error);
+        setLoading(false);
+      }
+    };
+
     if (id) {
       getCharacterData(id);
     }
-  }, [id, getCharacterData]);
+  }, [id]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

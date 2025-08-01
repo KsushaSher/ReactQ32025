@@ -1,6 +1,6 @@
 import { BASE_URL } from '../shared/constants';
 
-class CharacterAPI {
+class CharactersAPI {
   private baseUrl: string;
 
   constructor(baseUrl: string) {
@@ -34,4 +34,4 @@ class CharacterAPI {
   }
 }
 
-export const characterAPI = new CharacterAPI(BASE_URL);
+export const charactersAPI = new CharactersAPI(BASE_URL);

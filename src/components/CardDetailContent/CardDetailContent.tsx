@@ -1,5 +1,5 @@
 import type { Item } from '../../models';
-import { ROUTES } from '../../shared/constants/apiRoutes';
+import { ROUTES } from '../../shared/constants/routes';
 import s from './CardDetailContent.module.scss';
 import { NavLink } from 'react-router';
 

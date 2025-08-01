@@ -4,7 +4,7 @@ import AboutPage from '../pages/AboutPage';
 import Layout from '../pages/Layout';
 import { MainPage } from '../pages/MainPage';
 import NotFoundPage from '../pages/NotFoundPage';
-import { ROUTES } from '../shared/constants/apiRoutes';
+import { ROUTES } from '../shared/constants/routes';
 
 const router = createBrowserRouter([
   {

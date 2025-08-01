@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { RouterProvider } from 'react-router';
@@ -12,9 +12,9 @@ if (!rootElement) {
 }
 
 createRoot(rootElement).render(
-  <React.StrictMode>
+  <StrictMode>
     <ErrorBoundary>
       <RouterProvider router={router} />
     </ErrorBoundary>
-  </React.StrictMode>
+  </StrictMode>
 );

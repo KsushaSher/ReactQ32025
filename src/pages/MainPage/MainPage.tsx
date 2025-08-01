@@ -5,10 +5,10 @@ import { useEffect, useState } from 'react';
 import Pagination from '../../components/Pagination';
 import { Navigate, Outlet, useSearchParams } from 'react-router';
 import s from './MainPage.module.scss';
-import { useLocalStorage } from '../../shared/utils/hooks/useLocalStorage';
-import { LS_SEARCH_KEY } from '../../shared/constants/constants';
-import { characterAPI } from '../../services/api';
-import { ROUTES } from '../../shared/constants/apiRoutes';
+import { useLocalStorage } from '../../utils/hooks/useLocalStorage';
+import { LS_SEARCH_KEY } from '../../shared/constants/ls-keys';
+import { charactersAPI } from '../../services/characters-api';
+import { ROUTES } from '../../shared/constants/routes';
 
 const MainPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -42,7 +42,7 @@ const MainPage = () => {
       if (currentPage) {
         setLoading(true);
         try {
-          const data = await characterAPI.fetchCharacters(
+          const data = await charactersAPI.fetchCharacters(
             currentPage,
             search || ''
           );
