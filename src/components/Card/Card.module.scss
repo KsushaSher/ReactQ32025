@@ -13,8 +13,8 @@
   padding: 10px;
   border-radius: 8px;
 
-  background-color: rgb(243 237 191);
-  box-shadow: 3px 3px 4px rgb(189 183 137);
+  background-color: var(--bg-card);
+  box-shadow: 3px 3px 4px var(--bg-card-shadow);
 }
 
 .img-wrapper {
@@ -24,35 +24,25 @@
 .img {
   width: 100px;
   height: 100px;
-  border: 1px solid rgb(144 142 121);
+  border: 1px solid var(--ava-border);
   border-radius: 50%;
 }
 
 .accent {
   font-size: 18px;
   font-weight: 400;
-  color: rgb(111 102 91);
+  color: var(--text-color-accent);
 }
 
 .neutral {
   font-size: 16px;
   font-weight: 300;
-  color: rgb(124 120 115);
+  color: var(--text-color-neutral);
 }
 
 .name {
   width: 180px;
   text-align: center;
-}
-
-.link {
-  color: rgb(79 65 59);
-  text-decoration: none;
-  text-decoration: underline;
-
-  &:hover {
-    color: rgb(196 111 1);
-  }
 }
 
 .details-button {
@@ -89,5 +79,5 @@
 
   width: 18px;
   height: 18px;
-  border-color: rgb(124 120 115);
+  border-color: var(--text-color-neutral);
 }

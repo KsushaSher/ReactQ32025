@@ -18,13 +18,13 @@ const Pagination = ({ pages }: Pagination) => {
 
   return (
     <div className={s['pagination-wrapper']}>
-      <button className="button light" onClick={handlePrev}>
+      <button className="button light-btn" onClick={handlePrev}>
         Prev
       </button>
       <span className={s['current-page']}>
         {currentPage}/{pages}
       </span>
-      <button className="button light" onClick={handleNext}>
+      <button className="button light-btn" onClick={handleNext}>
         Next
       </button>
     </div>

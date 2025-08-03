@@ -27,10 +27,10 @@ const FlyoutElement = () => {
       <p>
         {count} item{count === 1 ? '' : 's'} are selected:
       </p>
-      <button onClick={handleClickReset} className="button light">
+      <button onClick={handleClickReset} className="button light-btn">
         Unselect all
       </button>
-      <button onClick={handleClickDownload} className="button light">
+      <button onClick={handleClickDownload} className="button light-btn">
         Download
       </button>
     </div>

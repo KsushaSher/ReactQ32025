@@ -42,7 +42,7 @@ class ErrorBoundary extends React.Component<Props, State> {
           </details>
           <a href="/">Home</a>
           <button
-            className="button light"
+            className="button light-btn"
             onClick={this.handleClick}
             data-testid="clear-error"
           >

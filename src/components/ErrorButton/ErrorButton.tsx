@@ -13,7 +13,7 @@ const ErrorButton = () => {
 
   return (
     <button
-      className="button error"
+      className="button error-btn"
       onClick={handleClick}
       data-testid="error-boundary"
     >

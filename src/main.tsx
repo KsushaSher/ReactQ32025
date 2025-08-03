@@ -5,6 +5,7 @@ import router from './router/router';
 import { Provider } from 'react-redux';
 import './styles//main.scss';
 import { store } from './store/store';
+import ThemeProvider from './components/Context';
 
 const rootElement = document.getElementById('root');
 
@@ -15,7 +16,9 @@ if (!rootElement) {
 createRoot(rootElement).render(
   <StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </Provider>
   </StrictMode>
 );
