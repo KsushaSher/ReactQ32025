@@ -9,7 +9,7 @@ const Layout = () => {
   const theme = useTheme();
 
   return (
-    <div className={`wrapper-app ${theme}`}>
+    <div className={`wrapper-app ${theme}`} data-testid="wrapper-app">
       <header className={s.header}>
         <div className={s.wrapper}>
           <nav className={s.wrapper}>

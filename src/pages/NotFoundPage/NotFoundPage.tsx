@@ -4,7 +4,7 @@ import { ROUTES } from '../../shared/constants/routes';
 
 const NotFoundPage = () => {
   return (
-    <div className={s['error-page']}>
+    <div className={s['error-page']} data-testid="not-found">
       <h1>Oops!</h1>
       <div className={s.error404}>404</div>
       <div>Sorry, but no such page was found.</div>

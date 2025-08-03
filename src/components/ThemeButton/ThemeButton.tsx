@@ -12,6 +12,7 @@ const ThemeButton = () => {
   return (
     <button
       className={`${s['theme-button']} ${s[theme]}`}
+      data-testid="theme-button"
       onClick={handleOnClick}
     ></button>
   );

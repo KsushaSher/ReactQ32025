@@ -69,7 +69,7 @@ const MainPage = () => {
 
   return (
     <>
-      <main>
+      <main data-testid="main-page">
         <Search search={searchLS} onSubmit={handleSubmit} />
         <Section loading={loading} error={error}>
           <Pagination pages={pages} />

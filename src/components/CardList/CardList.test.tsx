@@ -3,7 +3,6 @@ import CardList from './CardList';
 import { mockItems } from '../../test-utils/mocks/data';
 import { MemoryRouter } from 'react-router';
 import { Provider } from 'react-redux';
-import React from 'react';
 import { store } from '../../store/store';
 
 describe('CardList Rendering', () => {
