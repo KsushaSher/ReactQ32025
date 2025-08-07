@@ -1,1 +1,5 @@
-export { getCount, getIsSelected, getArraySelectedId } from './selectors';
+export {
+  selectCount,
+  selectIsSelected,
+  selectSelectedCharacters,
+} from './selectors';

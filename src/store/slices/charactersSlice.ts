@@ -1,10 +1,10 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-export interface CharactersState {
+export interface InitialState {
   selected: string[];
 }
 
-export const initialState: CharactersState = {
+export const initialState: InitialState = {
   selected: [],
 };
 
@@ -12,7 +12,7 @@ const charactersSlice = createSlice({
   name: 'characters',
   initialState,
   reducers: {
-    setSelected(state, action: PayloadAction<string>) {
+    toggleSelectedСharacter(state, action: PayloadAction<string>) {
       const id = action.payload;
 
       if (state.selected.includes(id)) {
@@ -21,11 +21,12 @@ const charactersSlice = createSlice({
         state.selected.push(id);
       }
     },
-    reset() {
-      return initialState;
+    resetSelectedСharacter(state) {
+      state.selected = [];
     },
   },
 });
 
-export const { setSelected, reset } = charactersSlice.actions;
+export const { toggleSelectedСharacter, resetSelectedСharacter } =
+  charactersSlice.actions;
 export default charactersSlice.reducer;

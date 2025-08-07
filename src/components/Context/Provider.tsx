@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { ThemeContext, type Theme } from './Context';
+import { ThemeContext, type Theme } from './ThemeContext';
 
-interface IThemeProps {
+interface ThemeProvider {
   children: React.ReactNode;
 }
 
-function ThemeProvider({ children }: IThemeProps) {
+const ThemeProvider = ({ children }: ThemeProvider) => {
   const [theme, setTheme] = useState<Theme>('light');
 
   const toggleTheme = () => {
@@ -17,6 +17,6 @@ function ThemeProvider({ children }: IThemeProps) {
       {children}
     </ThemeContext.Provider>
   );
-}
+};
 
 export default ThemeProvider;

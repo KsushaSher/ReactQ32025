@@ -3,7 +3,7 @@ import s from './ReactErrorBoundary.module.scss';
 import { RouteError } from './RouteError';
 import { ReactError } from './ReactError';
 
-export function ReactErrorBoundary() {
+export const ReactErrorBoundary = () => {
   const error = useRouteError();
 
   return isRouteErrorResponse(error) ? (
@@ -15,4 +15,4 @@ export function ReactErrorBoundary() {
       <h1>Unknown Error</h1>
     </div>
   );
-}
+};

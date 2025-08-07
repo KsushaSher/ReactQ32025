@@ -5,9 +5,9 @@ const ThemeButton = () => {
   const theme = useTheme();
   const themeToggle = useThemeToggle();
 
-  function handleOnClick() {
+  const handleOnClick = () => {
     themeToggle();
-  }
+  };
 
   return (
     <button

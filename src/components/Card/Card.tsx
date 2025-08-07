@@ -1,8 +1,8 @@
 import type { Item } from '../../models';
 import { ROUTES } from '../../shared/constants/routes';
-import { setSelected } from '../../store/charactersSlice';
-import { useAppDispatch, useAppSelector } from '../../store/hook';
-import { getIsSelected } from '../../store/selectors/selectors';
+import { useAppDispatch } from '../../store/hooks';
+import { toggleSelectedСharacter } from '../../store/slices/charactersSlice';
+import { useIsCardSelected } from '../../utils/hooks/useIsCardSelected';
 import s from './Card.module.scss';
 import { NavLink, useSearchParams } from 'react-router';
 export interface Card {
@@ -13,8 +13,9 @@ const Card = ({ item }: Card) => {
   const [searchParams] = useSearchParams();
   const dispatch = useAppDispatch();
   const id = String(item.id);
-  const isSelected = useAppSelector((state) => getIsSelected(state, id));
-  const handleToggle = () => dispatch(setSelected(id));
+  const isCardSelected = useIsCardSelected(id);
+
+  const handleToggle = () => dispatch(toggleSelectedСharacter(id));
 
   return (
     <div className={s['card']} data-testid="card">
@@ -43,7 +44,7 @@ const Card = ({ item }: Card) => {
         type="checkbox"
         className={s['checkbox-card']}
         onChange={handleToggle}
-        checked={isSelected}
+        checked={isCardSelected}
         onClick={(e) => e.stopPropagation()}
       />
     </div>
