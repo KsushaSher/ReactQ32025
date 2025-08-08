@@ -1,5 +1,8 @@
 import type { Item } from '../../models';
 import { ROUTES } from '../../shared/constants/routes';
+import { useAppDispatch } from '../../store/hooks';
+import { toggleSelectedСharacter } from '../../store/slices/charactersSlice';
+import { useIsCardSelected } from '../../utils/hooks/useIsCardSelected';
 import s from './Card.module.scss';
 import { NavLink, useSearchParams } from 'react-router';
 export interface Card {
@@ -8,6 +11,11 @@ export interface Card {
 
 const Card = ({ item }: Card) => {
   const [searchParams] = useSearchParams();
+  const dispatch = useAppDispatch();
+  const id = String(item.id);
+  const isCardSelected = useIsCardSelected(id);
+
+  const handleToggle = () => dispatch(toggleSelectedСharacter(id));
 
   return (
     <div className={s['card']} data-testid="card">
@@ -32,6 +40,13 @@ const Card = ({ item }: Card) => {
         }}
         onMouseDown={(e) => e.stopPropagation()}
       ></NavLink>
+      <input
+        type="checkbox"
+        className={s['checkbox-card']}
+        onChange={handleToggle}
+        checked={isCardSelected}
+        onClick={(e) => e.stopPropagation()}
+      />
     </div>
   );
 };

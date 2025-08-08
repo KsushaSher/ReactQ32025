@@ -4,6 +4,8 @@ import { server } from '../../test-utils/mocks/setup-server';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
+import { Provider } from 'react-redux';
+import { store } from '../../store/store';
 
 describe('Error Handling Tests', () => {
   let consoleErrorMock: ReturnType<typeof vi.spyOn>;
@@ -25,9 +27,11 @@ describe('Error Handling Tests', () => {
     );
 
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <MainPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <MainPage />
+        </MemoryRouter>
+      </Provider>
     );
 
     const errorElement = await screen.findByTestId('error');
@@ -44,9 +48,11 @@ describe('Error Handling Tests', () => {
     );
 
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <MainPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <MainPage />
+        </MemoryRouter>
+      </Provider>
     );
 
     const errorElement = await screen.findByTestId('error');
@@ -57,9 +63,11 @@ describe('Error Handling Tests', () => {
 
   it('Displays the spinner and characters after a successful search', async () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <MainPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <MainPage />
+        </MemoryRouter>
+      </Provider>
     );
 
     const buttonElement = await screen.findByTestId('button-search');

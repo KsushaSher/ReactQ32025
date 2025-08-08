@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { charactersAPI } from '../../services/characters-api';
 import '../../styles/main.scss';
 import { Spinner } from '../Spinner';
@@ -20,40 +20,43 @@ const CardDetail = () => {
   const [error, setError] = useState('');
   const [item, setItem] = useState<Item | null>();
 
+  const getCharacterData = async (id: string) => {
+    try {
+      setLoading(true);
+      const data = await charactersAPI.fetchCharacterById(id);
+
+      setError('');
+      setItem(data);
+      setLoading(false);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : String(error));
+      console.error(error);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const getCharacterData = async (id: string) => {
-      try {
-        setLoading(true);
-        const data = await charactersAPI.fetchCharacterById(id);
-
-        setError('');
-        setItem(data);
-        setLoading(false);
-      } catch (error) {
-        setError(error instanceof Error ? error.message : String(error));
-        console.error(error);
-        setLoading(false);
-      }
-    };
-
     if (id) {
       getCharacterData(id);
     }
   }, [id]);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
       if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
         navigate({ pathname: ROUTES.ROOT, search });
       }
-    };
+    },
+    [navigate, search]
+  );
 
+  useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [navigate, search]);
+  }, [handleClickOutside]);
 
   return loading ? (
     <Spinner />

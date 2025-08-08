@@ -1,0 +1,32 @@
+@use '../../styles/variables' as *;
+
+.theme-button {
+  position: absolute;
+  right: 100px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 3px;
+
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  &:not(:disabled):hover {
+    cursor: pointer;
+  }
+}
+
+.dark {
+  background-image: $theme-button-dark;
+}
+
+.light {
+  background-image: $theme-button-light;
+}

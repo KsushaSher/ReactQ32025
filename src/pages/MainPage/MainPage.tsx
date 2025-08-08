@@ -9,6 +9,7 @@ import { useLocalStorage } from '../../utils/hooks/useLocalStorage';
 import { LS_SEARCH_KEY } from '../../shared/constants/ls-keys';
 import { charactersAPI } from '../../services/characters-api';
 import { ROUTES } from '../../shared/constants/routes';
+import FlyoutElement from '../../components/FlyoutElement';
 
 const MainPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -68,7 +69,7 @@ const MainPage = () => {
 
   return (
     <>
-      <main>
+      <main data-testid="main-page">
         <Search search={searchLS} onSubmit={handleSubmit} />
         <Section loading={loading} error={error}>
           <Pagination pages={pages} />
@@ -77,6 +78,7 @@ const MainPage = () => {
             <Outlet />
           </div>
         </Section>
+        <FlyoutElement />
       </main>
     </>
   );

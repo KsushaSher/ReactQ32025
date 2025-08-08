@@ -4,7 +4,7 @@
 }
 
 .link {
-  color: rgb(79 65 59);
+  color: var(--text-color-dark);
   text-decoration: none;
 
   &:hover {
@@ -13,5 +13,5 @@
 }
 
 .active {
-  color: rgb(95 46 25);
+  color: var(--text-flyout-color);
 }

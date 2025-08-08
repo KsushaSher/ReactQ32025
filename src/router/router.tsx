@@ -5,11 +5,13 @@ import Layout from '../pages/Layout';
 import { MainPage } from '../pages/MainPage';
 import NotFoundPage from '../pages/NotFoundPage';
 import { ROUTES } from '../shared/constants/routes';
+import { ReactErrorBoundary } from '../components/ReactErrorBoundary/ReactErrorBoundary';
 
 const router = createBrowserRouter([
   {
     path: ROUTES.ROOT,
     Component: Layout,
+    ErrorBoundary: ReactErrorBoundary,
     children: [
       {
         path: ROUTES.MAIN,
@@ -30,6 +32,7 @@ const router = createBrowserRouter([
   {
     path: ROUTES.NOT_FOUND,
     Component: NotFoundPage,
+    ErrorBoundary: ReactErrorBoundary,
   },
 ]);
 

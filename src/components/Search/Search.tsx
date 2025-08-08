@@ -28,7 +28,7 @@ const Search = ({ search, onSubmit }: Search) => {
         data-testid="input"
       />
       <button
-        className="button default"
+        className="button default-btn"
         type="submit"
         data-testid="button-search"
       >
