@@ -1,28 +1,36 @@
-import { reset } from '../../store/charactersSlice';
-import { useAppDispatch, useAppSelector } from '../../store/hook';
+import { resetSelectedСharacter } from '../../store/slices/charactersSlice';
 import s from './FlyoutElement.module.scss';
-import { getArraySelectedId, getCount } from '../../store/selectors';
-import { getCharactersData } from '../../utils/getCharactersData';
+import { selectSelectedCharacters, selectCount } from '../../store/selectors';
 import { downloadCSV } from '../../utils/downloadCSV';
 import { convertToCSV } from '../../utils/convertToCSV';
+import { getCharactersData } from '../../utils/getCharactersData';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const FlyoutElement = () => {
   const dispatch = useAppDispatch();
-  const count = useAppSelector(getCount);
-  const ids = useAppSelector(getArraySelectedId);
+  const count = useAppSelector(selectCount);
+  const ids = useAppSelector(selectSelectedCharacters);
 
   const handleClickDownload = async () => {
-    const сharacterData = await getCharactersData(ids);
-    const csv = convertToCSV(сharacterData);
+    try {
+      const сharacterData = await getCharactersData(ids);
+      const csv = convertToCSV(сharacterData);
 
-    downloadCSV(csv, count);
+      downloadCSV(csv, count);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleClickReset = () => {
-    dispatch(reset());
+    dispatch(resetSelectedСharacter());
   };
 
-  return count > 0 ? (
+  if (count <= 0) {
+    return null;
+  }
+
+  return (
     <div className={s['wrapper-flyout']}>
       <p>
         {count} item{count === 1 ? '' : 's'} are selected:
@@ -34,7 +42,7 @@ const FlyoutElement = () => {
         Download
       </button>
     </div>
-  ) : null;
+  );
 };
 
 export default FlyoutElement;
