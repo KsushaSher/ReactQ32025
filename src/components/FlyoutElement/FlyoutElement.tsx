@@ -5,15 +5,17 @@ import { downloadCSV } from '../../utils/downloadCSV';
 import { convertToCSV } from '../../utils/convertToCSV';
 import { getCharactersData } from '../../utils/getCharactersData';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useLazyGetCharacterByIdQuery } from '../../store/charactersApi';
 
 const FlyoutElement = () => {
   const dispatch = useAppDispatch();
   const count = useAppSelector(selectCount);
   const ids = useAppSelector(selectSelectedCharacters);
+  const [getCharacterById] = useLazyGetCharacterByIdQuery();
 
   const handleClickDownload = async () => {
     try {
-      const сharacterData = await getCharactersData(ids);
+      const сharacterData = await getCharactersData(ids, getCharacterById);
       const csv = convertToCSV(сharacterData);
 
       downloadCSV(csv, count);
