@@ -48,8 +48,8 @@ const MainPage = () => {
     <>
       <main data-testid="main-page">
         <div className={s['option-wrapper']}>
-          <RefreshButton />
           <Search search={searchLS} onSubmit={handleSubmit} />
+          <RefreshButton />
         </div>
 
         <Section loading={isLoading} error={error}>

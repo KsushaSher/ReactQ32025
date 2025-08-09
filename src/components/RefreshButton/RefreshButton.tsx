@@ -1,23 +1,21 @@
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { charactersApi } from '../../store/charactersApi';
 
 const RefreshButton = () => {
-  const [hasError, setHasError] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   const handleClick = () => {
-    setHasError(true);
+    dispatch(charactersApi.util.resetApiState());
   };
-
-  if (hasError) {
-    throw new Error('Test error from button "Throw error"');
-  }
 
   return (
     <button
       className="button refresh-btn"
+      onMouseDown={(e) => e.stopPropagation()}
       onClick={handleClick}
       data-testid="refresh-boundary"
     >
-      Refresh
+      Refresh store
     </button>
   );
 };
