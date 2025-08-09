@@ -56,19 +56,17 @@ export const handlers = [
     async ({ params }) => {
       const { id } = params;
 
-      if (id === '1') {
-        await new Promise((r) => setTimeout(r, 300));
+      await new Promise((r) => setTimeout(r, 300));
 
-        if (id === '1') {
-          return HttpResponse.json({
-            id: 1,
-            name: 'Rick Sanchez',
-            status: 'Alive',
-            species: 'Human',
-            gender: 'Male',
-            image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
-          });
-        }
+      if (id === '1') {
+        return HttpResponse.json({
+          id: 1,
+          name: 'Rick Sanchez',
+          status: 'Alive',
+          species: 'Human',
+          gender: 'Male',
+          image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+        });
       }
 
       return new HttpResponse(null, { status: 404 });

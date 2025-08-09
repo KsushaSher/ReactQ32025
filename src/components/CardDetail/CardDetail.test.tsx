@@ -4,6 +4,8 @@ import CardDetail from '../CardDetail';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import { server } from '../../test-utils/mocks/setup-server';
 import { mockItem } from '../../test-utils/mocks/data';
+import { Provider } from 'react-redux';
+import { createStore } from '../../store/store';
 
 describe('CardDetail Component', () => {
   beforeEach(() => {
@@ -12,11 +14,13 @@ describe('CardDetail Component', () => {
 
   it('shows spinner while loading', async () => {
     render(
-      <MemoryRouter initialEntries={['/character/1']}>
-        <Routes>
-          <Route path="/character/:id" element={<CardDetail />} />
-        </Routes>
-      </MemoryRouter>
+      <Provider store={createStore()}>
+        <MemoryRouter initialEntries={['/character/1']}>
+          <Routes>
+            <Route path="/character/:id" element={<CardDetail />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     );
 
     expect(screen.getByTestId('spinner')).toBeInTheDocument();
@@ -28,11 +32,13 @@ describe('CardDetail Component', () => {
 
   it('displays character details correctly', async () => {
     render(
-      <MemoryRouter initialEntries={['/character/1']}>
-        <Routes>
-          <Route path="/character/:id" element={<CardDetail />} />
-        </Routes>
-      </MemoryRouter>
+      <Provider store={createStore()}>
+        <MemoryRouter initialEntries={['/character/1']}>
+          <Routes>
+            <Route path="/character/:id" element={<CardDetail />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     );
 
     const card = await screen.findByTestId('card-detail');
@@ -59,27 +65,31 @@ describe('CardDetail Component', () => {
     );
 
     render(
-      <MemoryRouter initialEntries={['/character/1']}>
-        <Routes>
-          <Route path="/character/:id" element={<CardDetail />} />
-        </Routes>
-      </MemoryRouter>
+      <Provider store={createStore()}>
+        <MemoryRouter initialEntries={['/character/1']}>
+          <Routes>
+            <Route path="/character/:id" element={<CardDetail />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     );
 
     const error = await screen.findByTestId('error');
 
     expect(error).toBeInTheDocument();
-    expect(error).toHaveTextContent('Failed to fetch');
+    expect(error).toHaveTextContent('Oh no, there was an error');
   });
 
   it('navigates back to main page when clicked outside', async () => {
     render(
-      <MemoryRouter initialEntries={['/character/1?name=rick']}>
-        <Routes>
-          <Route path="/" element={<div data-testid="main-page" />} />
-          <Route path="/character/:id" element={<CardDetail />} />
-        </Routes>
-      </MemoryRouter>
+      <Provider store={createStore()}>
+        <MemoryRouter initialEntries={['/character/1?name=rick']}>
+          <Routes>
+            <Route path="/" element={<div data-testid="main-page" />} />
+            <Route path="/character/:id" element={<CardDetail />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     );
 
     await screen.findByTestId('card-detail');
