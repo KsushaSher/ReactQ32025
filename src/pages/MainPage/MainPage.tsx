@@ -10,6 +10,7 @@ import { LS_SEARCH_KEY } from '../../shared/constants/ls-keys';
 import { ROUTES } from '../../shared/constants/routes';
 import FlyoutElement from '../../components/FlyoutElement';
 import { useGetCharactersQuery } from '../../store/charactersApi';
+import RefreshButton from '../../components/RefreshButton';
 
 const MainPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -46,7 +47,11 @@ const MainPage = () => {
   return (
     <>
       <main data-testid="main-page">
-        <Search search={searchLS} onSubmit={handleSubmit} />
+        <div className={s['option-wrapper']}>
+          <RefreshButton />
+          <Search search={searchLS} onSubmit={handleSubmit} />
+        </div>
+
         <Section loading={isLoading} error={error}>
           <Pagination pages={info?.pages} />
           <div className={s['content-wrapper']}>

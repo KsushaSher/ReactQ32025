@@ -6,12 +6,14 @@
   padding: 0;
 }
 
-.wrapper-app {
+#root {
   font-family: Montserrat, sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.5;
+}
 
+.wrapper-app {
   background-color: var(--bg-body);
 }
 
@@ -107,6 +109,34 @@
 }
 
 .error-btn {
+  border: 1px solid var(--border-btn-error);
+
+  color: var(--text-btn-error);
+
+  background: var(--bg-btn-error);
+  box-shadow: 3px 3px 0 var(--shadow-btn-error);
+
+  transition: all 0.2s ease;
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 var(--shadow-btn-error);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    border: 1px solid var(--border-btn-disabled);
+    color: var(--text-btn-disabled);
+    background: var(--bg-btn-disabled);
+  }
+
+  &:not(:disabled):hover {
+    border-color: var(--btn-hover);
+    color: var(--btn-hover);
+  }
+}
+
+.refresh-btn {
   border: 1px solid var(--border-btn-error);
 
   color: var(--text-btn-error);

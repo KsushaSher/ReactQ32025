@@ -5,6 +5,7 @@ import Card from '../Card';
 export interface CardList {
   items: Item[] | undefined;
 }
+
 const CardList = ({ items }: CardList) => {
   if (!items) return;
 
