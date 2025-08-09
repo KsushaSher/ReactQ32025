@@ -5,7 +5,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
 import { Provider } from 'react-redux';
-import { store } from '../../store/store';
+import { createStore } from '../../store/store';
 
 describe('Error Handling Tests', () => {
   let consoleErrorMock: ReturnType<typeof vi.spyOn>;
@@ -27,7 +27,7 @@ describe('Error Handling Tests', () => {
     );
 
     render(
-      <Provider store={store}>
+      <Provider store={createStore()}>
         <MemoryRouter initialEntries={['/']}>
           <MainPage />
         </MemoryRouter>
@@ -48,7 +48,7 @@ describe('Error Handling Tests', () => {
     );
 
     render(
-      <Provider store={store}>
+      <Provider store={createStore()}>
         <MemoryRouter initialEntries={['/']}>
           <MainPage />
         </MemoryRouter>
@@ -58,12 +58,12 @@ describe('Error Handling Tests', () => {
     const errorElement = await screen.findByTestId('error');
 
     expect(errorElement).toBeInTheDocument();
-    expect(errorElement).toHaveTextContent('No results found');
+    expect(errorElement).toHaveTextContent(/404/i);
   });
 
   it('Displays the spinner and characters after a successful search', async () => {
     render(
-      <Provider store={store}>
+      <Provider store={createStore()}>
         <MemoryRouter initialEntries={['/']}>
           <MainPage />
         </MemoryRouter>

@@ -14,7 +14,6 @@ const Card = ({ item }: Card) => {
   const dispatch = useAppDispatch();
   const id = String(item.id);
   const isCardSelected = useIsCardSelected(id);
-
   const handleToggle = () => dispatch(toggleSelectedСharacter(id));
 
   return (

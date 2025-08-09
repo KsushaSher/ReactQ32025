@@ -1,10 +1,16 @@
 import { vi } from 'vitest';
 import type { Item } from '../../models';
+import type { SerializedError } from '@reduxjs/toolkit';
 
 export const mockOnSubmit = vi.fn();
 
 export const BrokenComponent = () => {
   throw new Error('Error!');
+};
+
+export const mockError: SerializedError = {
+  name: 'Error',
+  message: 'Something went wrong',
 };
 export const mockItems: Item[] = [
   {
