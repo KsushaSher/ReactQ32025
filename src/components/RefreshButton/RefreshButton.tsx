@@ -20,7 +20,7 @@ const RefreshButton = () => {
       onClick={handleClick}
       data-testid="refresh-boundary"
     >
-      Refresh store
+      Refresh cache
     </button>
   );
 };
