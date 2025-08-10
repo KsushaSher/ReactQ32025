@@ -42,3 +42,6 @@ export const mockItem: Item = {
   image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
   url: 'https://rickandmortyapi.com/api/character/1',
 };
+
+export const getCharacterMock = vi.fn().mockResolvedValue({ data: mockItem });
+export const getEmptyCharacterMock = vi.fn().mockResolvedValue({});

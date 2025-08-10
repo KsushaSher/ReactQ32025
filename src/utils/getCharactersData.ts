@@ -1,8 +1,12 @@
 import type { Item } from '../models';
 
+export interface GetCharacterFn {
+  (id: string): Promise<{ data?: Item }>;
+}
+
 export const getCharactersData = async (
   ids: string[],
-  getCharacter: (id: string) => Promise<{ data?: Item }>
+  getCharacter: GetCharacterFn
 ): Promise<Item[]> => {
   const requests = ids.map((id) => getCharacter(id));
   const results = await Promise.all(requests);
