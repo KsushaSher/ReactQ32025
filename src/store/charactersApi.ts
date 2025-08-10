@@ -12,16 +12,20 @@ export const charactersApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
   }),
+  tagTypes: ['Characters', 'Character'],
   endpoints: (builder) => ({
     getCharacters: builder.query<Response, GetCharacters>({
       query: ({ page = '1', name = '' }) =>
         `/character/?page=${page}&name=${name}`,
+      providesTags: [{ type: 'Characters', id: 'LIST' }],
     }),
     getCharacterById: builder.query<Item, string>({
       query: (id) => `/character/${id}`,
+      providesTags: [{ type: 'Character', id: 'LIST' }],
     }),
   }),
 });
+
 export const {
   useGetCharactersQuery,
   useGetCharacterByIdQuery,

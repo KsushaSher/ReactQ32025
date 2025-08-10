@@ -5,7 +5,12 @@ const RefreshButton = () => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(charactersApi.util.resetApiState());
+    dispatch(
+      charactersApi.util.invalidateTags([
+        { type: 'Characters', id: 'LIST' },
+        { type: 'Character', id: 'LIST' },
+      ])
+    );
   };
 
   return (
