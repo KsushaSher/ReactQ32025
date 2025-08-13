@@ -1,12 +1,12 @@
-import type { Item } from '../../models';
+import type { CharacterItem } from '../../models';
 import { ROUTES } from '../../shared/constants/routes';
 import { useAppDispatch } from '../../store/hooks';
 import { toggleSelectedСharacter } from '../../store/slices/charactersSlice';
-import { useIsCardSelected } from '../../utils/hooks/useIsCardSelected';
+import { useIsCardSelected } from '../../utils/hooks/is-card-selected';
 import s from './Card.module.scss';
 import { NavLink, useSearchParams } from 'react-router';
 export interface Card {
-  item: Item;
+  item: CharacterItem;
 }
 
 const Card = ({ item }: Card) => {

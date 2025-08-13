@@ -4,7 +4,7 @@ import { Spinner } from '../Spinner';
 import { useNavigate, useParams, useSearchParams } from 'react-router';
 import CardDetailContent from '../CardDetailContent';
 import { ROUTES } from '../../shared/constants/routes';
-import { useGetCharacterByIdQuery } from '../../store/charactersApi';
+import { useGetCharacterByIdQuery } from '../../store/api/charactersApi';
 
 const CardDetail = () => {
   const [searchParams] = useSearchParams();

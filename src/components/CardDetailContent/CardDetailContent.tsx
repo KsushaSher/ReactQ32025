@@ -1,10 +1,10 @@
-import type { Item } from '../../models';
+import type { CharacterItem } from '../../models';
 import { ROUTES } from '../../shared/constants/routes';
 import s from './CardDetailContent.module.scss';
 import { NavLink } from 'react-router';
 
 interface CardDetailContent {
-  item: Item;
+  item: CharacterItem;
   search: string;
   cardRef: React.RefObject<HTMLDivElement | null>;
 }

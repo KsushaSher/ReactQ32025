@@ -1,9 +1,9 @@
-import type { Item } from '../../models';
+import type { CharacterItem } from '../../models';
 import s from './CardList.module.scss';
 import Card from '../Card';
 
 export interface CardList {
-  items: Item[] | undefined;
+  items: CharacterItem[] | undefined;
 }
 
 const CardList = ({ items }: CardList) => {

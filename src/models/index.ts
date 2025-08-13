@@ -1,1 +1,5 @@
-export type { Response, Info, Item } from './api';
+export type {
+  CharactersApiResponse,
+  PaginationInfo,
+  CharacterItem,
+} from './api';

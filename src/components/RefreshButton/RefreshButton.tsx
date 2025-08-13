@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { charactersApi } from '../../store/charactersApi';
+import { charactersApi } from '../../store/api/charactersApi';
 
 const RefreshButton = () => {
   const dispatch = useDispatch();

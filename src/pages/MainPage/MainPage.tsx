@@ -5,11 +5,11 @@ import { useEffect } from 'react';
 import Pagination from '../../components/Pagination';
 import { Navigate, Outlet, useSearchParams } from 'react-router';
 import s from './MainPage.module.scss';
-import { useLocalStorage } from '../../utils/hooks/useLocalStorage';
+import { useLocalStorage } from '../../utils/hooks/local-storage';
 import { LS_SEARCH_KEY } from '../../shared/constants/ls-keys';
 import { ROUTES } from '../../shared/constants/routes';
 import FlyoutElement from '../../components/FlyoutElement';
-import { useGetCharactersQuery } from '../../store/charactersApi';
+import { useGetCharactersQuery } from '../../store/api/charactersApi';
 import RefreshButton from '../../components/RefreshButton';
 
 const MainPage = () => {

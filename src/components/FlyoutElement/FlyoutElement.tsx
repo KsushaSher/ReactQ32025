@@ -4,7 +4,7 @@ import { selectSelectedCharacters, selectCount } from '../../store/selectors';
 import { convertToCSV } from '../../utils/convertToCSV';
 import { getCharactersData } from '../../utils/getCharactersData';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { useLazyGetCharacterByIdQuery } from '../../store/charactersApi';
+import { useLazyGetCharacterByIdQuery } from '../../store/api/charactersApi';
 import { useRef, useState } from 'react';
 
 const FlyoutElement = () => {
