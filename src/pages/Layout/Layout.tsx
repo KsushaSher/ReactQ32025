@@ -1,11 +1,10 @@
-import { Outlet } from 'react-router';
 import { NavigationLinks } from '../../components/NavigationLinks';
 import { useTheme } from '../../components/Context/Hooks';
 import ThemeButton from '../../components/ThemeButton';
 import s from './Layout.module.scss';
 import '../../styles/main.scss';
 
-const Layout = () => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   const theme = useTheme();
 
   return (
@@ -18,7 +17,7 @@ const Layout = () => {
           <ThemeButton />
         </div>
       </header>
-      <Outlet />
+      {children}
     </div>
   );
 };

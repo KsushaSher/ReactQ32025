@@ -1,19 +1,19 @@
 import s from './Pagination.module.scss';
-import { useSearchParams } from 'react-router';
+// import { useSearchParams } from 'react-router';
 
 interface Pagination {
   pages: number | undefined;
 }
 
 const Pagination = ({ pages }: Pagination) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const currentPage = Number(searchParams.get('page')) || 1;
+  // const [searchParams, setSearchParams] = useSearchParams();
+  const currentPage = 1; // Number(searchParams.get('page')) || 1;
 
   const handlePrev = () => {
-    setSearchParams({ page: String(currentPage - 1) });
+    // setSearchParams({ page: String(currentPage - 1) });
   };
   const handleNext = () => {
-    setSearchParams({ page: String(currentPage + 1) });
+    // setSearchParams({ page: String(currentPage + 1) });
   };
 
   return (

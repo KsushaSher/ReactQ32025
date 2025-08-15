@@ -3,21 +3,21 @@ import { Search } from '../../components/Search';
 import { CardList } from '../../components/CardList';
 import { useEffect } from 'react';
 import Pagination from '../../components/Pagination';
-import { Navigate, Outlet, useSearchParams } from 'react-router';
+// import { Navigate, Outlet, useSearchParams } from 'react-router';
 import s from './MainPage.module.scss';
 import { useLocalStorage } from '../../utils/hooks/local-storage';
 import { LS_SEARCH_KEY } from '../../shared/constants/ls-keys';
-import { ROUTES } from '../../shared/constants/routes';
+// import { ROUTES } from '../../shared/constants/routes';
 import FlyoutElement from '../../components/FlyoutElement';
 import { useGetCharactersQuery } from '../../store/api/charactersApi';
 import RefreshButton from '../../components/RefreshButton';
 
 const MainPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  // const [searchParams, setSearchParams] = useSearchParams();
   const [searchLS, setSearchLS] = useLocalStorage(LS_SEARCH_KEY);
 
-  const currentPage = searchParams.get('page');
-  const search = searchParams.get('search') || searchLS;
+  const currentPage = '1'; //searchParams.get('page');
+  const search = ''; //searchParams.get('search') || searchLS;
 
   const { data, error, isLoading } = useGetCharactersQuery({
     page: currentPage,
@@ -29,20 +29,20 @@ const MainPage = () => {
     const search = value.trim();
 
     setSearchLS(search);
-    setSearchParams({ page: '1', ...(search && { search }) });
+    // setSearchParams({ page: '1', ...(search && { search }) });
   };
 
   useEffect(() => {
-    if (!currentPage)
-      setSearchParams(
-        { page: '1', ...(search && { search }) },
-        { replace: true }
-      );
-  }, [setSearchParams, currentPage, search]);
+    // if (!currentPage)
+    // setSearchParams(
+    //   { page: '1', ...(search && { search }) },
+    //   { replace: true }
+    // );
+  }, [/* setSearchParams, */ currentPage, search]);
 
-  if (currentPage && !/^\d+$/.test(currentPage)) {
-    return <Navigate to={ROUTES.NOT_FOUND} />;
-  }
+  // if (currentPage && !/^\d+$/.test(currentPage)) {
+  //   return <Navigate to={ROUTES.NOT_FOUND} />;
+  // }
 
   return (
     <>
@@ -56,7 +56,7 @@ const MainPage = () => {
           <Pagination pages={info?.pages} />
           <div className={s['content-wrapper']}>
             <CardList items={results} />
-            <Outlet />
+            {/* <Outlet /> */}
           </div>
         </Section>
         <FlyoutElement />

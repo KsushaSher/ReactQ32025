@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { CharacterItem } from '../../models';
 import { ROUTES } from '../../shared/constants/routes';
 import s from './CardDetailContent.module.scss';
@@ -17,11 +18,7 @@ const CardDetailContent = ({ item, search, cardRef }: CardDetailContent) => {
         to={{ pathname: ROUTES.ROOT, search }}
       ></NavLink>
       <div className={s['img-wrapper']}>
-        <img
-          src={item.image}
-          alt={`${item.name} avatar`}
-          className={s.img}
-        ></img>
+        <Image src={item.image} alt={`${item.name} avatar`} className={s.img} />
       </div>
       <div className={`${s.name} ${s.neutral}`}>
         Name: <span className={s['accent']}>{item.name}</span>
