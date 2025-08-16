@@ -45,23 +45,21 @@ const MainPage = () => {
   // }
 
   return (
-    <>
-      <main data-testid="main-page">
-        <div className={s['option-wrapper']}>
-          <Search search={searchLS} onSubmit={handleSubmit} />
-          <RefreshButton />
-        </div>
+    <main data-testid="main-page">
+      <div className={s['option-wrapper']}>
+        <Search search={searchLS} onSubmit={handleSubmit} />
+        <RefreshButton />
+      </div>
 
-        <Section loading={isLoading} error={error}>
-          <Pagination pages={info?.pages} />
-          <div className={s['content-wrapper']}>
-            <CardList items={results} />
-            {/* <Outlet /> */}
-          </div>
-        </Section>
-        <FlyoutElement />
-      </main>
-    </>
+      <Section loading={isLoading} error={error}>
+        <Pagination pages={info?.pages} />
+        <div className={s['content-wrapper']}>
+          <CardList items={results} />
+          {/* <Outlet /> */}
+        </div>
+      </Section>
+      <FlyoutElement />
+    </main>
   );
 };
 

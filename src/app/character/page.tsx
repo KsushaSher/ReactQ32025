@@ -4,13 +4,13 @@ import React from 'react';
 // import ThemeProvider from '../components/Context';
 // import { store } from '../store/store';
 import * as s from '../pages/MainPage/MainPage.module.scss';
-import { Search } from '../components/Search';
-import RefreshButton from '../components/RefreshButton';
-import FlyoutElement from '../components/FlyoutElement';
-import { Section } from '../components/Section';
-import Pagination from '../components/Pagination';
-import { CardList } from '../components/CardList';
-import { useGetCharactersQuery } from '../store/api/charactersApi';
+import { useGetCharactersQuery } from '../../store/api/charactersApi';
+import { Search } from '../../components/Search';
+import RefreshButton from '../../components/RefreshButton';
+import { Section } from '../../components/Section';
+import Pagination from '../../components/Pagination';
+import { CardList } from '../../components/CardList';
+import FlyoutElement from '../../components/FlyoutElement';
 
 export const App = () => {
   const { data, error, isLoading } = useGetCharactersQuery({

@@ -1,24 +1,24 @@
-import Image from 'next/image';
 import type { CharacterItem } from '../../models';
 import { ROUTES } from '../../shared/constants/routes';
 import s from './CardDetailContent.module.scss';
-import { NavLink } from 'react-router';
+import Link from 'next/link';
+// import { NavLink } from 'react-router';
 
 interface CardDetailContent {
   item: CharacterItem;
   search: string;
-  cardRef: React.RefObject<HTMLDivElement | null>;
+  ref?: React.RefObject<HTMLDivElement | null>;
 }
 
-const CardDetailContent = ({ item, search, cardRef }: CardDetailContent) => {
+const CardDetailContent = ({ item, search, ref }: CardDetailContent) => {
   return (
-    <div className={s['card-detail']} ref={cardRef} data-testid="card-detail">
-      <NavLink
+    <div className={s['card-detail']} ref={ref} data-testid="card-detail">
+      <Link
         className={s['close-button']}
-        to={{ pathname: ROUTES.ROOT, search }}
-      ></NavLink>
+        href={{ pathname: ROUTES.ROOT, search }}
+      />
       <div className={s['img-wrapper']}>
-        <Image src={item.image} alt={`${item.name} avatar`} className={s.img} />
+        <img src={item.image} alt={`${item.name} avatar`} className={s.img} />
       </div>
       <div className={`${s.name} ${s.neutral}`}>
         Name: <span className={s['accent']}>{item.name}</span>

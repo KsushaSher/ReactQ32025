@@ -1,24 +1,56 @@
-import type { Metadata } from 'next';
+'use client';
+// import type { Metadata } from 'next';
+import s from '../pages/Layout/Layout.module.scss';
+import '../styles/main.scss';
+import { NavigationLinks } from '../components/NavigationLinks';
+import ThemeButton from '../components/ThemeButton';
+// import { App } from './page';
+import { store } from '../store/store';
+import { Provider } from 'react-redux';
+import React from 'react';
+// import ThemeProvider from '../components/Context';
 
-export const metadata: Metadata = {
-  title: 'REACTQ32025',
-  description: 'My App is a...',
-};
+// export const metadata: Metadata = {
+//   title: 'REACTQ32025',
+//   description: 'My App is a...',
+// };
 
-const RootLayout = async ({ children }: { children: React.ReactNode }) => {
-  // const cookieStore = await cookies();
-  // const theme = cookieStore.get('theme');
-  // const themeValue = theme?.value || 'light';
+const Layout = /* async */ ({
+  children,
+  character,
+
+  ...rest
+}: {
+  children: React.ReactNode;
+  character: React.ReactNode;
+}) => {
+  // const theme = useTheme();
+  console.log({ children, character, rest });
 
   return (
-    <html lang="en">
+    <html>
       <body>
-        <div id="root">{children}</div>
-        {/* <script type="module" src="/src/main.tsx"></script> */}
-        {/* удалить */}
+        <div className={`wrapper-app ${'light'}`} data-testid="wrapper-app">
+          <Provider store={store}>
+            {/* <ThemeProvider> */}
+            <header className={s.header}>
+              <div className={s.wrapper}>
+                <nav className={s.wrapper}>
+                  <NavigationLinks />
+                </nav>
+                <ThemeButton />
+              </div>
+            </header>
+
+            <React.Fragment key={'character'}>{character}</React.Fragment>
+            <React.Fragment key={'children'}>{children}</React.Fragment>
+
+            {/* </ThemeProvider> */}
+          </Provider>
+        </div>
       </body>
     </html>
   );
 };
 
-export default RootLayout;
+export default Layout;
