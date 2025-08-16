@@ -3,21 +3,25 @@ import { Search } from '../../components/Search';
 import { CardList } from '../../components/CardList';
 import { useEffect } from 'react';
 import Pagination from '../../components/Pagination';
-// import { Navigate, Outlet, useSearchParams } from 'react-router';
 import s from './MainPage.module.scss';
 import { useLocalStorage } from '../../utils/hooks/local-storage';
 import { LS_SEARCH_KEY } from '../../shared/constants/ls-keys';
-// import { ROUTES } from '../../shared/constants/routes';
 import FlyoutElement from '../../components/FlyoutElement';
 import { useGetCharactersQuery } from '../../store/api/charactersApi';
 import RefreshButton from '../../components/RefreshButton';
+import { useRouter, useSearchParams } from 'next/navigation';
+import CardDetail from '../../components/CardDetail';
+import { ROUTES } from '../../shared/constants/routes';
 
 const MainPage = () => {
-  // const [searchParams, setSearchParams] = useSearchParams();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [searchLS, setSearchLS] = useLocalStorage(LS_SEARCH_KEY);
 
-  const currentPage = '1'; //searchParams.get('page');
-  const search = ''; //searchParams.get('search') || searchLS;
+  const id = searchParams?.get('details') || null;
+  const currentPage = searchParams?.get('page') || '1';
+  const search = searchParams?.get('search') || searchLS;
 
   const { data, error, isLoading } = useGetCharactersQuery({
     page: currentPage,
@@ -26,23 +30,29 @@ const MainPage = () => {
   const { info, results } = data || {};
 
   const handleSubmit = (value: string) => {
-    const search = value.trim();
+    const trimmedSearch = value.trim();
 
-    setSearchLS(search);
-    // setSearchParams({ page: '1', ...(search && { search }) });
+    setSearchLS(trimmedSearch);
+    const query: Record<string, string> = { page: '1' };
+
+    if (trimmedSearch) query.search = trimmedSearch;
+
+    router.push(`?${new URLSearchParams(query).toString()}`);
   };
 
   useEffect(() => {
-    // if (!currentPage)
-    // setSearchParams(
-    //   { page: '1', ...(search && { search }) },
-    //   { replace: true }
-    // );
-  }, [/* setSearchParams, */ currentPage, search]);
+    if (!currentPage) {
+      const query: Record<string, string> = { page: '1' };
 
-  // if (currentPage && !/^\d+$/.test(currentPage)) {
-  //   return <Navigate to={ROUTES.NOT_FOUND} />;
-  // }
+      if (search) query.search = search;
+
+      router.replace(`?${new URLSearchParams(query).toString()}`);
+    }
+  }, [currentPage, search, router]);
+
+  if (currentPage && !/^\d+$/.test(currentPage)) {
+    router.replace(ROUTES.NOT_FOUND);
+  }
 
   return (
     <main data-testid="main-page">
@@ -55,7 +65,7 @@ const MainPage = () => {
         <Pagination pages={info?.pages} />
         <div className={s['content-wrapper']}>
           <CardList items={results} />
-          {/* <Outlet /> */}
+          {id && <CardDetail id={id} />}
         </div>
       </Section>
       <FlyoutElement />

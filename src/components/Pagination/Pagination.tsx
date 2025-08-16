@@ -1,19 +1,28 @@
+'use client';
+import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import s from './Pagination.module.scss';
-// import { useSearchParams } from 'react-router';
 
 interface Pagination {
   pages: number | undefined;
 }
 
 const Pagination = ({ pages }: Pagination) => {
-  // const [searchParams, setSearchParams] = useSearchParams();
-  const currentPage = 1; // Number(searchParams.get('page')) || 1;
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const currentPage = Number(searchParams?.get('page')) || 1;
 
   const handlePrev = () => {
-    // setSearchParams({ page: String(currentPage - 1) });
+    if (currentPage > 1) {
+      router.push(`?page=${currentPage - 1}`);
+    }
   };
+
   const handleNext = () => {
-    // setSearchParams({ page: String(currentPage + 1) });
+    if (pages && currentPage < pages) {
+      router.push(`?page=${currentPage + 1}`);
+    }
   };
 
   return (
