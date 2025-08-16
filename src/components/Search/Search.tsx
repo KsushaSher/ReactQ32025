@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import s from './Search.module.scss';
 
 interface Search {
@@ -17,6 +18,10 @@ const Search = ({ search, onSubmit }: Search) => {
     event.preventDefault();
     onSubmit(value);
   };
+
+  useEffect(() => {
+    setValue(search);
+  }, [search]);
 
   return (
     <form className={s['search-form']} onSubmit={handleSubmit}>
