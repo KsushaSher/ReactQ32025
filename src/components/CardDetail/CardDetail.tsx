@@ -8,23 +8,15 @@ import { useRouter } from 'next/navigation';
 import { ROUTES } from '../../shared/constants/routes';
 import { useCallback, useEffect, useRef } from 'react';
 
-const CardDetail = ({ id, search }: { id: string; search: string }) => {
-  const searchParams = search;
+const CardDetail = ({ id }: { id: string }) => {
   const router = useRouter();
-
-  console.log(searchParams);
-
   const cardRef = useRef<HTMLDivElement>(null);
-
   const { data, error, isLoading } = useGetCharacterByIdQuery(id);
 
   const handleClickOutside = useCallback(
     (event: MouseEvent) => {
-      console.log('click');
-
       if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
         router.push(ROUTES.ROOT);
-        console.log('++');
       }
     },
     [router]
@@ -48,7 +40,7 @@ const CardDetail = ({ id, search }: { id: string; search: string }) => {
   ) : !data ? (
     <div>No result</div>
   ) : (
-    <CardDetailContent item={data} search={search} ref={cardRef} />
+    <CardDetailContent item={data} ref={cardRef} />
   );
 };
 

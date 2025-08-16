@@ -11,6 +11,8 @@ import { Section } from '../components/Section';
 import Pagination from '../components/Pagination';
 import { CardList } from '../components/CardList';
 import { useGetCharactersQuery } from '../store/api/charactersApi';
+import CardDetail from '../components/CardDetail';
+import { useSearchParams } from 'next/navigation';
 
 export const App = () => {
   const { data, error, isLoading } = useGetCharactersQuery({
@@ -18,6 +20,8 @@ export const App = () => {
     name: '',
   });
   const { info, results } = data || {};
+  const searchParams = useSearchParams();
+  const id = searchParams?.get('details') ?? null;
 
   return (
     <main data-testid="main-page">
@@ -31,7 +35,10 @@ export const App = () => {
       <div className={s['content-wrapper']}>
         <Section loading={isLoading} error={error}>
           <Pagination pages={info?.pages} />
-          <CardList items={results} />
+          <div className={s['cards-wrapper']}>
+            <CardList items={results} />
+            {id && <CardDetail id={id} />}
+          </div>
         </Section>
       </div>
       <FlyoutElement />

@@ -1,5 +1,5 @@
+import { useSearchParams } from 'next/navigation';
 import type { CharacterItem } from '../../models';
-import { ROUTES } from '../../shared/constants/routes';
 import { useAppDispatch } from '../../store/hooks';
 import { toggleSelectedСharacter } from '../../store/slices/charactersSlice';
 import { useIsCardSelected } from '../../utils/hooks/is-card-selected';
@@ -10,11 +10,12 @@ export interface Card {
 }
 
 const Card = ({ item }: Card) => {
-  // const [searchParams] = useSearchParams();
   const dispatch = useAppDispatch();
   const id = String(item.id);
   const isCardSelected = useIsCardSelected(id);
   const handleToggle = () => dispatch(toggleSelectedСharacter(id));
+  const searchParams = useSearchParams();
+  const page = searchParams?.get('page') ?? 1;
 
   return (
     <div className={s['card']} data-testid="card">
@@ -29,10 +30,7 @@ const Card = ({ item }: Card) => {
       </div>
       <Link
         className={s['details-button']}
-        href={{
-          pathname: `${ROUTES.CHARACTER.ROOT}/${item.id}`,
-          // search: searchParams.toString(),
-        }}
+        href={`/?page=${page}&details=${item.id}`}
         onMouseDown={(e) => e.stopPropagation()}
       ></Link>
       <input
