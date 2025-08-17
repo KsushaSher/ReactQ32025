@@ -1,8 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { charactersApi } from '../../store/api/charactersApi';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 const RefreshButton = () => {
   const dispatch = useDispatch();
+  const t = useTranslations();
 
   const handleClick = () => {
     dispatch(
@@ -20,7 +23,7 @@ const RefreshButton = () => {
       onClick={handleClick}
       data-testid="refresh-boundary"
     >
-      Refresh cache
+      {t('mainPage.options.refreshCache')}
     </button>
   );
 };

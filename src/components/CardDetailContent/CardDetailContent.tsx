@@ -1,7 +1,9 @@
+import React from 'react';
 import type { CharacterItem } from '../../models';
 import { ROUTES } from '../../shared/constants/routes';
 import s from './CardDetailContent.module.scss';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 interface CardDetailContent {
   item: CharacterItem;
@@ -9,6 +11,8 @@ interface CardDetailContent {
 }
 
 const CardDetailContent = ({ item, ref }: CardDetailContent) => {
+  const t = useTranslations();
+
   return (
     <div className={s['card-detail']} ref={ref} data-testid="card-detail">
       <Link className={s['close-button']} href={ROUTES.ROOT} />
@@ -16,16 +20,20 @@ const CardDetailContent = ({ item, ref }: CardDetailContent) => {
         <img src={item.image} alt={`${item.name} avatar`} className={s.img} />
       </div>
       <div className={`${s.name} ${s.neutral}`}>
-        Name: <span className={s['accent']}>{item.name}</span>
+        {t('mainPage.cardsSection.name')}{' '}
+        <span className={s['accent']}>{item.name}</span>
       </div>
       <div className={`${s.species} ${s.neutral}`}>
-        Species: <span className={s['accent']}>{item.species}</span>
+        {t('mainPage.cardsSection.species')}{' '}
+        <span className={s['accent']}>{item.species}</span>
       </div>
       <div className={`${s.species} ${s.neutral}`}>
-        Status: <span className={s['accent']}>{item.status}</span>
+        {t('mainPage.cardsSection.status')}{' '}
+        <span className={s['accent']}>{item.status}</span>
       </div>
       <div className={`${s.species} ${s.neutral}`}>
-        Gender: <span className={s['accent']}>{item.gender}</span>
+        {t('mainPage.cardsSection.gender')}{' '}
+        <span className={s['accent']}>{item.gender}</span>
       </div>
     </div>
   );

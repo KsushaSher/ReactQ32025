@@ -7,7 +7,7 @@ export interface RootStateSchema {
   [charactersApi.reducerPath]: ReturnType<typeof charactersApi.reducer>;
 }
 
-export const createStore = () =>
+export const createStore = (preloadedState?: Partial<RootStateSchema>) =>
   configureStore({
     reducer: {
       characters: charactersReducer,
@@ -15,9 +15,11 @@ export const createStore = () =>
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(charactersApi.middleware),
+    preloadedState,
   });
 
 export const store = createStore();
 
+export type AppStore = ReturnType<typeof createStore>;
 export type RootState = RootStateSchema;
 export type AppDispatch = typeof store.dispatch;

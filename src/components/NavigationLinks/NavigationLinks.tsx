@@ -1,30 +1,31 @@
 import Link from 'next/link';
 import { ROUTES } from '../../shared/constants/routes';
 import s from './NavigationLinks.module.scss';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 const NavigationLinks = () => {
+  const t = useTranslations();
+
   return (
     <nav className={s.nav}>
       <Link
         href={ROUTES.ROOT}
-        // to={ROUTES.ROOT}
-        // end
+
         // className={({ isActive }) =>
         //   isActive ? `${s.link} ${s.active}` : s.link
         // }
       >
-        Home
+        {t('mainPage.header.home')}
       </Link>
       <Link
         href={ROUTES.ABOUT}
-        // to={ROUTES.ABOUT}
-        // end
         // className={({ isActive }) =>
         //   isActive ? `${s.link} ${s.active}` : s.link
         // }
         data-testid="about-link"
       >
-        About
+        {t('mainPage.header.about')}
       </Link>
     </nav>
   );

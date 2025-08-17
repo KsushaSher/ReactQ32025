@@ -1,0 +1,32 @@
+{
+  "language": "en",
+  "ru": "ru",
+  "en": "en",
+  "mainPage": {
+    "header": {
+      "home": "Home",
+      "about": "About"
+    },
+    "options": {
+      "searchBar": "search",
+      "searchButton": "Search",
+      "refreshCache": "Refresh cache"
+    },
+    "cardsSection": {
+      "paginationPrev": "Prev",
+      "paginationNext": "Next",
+      "name": "Name:",
+      "species": "Species:",
+      "status": "Status:",
+      "gender": "Gender:"
+    }
+  },
+  "aboutPage": {
+    "text": "Architectural and design thinking have always been part of my work, but I wanted to expand my horizons and find a new direction where creativity and structure meet. Frontend was exactly what I was looking for. The course helped me see how visual experience can be applied in a digital environment and inspired me to move in this direction with full confidence."
+  },
+  "flyoutElement": {
+    "text": "Selected: ",
+    "unselect": "Unselect all",
+    "download": "Download"
+  }
+}

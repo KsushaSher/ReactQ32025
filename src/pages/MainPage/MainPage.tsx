@@ -1,3 +1,5 @@
+'use client';
+
 import { Section } from '../../components/Section';
 import { Search } from '../../components/Search';
 import { CardList } from '../../components/CardList';
@@ -7,13 +9,33 @@ import s from './MainPage.module.scss';
 import { useLocalStorage } from '../../utils/hooks/local-storage';
 import { LS_SEARCH_KEY } from '../../shared/constants/ls-keys';
 import FlyoutElement from '../../components/FlyoutElement';
-import { useGetCharactersQuery } from '../../store/api/charactersApi';
+import { charactersApi } from '../../store/api/charactersApi';
 import RefreshButton from '../../components/RefreshButton';
 import { useRouter, useSearchParams } from 'next/navigation';
 import CardDetail from '../../components/CardDetail';
 import { ROUTES } from '../../shared/constants/routes';
+import { useAppDispatch } from '../../store/hooks';
+import { CharactersApiResponse } from '../../models';
 
-const MainPage = () => {
+const MainPage = ({
+  initialData,
+  page,
+}: {
+  initialData: CharactersApiResponse;
+  page: string;
+}) => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(
+      charactersApi.util.upsertQueryData(
+        'getCharacters',
+        { page, name: '' },
+        initialData
+      )
+    );
+  }, [dispatch, initialData, page]);
+
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -23,11 +45,15 @@ const MainPage = () => {
   const currentPage = searchParams?.get('page') || '1';
   const search = searchParams?.get('search') || searchLS;
 
-  const { data, error, isLoading } = useGetCharactersQuery({
-    page: currentPage,
-    name: search,
-  });
-  const { info, results } = data || {};
+  // const {
+  //   data = initialData,
+  //   error,
+  //   isLoading,
+  // } = useGetCharactersQuery(
+  //   { page: currentPage, name: search },
+  //   { skip: currentPage === page }
+  // );
+  const { info, results } = initialData || {};
 
   const handleSubmit = (value: string) => {
     const trimmedSearch = value.trim();
@@ -61,7 +87,7 @@ const MainPage = () => {
         <RefreshButton />
       </div>
 
-      <Section loading={isLoading} error={error}>
+      <Section loading={false}>
         <Pagination pages={info?.pages} />
         <div className={s['content-wrapper']}>
           <CardList items={results} />

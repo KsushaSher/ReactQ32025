@@ -6,6 +6,8 @@ import { getCharactersData } from '../../utils/getCharactersData';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { useLazyGetCharacterByIdQuery } from '../../store/api/charactersApi';
 import { useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 const FlyoutElement = () => {
   const dispatch = useAppDispatch();
@@ -14,6 +16,7 @@ const FlyoutElement = () => {
   const [getCharacterById] = useLazyGetCharacterByIdQuery();
   const [downloadUrl, setDownloadUrl] = useState('');
   const downloadRef = useRef<HTMLAnchorElement | null>(null);
+  const t = useTranslations();
 
   const downloadCSV = (csv: string) => {
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -52,13 +55,14 @@ const FlyoutElement = () => {
   return (
     <div className={s['wrapper-flyout']}>
       <p>
-        {count} item{count === 1 ? '' : 's'} are selected:
+        {t('flyoutElement.text')}
+        {count}
       </p>
       <button onClick={handleClickReset} className="button light-btn">
-        Unselect all
+        {t('flyoutElement.unselect')}
       </button>
       <button onClick={handleClickDownload} className="button light-btn">
-        Download
+        {t('flyoutElement.download')}
       </button>
       <a
         ref={downloadRef}

@@ -5,6 +5,8 @@ import { toggleSelectedСharacter } from '../../store/slices/charactersSlice';
 import { useIsCardSelected } from '../../utils/hooks/is-card-selected';
 import s from './Card.module.scss';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 export interface Card {
   item: CharacterItem;
 }
@@ -16,6 +18,7 @@ const Card = ({ item }: Card) => {
   const handleToggle = () => dispatch(toggleSelectedСharacter(id));
   const searchParams = useSearchParams();
   const page = searchParams?.get('page') ?? 1;
+  const t = useTranslations();
 
   return (
     <div className={s['card']} data-testid="card">
@@ -23,10 +26,12 @@ const Card = ({ item }: Card) => {
         <img src={item.image} alt={`${item.name} avatar`} className={s.img} />
       </div>
       <div className={`${s.name} ${s.neutral}`}>
-        Name: <span className={s['accent']}>{item.name}</span>
+        {t('mainPage.cardsSection.name')}{' '}
+        <span className={s['accent']}>{item.name}</span>
       </div>
       <div className={`${s.species} ${s.neutral}`}>
-        Species: <span className={s['accent']}>{item.species}</span>
+        {t('mainPage.cardsSection.species')}{' '}
+        <span className={s['accent']}>{item.species}</span>
       </div>
       <Link
         className={s['details-button']}

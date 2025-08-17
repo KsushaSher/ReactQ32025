@@ -1,6 +1,8 @@
 'use client';
+
 import React, { useEffect, useState } from 'react';
 import s from './Search.module.scss';
+import { useTranslations } from 'next-intl';
 
 interface Search {
   search: string;
@@ -9,6 +11,7 @@ interface Search {
 
 const Search = ({ search, onSubmit }: Search) => {
   const [value, setValue] = useState(search);
+  const t = useTranslations();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -27,7 +30,7 @@ const Search = ({ search, onSubmit }: Search) => {
     <form className={s['search-form']} onSubmit={handleSubmit}>
       <input
         className="input"
-        placeholder="search"
+        placeholder={t('mainPage.options.searchBar')}
         value={value}
         onChange={handleChange}
         data-testid="input"
@@ -37,7 +40,7 @@ const Search = ({ search, onSubmit }: Search) => {
         type="submit"
         data-testid="button-search"
       >
-        Search
+        {t('mainPage.options.searchButton')}
       </button>
     </form>
   );

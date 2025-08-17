@@ -1,9 +1,7 @@
-import { distDir } from 'vitest/dist/node.js';
+import createNextIntlPlugin from 'next-intl/plugin';
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  // output: 'export',
-  distDir: './dist',
-};
+const nextConfig = {};
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin();
+
+export default withNextIntl(nextConfig);

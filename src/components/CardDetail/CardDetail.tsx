@@ -7,6 +7,7 @@ import { useGetCharacterByIdQuery } from '../../store/api/charactersApi';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '../../shared/constants/routes';
 import { useCallback, useEffect, useRef } from 'react';
+import React from 'react';
 
 const CardDetail = ({ id }: { id: string }) => {
   const router = useRouter();
