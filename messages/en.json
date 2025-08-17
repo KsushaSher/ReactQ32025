@@ -28,5 +28,12 @@
     "text": "Selected: ",
     "unselect": "Unselect all",
     "download": "Download"
+  },
+  "errors": {
+    "homeButton": "Return to home",
+    "title": "Something went wrong...",
+    "details": "Details",
+    "ops": "Oops!",
+    "sorry": "Sorry, but no such page was found."
   }
 }
