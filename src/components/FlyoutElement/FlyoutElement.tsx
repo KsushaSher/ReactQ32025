@@ -1,10 +1,7 @@
 import { resetSelectedСharacter } from '../../store/slices/charactersSlice';
 import s from './FlyoutElement.module.scss';
 import { selectSelectedCharacters, selectCount } from '../../store/selectors';
-import { convertToCSV } from '../../utils/convertToCSV';
-import { getCharactersData } from '../../utils/getCharactersData';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { useLazyGetCharacterByIdQuery } from '../../store/api/charactersApi';
 import { useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
@@ -14,7 +11,6 @@ const FlyoutElement = () => {
   const dispatch = useAppDispatch();
   const count = useAppSelector(selectCount);
   const ids = useAppSelector(selectSelectedCharacters);
-  const [getCharacterById] = useLazyGetCharacterByIdQuery();
   const [downloadUrl, setDownloadUrl] = useState('');
   const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const t = useTranslations();
@@ -36,8 +32,15 @@ const FlyoutElement = () => {
 
   const handleClickDownload = async () => {
     try {
-      const сharacterData = await getCharactersData(ids, getCharacterById);
-      const csv = convertToCSV(сharacterData);
+      const res = await fetch('/api/csv', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids }),
+      });
+
+      if (!res.ok) throw new Error('Download error');
+
+      const csv = await res.text();
 
       downloadCSV(csv);
     } catch (error) {
