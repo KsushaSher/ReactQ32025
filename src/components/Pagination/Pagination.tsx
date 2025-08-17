@@ -15,16 +15,17 @@ const Pagination = ({ pages }: Pagination) => {
   const t = useTranslations();
 
   const currentPage = Number(searchParams?.get('page')) || 1;
+  const currentSearch = searchParams?.get('search') || '';
 
   const handlePrev = () => {
     if (currentPage > 1) {
-      router.replace(`?page=${currentPage - 1}`);
+      router.replace(`?page=${currentPage - 1}&search=${currentSearch}`);
     }
   };
 
   const handleNext = () => {
     if (pages && currentPage < pages) {
-      router.replace(`?page=${currentPage + 1}`);
+      router.replace(`?page=${currentPage + 1}&search=${currentSearch}`);
     }
   };
 
