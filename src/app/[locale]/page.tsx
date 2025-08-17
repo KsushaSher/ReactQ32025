@@ -1,4 +1,4 @@
-import MainPage from '../../pages/MainPage';
+import MainPage from '../../pageComponents/MainPage';
 
 export default async function App({
   searchParams,

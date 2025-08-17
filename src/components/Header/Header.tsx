@@ -1,7 +1,7 @@
 import LanguageButton from '../LanguageButton';
 import { NavigationLinks } from '../NavigationLinks';
 import ThemeButton from '../ThemeButton';
-import s from '../../pages/Layout/Layout.module.scss';
+import s from '../../pageComponents/Layout/Layout.module.scss';
 import React from 'react';
 
 const Header = () => {
