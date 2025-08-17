@@ -1,15 +1,12 @@
-import s from '../../pages/Layout/Layout.module.scss';
 import '../../styles/main.scss';
-import { NavigationLinks } from '../../components/NavigationLinks';
-import ThemeButton from '../../components/ThemeButton';
 import React from 'react';
 import StoreProvider from './StoreProvider';
 import { Metadata } from 'next';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '../../i18n/routing';
-import LanguageButton from '../../components/LanguageButton';
 import ThemeProvider from '../../components/Context';
+import Header from '../../components/Header';
 
 export const metadata: Metadata = {
   title: 'REACTQ32025',
@@ -17,11 +14,9 @@ export const metadata: Metadata = {
 
 export default async function Layout({
   children,
-  character,
   params,
 }: {
   children: React.ReactNode;
-  character: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
@@ -34,25 +29,14 @@ export default async function Layout({
     <html lang={locale} className="light">
       <body>
         <NextIntlClientProvider>
-          <div className="wrapper-app" data-testid="wrapper-app">
-            <StoreProvider>
-              <ThemeProvider>
-                <header className={s.header}>
-                  <div className={s.wrapper}>
-                    <nav className={s.wrapper}>
-                      <NavigationLinks />
-                    </nav>
-                    <ThemeButton />
-                    <LanguageButton />
-                  </div>
-                </header>
-                {character}
-                {/* <React.Fragment key={'character'}>{character}</React.Fragment> */}
-                {/* <React.Fragment key={'children'}>{children}</React.Fragment> */}
+          <StoreProvider>
+            <ThemeProvider>
+              <div className="wrapper-app" data-testid="wrapper-app">
+                <Header />
                 {children}
-              </ThemeProvider>
-            </StoreProvider>
-          </div>
+              </div>
+            </ThemeProvider>
+          </StoreProvider>
         </NextIntlClientProvider>
       </body>
     </html>
