@@ -24,9 +24,11 @@ import { CharactersApiResponse } from '../../models';
 const MainPage = ({
   initialData,
   page,
+  name,
 }: {
   initialData: CharactersApiResponse;
   page: string;
+  name: string;
 }) => {
   const dispatch = useAppDispatch();
 
@@ -34,11 +36,11 @@ const MainPage = ({
     dispatch(
       charactersApi.util.upsertQueryData(
         'getCharacters',
-        { page, name: '' },
+        { page, name },
         initialData
       )
     );
-  }, [dispatch, initialData, page]);
+  }, [dispatch, initialData, name, page]);
 
   const router = useRouter();
   const searchParams = useSearchParams();

@@ -1,7 +1,7 @@
-async function fetchCharacters(page: string = '1') {
+async function fetchCharacters(page: string = '1', name = '') {
   try {
     const response = await fetch(
-      `https://rickandmortyapi.com/api/character?page=${page}`
+      `https://rickandmortyapi.com/api/character?page=${page}&name=${name}`
     );
 
     if (!response.ok) {
