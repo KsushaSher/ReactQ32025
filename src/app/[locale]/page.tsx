@@ -1,4 +1,5 @@
 import MainPage from '../../pageComponents/MainPage';
+import fetchCharacters from '../api/characters/fetchCharacters';
 
 export default async function App({
   searchParams,
@@ -6,9 +7,7 @@ export default async function App({
   searchParams: Promise<{ page?: string }>;
 }) {
   const { page = '1' } = await searchParams;
-  const res = await fetch(
-    `https://rickandmortyapi.com/api/character?page=${page}`
-  ).then((res) => res.json());
+  const res = await fetchCharacters(page);
 
   return <MainPage initialData={res} page={page} />;
 }

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { usePathname, useRouter } from '../../i18n/navigation';
 import { useLocale } from 'next-intl';
+import React from 'react';
 
 const LanguageButton = () => {
   const router = useRouter();
@@ -13,8 +14,10 @@ const LanguageButton = () => {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const language = event.target.value;
 
-    setLocale(language);
-    router.push(pathname, { locale: language });
+    if (language !== locale) {
+      setLocale(language);
+      router.push(pathname, { locale: language });
+    }
   };
 
   return (
@@ -22,6 +25,7 @@ const LanguageButton = () => {
       className="button light-btn"
       value={locale}
       onChange={handleChange}
+      onMouseDown={(e) => e.stopPropagation()}
       name="select"
     >
       <option value="en">EN</option>

@@ -49,10 +49,14 @@ const MainPage = ({
   const currentPage = searchParams?.get('page') || '1';
   const search = searchParams?.get('search') || searchLS;
 
-  const { data, error, isLoading } = useGetCharactersQuery({
-    page: currentPage,
-    name: search,
-  });
+  const {
+    data = initialData,
+    error,
+    isLoading,
+  } = useGetCharactersQuery(
+    { page: currentPage, name: search },
+    { skip: page === currentPage }
+  );
   const { info, results } = data || {};
 
   const handleSubmit = (value: string) => {
