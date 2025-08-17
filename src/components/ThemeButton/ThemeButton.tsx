@@ -1,19 +1,21 @@
-// import { useTheme, useThemeToggle } from '../Context/Hooks';
-// import s from './ThemeButton.module.scss';
+'use client';
+
+import { useTheme, useThemeToggle } from '../Context/Hooks';
+import s from './ThemeButton.module.scss';
 
 const ThemeButton = () => {
-  // const theme = useTheme();
-  // const themeToggle = useThemeToggle();
+  const theme = useTheme();
+  const themeToggle = useThemeToggle();
 
-  // const handleOnClick = () => {
-  //   themeToggle();
-  // };
+  const handleOnClick = () => {
+    themeToggle();
+  };
 
   return (
     <button
-      // className={`${s['theme-button']} ${s[theme]}`}
+      className={`${s['theme-button']} ${s[theme]}`}
       data-testid="theme-button"
-      // onClick={handleOnClick}
+      onClick={handleOnClick}
     ></button>
   );
 };

@@ -9,10 +9,10 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '../../i18n/routing';
 import LanguageButton from '../../components/LanguageButton';
+import ThemeProvider from '../../components/Context';
 
 export const metadata: Metadata = {
   title: 'REACTQ32025',
-  description: 'My App is a...',
 };
 
 export default async function Layout({
@@ -24,7 +24,6 @@ export default async function Layout({
   character: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
-  // const theme = useTheme();
   const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) {
@@ -32,26 +31,26 @@ export default async function Layout({
   }
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className="light">
       <body>
         <NextIntlClientProvider>
-          <div className={`wrapper-app ${'light'}`} data-testid="wrapper-app">
+          <div className="wrapper-app" data-testid="wrapper-app">
             <StoreProvider>
-              {/* <ThemeProvider> */}
-              <header className={s.header}>
-                <div className={s.wrapper}>
-                  <nav className={s.wrapper}>
-                    <NavigationLinks />
-                  </nav>
-                  <ThemeButton />
-                  <LanguageButton />
-                </div>
-              </header>
-
-              <React.Fragment key={'character'}>{character}</React.Fragment>
-              <React.Fragment key={'children'}>{children}</React.Fragment>
-
-              {/* </ThemeProvider> */}
+              <ThemeProvider>
+                <header className={s.header}>
+                  <div className={s.wrapper}>
+                    <nav className={s.wrapper}>
+                      <NavigationLinks />
+                    </nav>
+                    <ThemeButton />
+                    <LanguageButton />
+                  </div>
+                </header>
+                {character}
+                {/* <React.Fragment key={'character'}>{character}</React.Fragment> */}
+                {/* <React.Fragment key={'children'}>{children}</React.Fragment> */}
+                {children}
+              </ThemeProvider>
             </StoreProvider>
           </div>
         </NextIntlClientProvider>

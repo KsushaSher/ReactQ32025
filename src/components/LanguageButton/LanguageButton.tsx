@@ -18,7 +18,12 @@ const LanguageButton = () => {
   };
 
   return (
-    <select className="button light-btn" value={locale} onChange={handleChange}>
+    <select
+      className="button light-btn"
+      value={locale}
+      onChange={handleChange}
+      name="select"
+    >
       <option value="en">EN</option>
       <option value="ru">RU</option>
     </select>
