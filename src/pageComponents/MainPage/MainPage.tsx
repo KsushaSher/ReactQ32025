@@ -9,7 +9,10 @@ import s from './MainPage.module.scss';
 import { useLocalStorage } from '../../utils/hooks/local-storage';
 import { LS_SEARCH_KEY } from '../../shared/constants/ls-keys';
 import FlyoutElement from '../../components/FlyoutElement';
-import { charactersApi } from '../../store/api/charactersApi';
+import {
+  charactersApi,
+  useGetCharactersQuery,
+} from '../../store/api/charactersApi';
 import RefreshButton from '../../components/RefreshButton';
 import { useRouter } from '../../i18n/navigation';
 import { useSearchParams } from 'next/navigation';
@@ -46,15 +49,11 @@ const MainPage = ({
   const currentPage = searchParams?.get('page') || '1';
   const search = searchParams?.get('search') || searchLS;
 
-  // const {
-  //   data = initialData,
-  //   error,
-  //   isLoading,
-  // } = useGetCharactersQuery(
-  //   { page: currentPage, name: search },
-  //   { skip: currentPage === page }
-  // );
-  const { info, results } = initialData || {};
+  const { data, error, isLoading } = useGetCharactersQuery({
+    page: currentPage,
+    name: search,
+  });
+  const { info, results } = data || {};
 
   const handleSubmit = (value: string) => {
     const trimmedSearch = value.trim();
@@ -88,7 +87,7 @@ const MainPage = ({
         <RefreshButton />
       </div>
 
-      <Section loading={false}>
+      <Section loading={isLoading} error={error}>
         <Pagination pages={info?.pages} />
         <div className={s['content-wrapper']}>
           <CardList items={results} />

@@ -7,6 +7,7 @@ import s from './Card.module.scss';
 import { Link } from '../../i18n/navigation';
 import { useTranslations } from 'next-intl';
 import React from 'react';
+import Image from 'next/image';
 export interface Card {
   item: CharacterItem;
 }
@@ -23,7 +24,14 @@ const Card = ({ item }: Card) => {
   return (
     <div className={s['card']} data-testid="card">
       <div className={s['img-wrapper']}>
-        <img src={item.image} alt={`${item.name} avatar`} className={s.img} />
+        <Image
+          src={item.image}
+          alt={`${item.name} avatar`}
+          className={s.img}
+          width={220}
+          height={220}
+          priority
+        />
       </div>
       <div className={`${s.name} ${s.neutral}`}>
         {t('mainPage.cardsSection.name')}{' '}

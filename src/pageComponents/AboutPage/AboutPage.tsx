@@ -3,6 +3,7 @@ import Image from 'next/image';
 import s from './AboutPage.module.scss';
 import avatar from '/public/images/ava3.jpg';
 import rssLogo from '/public/images/svg/rss-logo.svg';
+import { Link } from '../../i18n/navigation';
 
 const AboutPage = () => {
   return (
@@ -24,7 +25,7 @@ const AboutPage = () => {
           full confidence.
         </div>
       </div>
-      <a href={REACT_COURSE} target="_blank" rel="noopener noreferrer">
+      <Link href={REACT_COURSE} target="_blank" rel="noopener noreferrer">
         <Image
           src={rssLogo.src}
           alt={'rss-logo'}
@@ -33,7 +34,7 @@ const AboutPage = () => {
           data-testid="rs-logo"
           className={s['rss-logo']}
         />
-      </a>
+      </Link>
     </div>
   );
 };

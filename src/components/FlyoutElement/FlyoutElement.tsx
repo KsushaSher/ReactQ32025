@@ -8,6 +8,7 @@ import { useLazyGetCharacterByIdQuery } from '../../store/api/charactersApi';
 import { useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import React from 'react';
+import { Link } from '../../i18n/navigation';
 
 const FlyoutElement = () => {
   const dispatch = useAppDispatch();
@@ -64,7 +65,7 @@ const FlyoutElement = () => {
       <button onClick={handleClickDownload} className="button light-btn">
         {t('flyoutElement.download')}
       </button>
-      <a
+      <Link
         ref={downloadRef}
         href={downloadUrl}
         download={`${count}_items.csv`}

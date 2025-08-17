@@ -4,6 +4,7 @@ import { ROUTES } from '../../shared/constants/routes';
 import s from './CardDetailContent.module.scss';
 import { Link } from '../../i18n/navigation';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
 interface CardDetailContent {
   item: CharacterItem;
@@ -17,7 +18,14 @@ const CardDetailContent = ({ item, ref }: CardDetailContent) => {
     <div className={s['card-detail']} ref={ref} data-testid="card-detail">
       <Link className={s['close-button']} href={ROUTES.ROOT} />
       <div className={s['img-wrapper']}>
-        <img src={item.image} alt={`${item.name} avatar`} className={s.img} />
+        <Image
+          src={item.image}
+          alt={`${item.name} avatar`}
+          className={s.img}
+          width={330}
+          height={330}
+          priority
+        />
       </div>
       <div className={`${s.name} ${s.neutral}`}>
         {t('mainPage.cardsSection.name')}{' '}
