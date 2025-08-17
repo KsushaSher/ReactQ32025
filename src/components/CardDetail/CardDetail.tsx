@@ -4,7 +4,7 @@ import '../../styles/main.scss';
 import { Spinner } from '../Spinner';
 import CardDetailContent from '../CardDetailContent';
 import { useGetCharacterByIdQuery } from '../../store/api/charactersApi';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '../../i18n/navigation';
 import { ROUTES } from '../../shared/constants/routes';
 import { useCallback, useEffect, useRef } from 'react';
 import React from 'react';

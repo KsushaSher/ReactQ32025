@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '../../i18n/navigation';
 import { ROUTES } from '../../shared/constants/routes';
 import s from './NavigationLinks.module.scss';
 import { useTranslations } from 'next-intl';

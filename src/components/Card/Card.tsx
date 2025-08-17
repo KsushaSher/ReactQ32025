@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../store/hooks';
 import { toggleSelectedСharacter } from '../../store/slices/charactersSlice';
 import { useIsCardSelected } from '../../utils/hooks/is-card-selected';
 import s from './Card.module.scss';
-import Link from 'next/link';
+import { Link } from '../../i18n/navigation';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 export interface Card {

@@ -1,6 +1,6 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '../../i18n/navigation';
 import s from './Pagination.module.scss';
 import { useTranslations } from 'next-intl';
 import React from 'react';

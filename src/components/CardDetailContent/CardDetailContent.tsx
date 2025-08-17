@@ -2,7 +2,7 @@ import React from 'react';
 import type { CharacterItem } from '../../models';
 import { ROUTES } from '../../shared/constants/routes';
 import s from './CardDetailContent.module.scss';
-import Link from 'next/link';
+import { Link } from '../../i18n/navigation';
 import { useTranslations } from 'next-intl';
 
 interface CardDetailContent {

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '../../i18n/navigation';
 import s from './NotFoundPage.module.scss';
 import { ROUTES } from '../../shared/constants/routes';
 
