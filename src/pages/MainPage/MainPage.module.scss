@@ -1,0 +1,19 @@
+.content-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.option-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 16px;
+}
+
+.main {
+  background-color: rgb(206 228 106);
+}
