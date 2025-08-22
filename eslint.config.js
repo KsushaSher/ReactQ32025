@@ -1,10 +1,12 @@
 import js from '@eslint/js';
-import globals, { browser } from 'globals';
-import reactHooks, { configs, rules } from 'eslint-plugin-react-hooks';
+import globals from 'globals';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
-import tseslint, { config } from 'typescript-eslint';
+import tseslint from 'typescript-eslint';
 import { globalIgnores } from 'eslint/config';
-import { version } from 'typescript';
+import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
+import reactCompiler from 'eslint-plugin-react-compiler';
 
 export default tseslint.config([
   globalIgnores(['dist']),
