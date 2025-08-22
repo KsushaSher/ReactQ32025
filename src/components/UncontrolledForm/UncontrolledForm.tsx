@@ -1,6 +1,6 @@
 import '../../styles/main.scss';
 
-const UncontrolledForm = () => {
+export const UncontrolledForm = () => {
   return <div>{'Uncontrolled Form'}</div>;
 };
 
