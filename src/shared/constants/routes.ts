@@ -2,7 +2,7 @@ export const ROUTES = {
   MAIN: '/',
   FORMS: {
     UNCONTROLLED: '/uncontrolledForm',
-    CONTROLLED: '/uncontrolledForm',
+    CONTROLLED: '/controlledForm',
   },
   NOT_FOUND: '/*',
 };
