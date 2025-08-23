@@ -16,7 +16,7 @@ export const ReactError = ({ error }: ReactError) => {
         <p>The stack trace is:</p>
         <p>{error.stack}</p>
       </details>
-      <a href={ROUTES.ROOT}>Home</a>
+      <a href={ROUTES.MAIN}>Home</a>
     </div>
   );
 };

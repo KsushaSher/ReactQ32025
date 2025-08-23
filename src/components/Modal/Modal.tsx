@@ -35,7 +35,7 @@ const Modal = ({ isShowing, hide, children }: Args) => {
 
   return ReactDOM.createPortal(
     <div
-      className={s['modal-wrapper']}
+      className={`${s['modal-wrapper']} light`}
       onClick={handleClickOutside}
       tabIndex={-1}
     >

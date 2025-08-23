@@ -16,7 +16,7 @@ export const RouteError = ({ error }: RouteErrorProps) => {
         <br />
         {error.data}
       </details>
-      <a href={ROUTES.ROOT}>Home</a>
+      <a href={ROUTES.MAIN}>Home</a>
     </div>
   );
 };
