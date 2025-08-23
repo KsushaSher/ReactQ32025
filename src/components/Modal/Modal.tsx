@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import s from './Modal.module.scss';
 import '../../styles/main.scss';
@@ -9,37 +9,51 @@ interface Args {
   children: ReactNode;
 }
 
-const Modal = ({ isShowing, hide, children }: Args) =>
-  isShowing
-    ? ReactDOM.createPortal(
-        <React.Fragment>
-          <div className={s['modal-overlay']} />
-          <div
-            className={s['modal-wrapper']}
-            aria-modal
-            aria-hidden
-            tabIndex={-1}
-            role="dialog"
+const Modal = ({ isShowing, hide, children }: Args) => {
+  useEffect(() => {
+    const closeOnEscapeKey = (e: KeyboardEvent) =>
+      e.key === 'Escape' ? hide() : null;
+
+    document.body.addEventListener('keydown', closeOnEscapeKey);
+
+    return () => {
+      document.body.removeEventListener('keydown', closeOnEscapeKey);
+    };
+  }, [hide]);
+
+  if (!isShowing) return null;
+
+  const modalRoot = document.getElementById('modal');
+
+  if (!modalRoot) return null;
+
+  const handleClickOutside = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      hide();
+    }
+  };
+
+  return ReactDOM.createPortal(
+    <div
+      className={s['modal-wrapper']}
+      onClick={handleClickOutside}
+      tabIndex={-1}
+    >
+      <div className={s.modal}>
+        <div className={s['modal-header']}>
+          <button
+            type="button"
+            className={s['modal-close-button']}
+            onClick={hide}
           >
-            <div className={s.modal}>
-              <div className={s['modal-header']}>
-                <button
-                  type="button"
-                  className={s['modal-close-button']}
-                  data-dismiss="modal"
-                  aria-label="Close"
-                  onClick={hide}
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <p>{"Hello, I'm a modal."}</p>
-              {children}
-            </div>
-          </div>
-        </React.Fragment>,
-        document.getElementById('modal') || document.body
-      )
-    : null;
+            <span>&times;</span>
+          </button>
+        </div>
+        {children}
+      </div>
+    </div>,
+    modalRoot
+  );
+};
 
 export default Modal;
