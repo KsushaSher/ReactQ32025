@@ -9,6 +9,17 @@ export interface FormValues {
   country: string;
   acceptTerms: boolean;
 }
+export interface ControlFormValues {
+  name: string;
+  age: number;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  gender: string;
+  image: FileList;
+  country: string;
+  acceptTerms: boolean;
+}
 
 export type Errors = Partial<{
   [key in keyof FormValues]: string;

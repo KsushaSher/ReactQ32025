@@ -19,44 +19,50 @@ const MainPage = () => {
       <Header />
       <Outlet />
       <main className={s['main']}>
-        <div className={s['uncontrolled-items']}>
-          {uncontrolledItems?.map(({ image, ...item }, index) => (
-            <div key={index}>
-              {typeof image === 'string' && (
-                <img
-                  src={image}
-                  alt={`image ${index}`}
-                  style={{ width: '100%' }}
-                />
-              )}
-              <div className={s.item}>
-                {Object.entries(item).map(([key, value]) => (
-                  <div key={key}>
-                    <strong>{key}:</strong>
-                    {` ${String(value)}`}
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className={s['controlled-items']}>
-          {controlledItems?.map(({ image, ...item }, index) => (
-            <div key={index}>
-              {typeof image === 'string' && (
-                <img
-                  src={image}
-                  alt={`image ${index}`}
-                  style={{ width: '100%' }}
-                />
-              )}
-              {Object.entries(item).map(([key, value]) => (
-                <div key={key}>
-                  <strong>{key}:</strong> {String(value)}
+        <div className={s['items-wrapper']}>
+          <div className={s['uncontrolled-items']}>
+            {'Uncontrolled form data:'}
+            {uncontrolledItems?.map(({ image, ...item }, index) => (
+              <div key={index}>
+                {typeof image === 'string' && (
+                  <img
+                    src={image}
+                    alt={`image ${index}`}
+                    style={{ width: '100%' }}
+                  />
+                )}
+                <div className={s.item}>
+                  {Object.entries(item).map(([key, value]) => (
+                    <div key={key}>
+                      <strong>{key}:</strong>
+                      {` ${String(value)}`}
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
+          <div className={s['controlled-items']}>
+            {'Controlled form data:'}
+            {controlledItems?.map(({ image, ...item }, index) => (
+              <div key={index} className={s.tile}>
+                {typeof image === 'string' && (
+                  <img
+                    src={image}
+                    alt={`image ${index}`}
+                    style={{ width: '100%' }}
+                  />
+                )}
+                <div className={s.item}>
+                  {Object.entries(item).map(([key, value]) => (
+                    <div key={key}>
+                      <strong>{key}:</strong> {String(value)}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </main>
     </div>

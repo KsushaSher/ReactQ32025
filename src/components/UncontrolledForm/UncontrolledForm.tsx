@@ -3,10 +3,7 @@ import '../../styles/main.scss';
 import { validationSchema } from '../../shared/validation/validation-schema';
 import * as Yup from 'yup';
 import type { Errors } from '../../models';
-import {
-  selectCountries,
-  selectUncontrolledData,
-} from '../../store/selectors/forms.selectors';
+import { selectCountries } from '../../store/selectors/forms.selectors';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import type { FormValues } from '../../models/form';
 import { setUncontrolledDataItem } from '../../store/slices/formsSlice';
@@ -67,8 +64,6 @@ export const UncontrolledForm = () => {
     return formValues;
   };
 
-  const test = useAppSelector(selectUncontrolledData);
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const values = getFormData(event);
@@ -88,8 +83,6 @@ export const UncontrolledForm = () => {
 
       if (image instanceof File) reader.readAsDataURL(image);
     }
-
-    console.log('uncontrolledData---', test);
   };
 
   return (

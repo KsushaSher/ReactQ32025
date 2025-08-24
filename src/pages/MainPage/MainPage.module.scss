@@ -15,23 +15,38 @@
 }
 
 .main {
+  overflow: auto;
+  height: 100%;
+  padding: 10px;
+  color: var(--text-color-accent);
+}
+
+.items-wrapper {
   display: flex;
   flex-direction: row;
   gap: 10px;
 
-  height: calc(100vh - 70px);
-  padding: 10px;
+  width: 100%;
+  max-width: 900px;
+  height: 100%;
 }
 
 .uncontrolled-items,
 .controlled-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-start;
+
   width: 100%;
-  height: 100%;
+}
+
+.tile {
   border: 2px solid var(--border-btn-light);
   border-radius: 6px;
 }
 
 .item {
   padding: 10px;
-  color: var(--text-color-accent);
 }
