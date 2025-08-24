@@ -5,21 +5,21 @@ import '../../styles/main.scss';
 
 interface Args {
   isShowing: boolean;
-  hide: () => void;
+  onClose: () => void;
   children: ReactNode;
 }
 
-const Modal = ({ isShowing, hide, children }: Args) => {
+const Modal = ({ isShowing, onClose, children }: Args) => {
   useEffect(() => {
     const closeOnEscapeKey = (e: KeyboardEvent) =>
-      e.key === 'Escape' ? hide() : null;
+      e.key === 'Escape' ? onClose() : null;
 
     document.body.addEventListener('keydown', closeOnEscapeKey);
 
     return () => {
       document.body.removeEventListener('keydown', closeOnEscapeKey);
     };
-  }, [hide]);
+  }, [onClose]);
 
   if (!isShowing) return null;
 
@@ -29,7 +29,7 @@ const Modal = ({ isShowing, hide, children }: Args) => {
 
   const handleClickOutside = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
-      hide();
+      onClose();
     }
   };
 
@@ -44,7 +44,7 @@ const Modal = ({ isShowing, hide, children }: Args) => {
           <button
             type="button"
             className={s['modal-close-button']}
-            onClick={hide}
+            onClick={onClose}
           >
             <span>&times;</span>
           </button>

@@ -5,7 +5,7 @@ export interface FormValues {
   password: string;
   confirmPassword: string;
   gender: string;
-  image: File | null;
+  image: File | string | null;
   country: string;
   acceptTerms: boolean;
 }
