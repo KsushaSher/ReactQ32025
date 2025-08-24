@@ -43,7 +43,7 @@ const ControlledForm = () => {
   };
 
   return (
-    <Modal isShowing onClose={onClose}>
+    <Modal onClose={onClose}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form_header">
           <h1>Controlled form</h1>

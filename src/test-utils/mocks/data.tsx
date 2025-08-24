@@ -3,6 +3,9 @@ import formsReducer from '../../store/slices/formsSlice';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
+import { ROUTES } from '../../shared/constants';
+import { vi } from 'vitest';
+import type { FormValues } from '../../models';
 
 export const mockStore = configureStore({
   reducer: { forms: formsReducer },
@@ -17,7 +20,7 @@ export const mockStore = configureStore({
 
 export function renderWithStore(
   children: React.ReactElement,
-  initialEntries = ['/']
+  initialEntries = [ROUTES.MAIN]
 ) {
   return render(
     <Provider store={mockStore}>
@@ -26,3 +29,17 @@ export function renderWithStore(
     </Provider>
   );
 }
+
+export const mockOnClose = vi.fn();
+
+export const mockFormValue: FormValues = {
+  name: 'John',
+  age: 30,
+  email: 'tt@tt.tt',
+  password: 'Jj1!',
+  confirmPassword: 'Jj1!',
+  gender: 'male',
+  image: 'data:image/png;base64',
+  country: 'Belarus',
+  acceptTerms: true,
+};

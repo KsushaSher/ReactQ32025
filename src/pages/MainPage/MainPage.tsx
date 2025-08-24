@@ -15,7 +15,7 @@ const MainPage = () => {
   const controlledItems = useAppSelector(selectControlledData);
 
   return (
-    <div className={`${'wrapper-app'} ${'light'}`}>
+    <div className={`${'wrapper-app'} ${'light'}`} data-testid={'wrapper-app'}>
       <Header />
       <Outlet />
       <main className={s['main']}>

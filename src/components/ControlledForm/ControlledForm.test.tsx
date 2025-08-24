@@ -23,7 +23,7 @@ describe('Field validation', () => {
 
   beforeEach(() => {
     user = userEvent.setup();
-    renderWithStore(<ControlledForm />, ['controlledForm']);
+    renderWithStore(<ControlledForm />, ['/controlledForm']);
   });
 
   it('should name must start with uppercase letter', async () => {

@@ -86,7 +86,7 @@ export const UncontrolledForm = () => {
   };
 
   return (
-    <Modal isShowing onClose={onClose}>
+    <Modal onClose={onClose}>
       <form onSubmit={handleSubmit}>
         <div className="form_header">
           <h1>Uncontrolled form</h1>

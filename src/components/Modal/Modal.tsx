@@ -4,12 +4,11 @@ import s from './Modal.module.scss';
 import '../../styles/main.scss';
 
 interface Args {
-  isShowing: boolean;
   onClose: () => void;
   children: ReactNode;
 }
 
-const Modal = ({ isShowing, onClose, children }: Args) => {
+const Modal = ({ onClose, children }: Args) => {
   useEffect(() => {
     const closeOnEscapeKey = (e: KeyboardEvent) =>
       e.key === 'Escape' ? onClose() : null;
@@ -20,8 +19,6 @@ const Modal = ({ isShowing, onClose, children }: Args) => {
       document.body.removeEventListener('keydown', closeOnEscapeKey);
     };
   }, [onClose]);
-
-  if (!isShowing) return null;
 
   const modalRoot = document.getElementById('modal');
 
@@ -45,6 +42,7 @@ const Modal = ({ isShowing, onClose, children }: Args) => {
             type="button"
             className={s['modal-close-button']}
             onClick={onClose}
+            data-testid="close-button"
           >
             <span>&times;</span>
           </button>
