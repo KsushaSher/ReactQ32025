@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import '../../styles/main.scss';
 import { ROUTES } from '../../shared/constants';
-import Modal from '../Modal/Modal';
+import Modal from '../Modal';
 import { useDispatch } from 'react-redux';
 import { validationSchema } from '../../shared/validation/validation-schema';
 import { setControlledDataItem } from '../../store/slices/formsSlice';
@@ -70,7 +70,9 @@ const ControlledForm = () => {
         </div>
 
         <div className="field">
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password" data-testid={'password'}>
+            Password:
+          </label>
           <input id="password" type="password" {...register('password')} />
           {errors.password && (
             <p className="error-field">{errors.password.message}</p>

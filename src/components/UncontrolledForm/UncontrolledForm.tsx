@@ -10,7 +10,7 @@ import { setUncontrolledDataItem } from '../../store/slices/formsSlice';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../shared/constants';
 import { convertFormToObject } from '../../utils/convert-form-to-object';
-import Modal from '../Modal/Modal';
+import Modal from '../Modal';
 
 export const UncontrolledForm = () => {
   const navigate = useNavigate();
