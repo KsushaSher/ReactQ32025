@@ -26,27 +26,28 @@ main {
   justify-content: center;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
 .field {
   position: relative;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  margin-bottom: 16px;
-
-  .field {
-    flex-grow: 1;
-  }
+  display: grid;
+  grid-template-areas:
+    'label content '
+    '.    error';
+  grid-template-columns: 30% 70%;
 
   label {
-    flex: 0 0 30%;
+    grid-area: label;
     color: #5a5959;
   }
 
   input,
   select {
-    flex: 0 0 70%;
+    grid-area: content;
 
     box-sizing: border-box;
     padding: 4px 8px;
@@ -60,6 +61,31 @@ main {
 
     transition: border-color 0.25s;
   }
+
+  label[for='termsAccepted'] {
+    flex: 0 0 auto;
+  }
+
+  input[id='termsAccepted'] {
+    flex: 0 0 auto;
+  }
+
+  .error-field {
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    grid-area: error;
+    flex: 0 0 70%;
+
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--text-error);
+  }
+}
+
+.accept-terms {
+  place-self: center start;
 }
 
 .gender-content {
@@ -67,6 +93,11 @@ main {
   gap: 10px;
   align-items: center;
   justify-content: flex-end;
+}
+
+.select {
+  overflow: scroll;
+  width: 100%;
 }
 
 .button {
