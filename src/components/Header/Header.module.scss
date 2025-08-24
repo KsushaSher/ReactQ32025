@@ -15,3 +15,12 @@
 
   background-color: var(--bg-header);
 }
+
+.link {
+  color: var(--text-flyout-color);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

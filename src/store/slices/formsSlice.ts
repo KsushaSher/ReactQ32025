@@ -1,8 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { FormValues } from '../../models';
 import { COUNTRIES } from '../../shared/constants';
-
-interface FormState {
+export interface FormState {
   countries: string[];
   uncontrolledData: FormValues[];
   controlledData: FormValues[];

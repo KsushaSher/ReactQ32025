@@ -22,9 +22,13 @@ export function renderWithStore(
   children: React.ReactElement,
   initialEntries = [ROUTES.MAIN]
 ) {
+  const modalRoot = document.createElement('div');
+
+  modalRoot.setAttribute('id', 'modal');
+  document.body.appendChild(modalRoot);
+
   return render(
     <Provider store={mockStore}>
-      <div id="modal" />
       <MemoryRouter initialEntries={initialEntries}>{children}</MemoryRouter>
     </Provider>
   );

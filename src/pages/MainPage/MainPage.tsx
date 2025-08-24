@@ -23,7 +23,7 @@ const MainPage = () => {
           <div className={s['uncontrolled-items']}>
             {'Uncontrolled form data:'}
             {uncontrolledItems?.map(({ image, ...item }, index) => (
-              <div key={index}>
+              <div key={index} className={s.tile}>
                 {typeof image === 'string' && (
                   <img
                     src={image}
