@@ -1,0 +1,49 @@
+:root {
+  $content-width: 1276px;
+  $tablet-width: 768px;
+  $mobile-width: 380px;
+
+  $close-button: url('../../public/images/svg/close-button.png');
+  $close-button-light: url('../../public/images/svg/close-button-light.png');
+  $details-light: url('../../public/images/svg//detail-light.svg');
+  $details: url('../../public/images/svg/detail.svg');
+  $theme-button-light: url('../../public/images/svg/sun.png');
+  $theme-button-dark: url('../../public/images/svg/moonDark.png');
+
+  --bg-card: rgb(243 237 191);
+  --bg-card-shadow: rgb(189 183 137);
+  --bg-flyout-shadow: rgb(219 167 98);
+  --bg-body: rgb(238 198 134);
+  --ava-border: rgb(144 142 121);
+  --text-color-accent: rgb(111 102 91);
+  --text-color-neutral: rgb(124 120 115);
+  --text-flyout-color: rgb(112 49 21);
+  --text-color-dark: rgb(79 65 59);
+  --text-input: rgb(71 55 48);
+  --border-input: rgb(204 125 46);
+  --bg-input: rgb(255 242 229);
+  --bg-input-focus: rgb(255 254 252);
+  --shadow-input: rgb(169 169 169);
+  --border-bnt-default: #8a683e;
+  --text-bnt-default: rgb(79 65 59);
+  --bg-btn-default: rgb(176 149 130);
+  --shadow-btn-default: #6f5331;
+  --shadow-btn-default-active: #6f5331;
+  --border-btn-disabled: rgb(151 150 149);
+  --text-btn-disabled: rgb(121 121 121);
+  --bg-btn-disabled: rgb(151 150 149);
+  --btn-hover: rgb(0 0 0);
+  --border-btn-light: #b3946d;
+  --text-btn-light: rgb(105 97 91);
+  --bg-btn-light: rgb(228 210 198);
+  --shadow-btn-light: #987f61;
+  --border-btn-error: #8a683e;
+  --text-btn-error: rgb(94 30 20);
+  --text-error: rgb(231 31 0);
+  --bg-btn-error: rgb(197 151 134);
+  --shadow-btn-error: #6f5331;
+  --bg-header: rgb(215 136 57);
+  --border-spinner: #bd7731;
+  --bg-spinner-content: #d08e23;
+  --text-pagination: rgb(105 97 91);
+}

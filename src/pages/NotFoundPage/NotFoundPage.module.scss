@@ -1,0 +1,30 @@
+@use '../../styles/variables' as *;
+
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  height: 100vh;
+  padding-top: 30px;
+
+  color: var(--text-color-dark);
+
+  background-color: var(--bg-body);
+}
+
+.error404 {
+  font-size: 30px;
+}
+
+.link {
+  padding-top: 20px;
+  color: var(--text-color-dark);
+  text-decoration: none;
+  text-decoration: underline;
+
+  &:hover {
+    color: var(--border-input);
+  }
+}
