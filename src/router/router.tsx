@@ -1,19 +1,19 @@
 import { createBrowserRouter } from 'react-router';
 import NotFoundPage from '../pages/NotFoundPage';
 import { ROUTES } from '../shared/constants/routes';
-import { ReactErrorBoundary } from '../components/ReactErrorBoundary/ReactErrorBoundary';
 import MainPage from '../pages/MainPage';
+import RouteErrorBoundary from '../components/RouteErrorBoundary';
 
 const router = createBrowserRouter([
   {
     path: ROUTES.MAIN,
     Component: MainPage,
-    ErrorBoundary: ReactErrorBoundary,
+    ErrorBoundary: RouteErrorBoundary,
   },
   {
     path: ROUTES.NOT_FOUND,
     Component: NotFoundPage,
-    ErrorBoundary: ReactErrorBoundary,
+    ErrorBoundary: RouteErrorBoundary,
   },
 ]);
 

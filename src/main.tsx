@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router';
 import router from './router/router';
 import './styles//main.scss';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import DataProvider from './components/DataContext';
 
 const rootElement = document.getElementById('root');
 
@@ -12,6 +14,10 @@ if (!rootElement) {
 
 createRoot(rootElement).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ErrorBoundary>
+      <DataProvider>
+        <RouterProvider router={router} />
+      </DataProvider>
+    </ErrorBoundary>
   </StrictMode>
 );

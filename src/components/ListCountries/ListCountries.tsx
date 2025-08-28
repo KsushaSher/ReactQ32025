@@ -1,5 +1,15 @@
+import { useData } from '../DataContext/Hooks';
+
 const ListCountries = () => {
-  return <div>{'ListCountries'}</div>;
+  const data = useData();
+
+  console.log('data------', data);
+
+  return (
+    <>
+      <div>{'ListCountries'}</div>
+    </>
+  );
 };
 
 export default ListCountries;
