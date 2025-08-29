@@ -1,10 +1,15 @@
-import ListCountries from '../../components/ListCountries';
+import ListCountries from '../../components/CountryList';
+import s from './MainPage.module.scss';
 
 function MainPage() {
   return (
-    <div>
-      <h1>CO2 emission data</h1>
-      <ListCountries />
+    <div className="wrapper-app">
+      <header className={s.header}>
+        <h1>CO2 emission data</h1>
+      </header>
+      <main>
+        <ListCountries />
+      </main>
     </div>
   );
 }

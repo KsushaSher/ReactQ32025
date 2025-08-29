@@ -1,18 +1,5 @@
+import type { ResponseData } from '../../models/api';
 import { fetchData } from '../../services/fetch-data';
-
-export type ResponseData = Record<string, Country>;
-
-interface Country {
-  data: CountryData[];
-  iso_code: string;
-}
-interface CountryData {
-  cement_co2: number;
-  cement_co2_per_capita?: number;
-  cumulative_cement_co2: number;
-  population?: number;
-  year: number;
-}
 
 const getCO2Data = () => {
   let status = 'pending';
