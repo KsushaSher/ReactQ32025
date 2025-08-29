@@ -160,6 +160,38 @@ input[id='termsAccepted'] {
   }
 }
 
+.add-btn {
+  cursor: pointer;
+
+  padding: 4px 9px;
+  border: 1px solid rgb(140 140 140);
+  border-radius: 100%;
+
+  color: var(--text-btn-light);
+
+  background: rgb(191 192 167);
+  box-shadow: 3px 3px 0 rgb(140 140 140);
+
+  transition: all 0.2s ease;
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 var(--shadow-btn-light);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    border: 1px solid var(--border-btn-disabled);
+    color: var(--text-btn-disabled);
+    background: var(--bg-btn-disabled);
+  }
+
+  &:not(:disabled):hover {
+    border-color: var(--btn-hover);
+    color: var(--btn-hover);
+  }
+}
+
 .error-btn {
   border: 1px solid var(--border-btn-error);
 

@@ -5,6 +5,8 @@ import router from './router/router';
 import './styles//main.scss';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import DataProvider from './components/DataContext';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 const rootElement = document.getElementById('root');
 
@@ -16,7 +18,9 @@ createRoot(rootElement).render(
   <StrictMode>
     <ErrorBoundary>
       <DataProvider>
-        <RouterProvider router={router} />
+        <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
       </DataProvider>
     </ErrorBoundary>
   </StrictMode>

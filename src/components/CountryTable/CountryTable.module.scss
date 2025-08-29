@@ -19,8 +19,11 @@
 
 .table-wrapper {
   overflow: auto;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
 
-  width: 460px;
+  width: 750px;
   height: 150px;
   padding: 10px;
   border: 1px solid rgb(191 192 167);
@@ -41,6 +44,7 @@ table {
 
   font-family: sans-serif;
   font-size: 0.8rem;
+  color: var(--text-color-neutral);
   letter-spacing: 1px;
 }
 
@@ -54,7 +58,10 @@ td {
   min-width: 100px;
   padding: 8px 10px;
   border: 1px solid rgb(160 160 160);
+
   white-space: nowrap;
+
+  background-color: rgb(237 238 242 / 27%);
 }
 
 td:last-of-type {
