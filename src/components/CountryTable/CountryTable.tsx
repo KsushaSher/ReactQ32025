@@ -24,7 +24,7 @@ const CountryTable = ({ data }: CountryTableProps) => {
         </thead>
         <tbody>
           {year ? (
-            <tr key={dataByYear?.year} className={s.highlight}>
+            <tr key={dataByYear?.year} className={'highlight'}>
               {columns.map((col) => (
                 <td key={`column-${col}`}>{dataByYear?.[col] ?? 'N/A'}</td>
               ))}

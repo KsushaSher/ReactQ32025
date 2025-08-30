@@ -34,17 +34,18 @@ form {
   gap: 34px;
 }
 
-input,
-select {
+select,
+input:not([type='checkbox']) {
   grid-area: content;
 
   box-sizing: border-box;
+  height: 32px;
   padding: 4px 8px;
   border: 1px solid var(--border-input);
-  border-radius: 8px;
+  border-radius: 4px;
 
-  font-size: 1em;
   font-weight: 500;
+  color: var(--text-color-accent);
 
   background-color: rgb(191 192 167);
   box-shadow:
@@ -168,7 +169,7 @@ input[id='termsAccepted'] {
 
   padding: 4px 9px;
   border: 1px solid rgb(140 140 140);
-  border-radius: 100%;
+  border-radius: 4px;
 
   color: var(--text-btn-light);
 
@@ -249,4 +250,22 @@ input[id='termsAccepted'] {
     border-color: var(--btn-hover);
     color: var(--btn-hover);
   }
+}
+
+.highlight {
+  animation: highlight 1s ease-out;
+}
+
+@keyframes highlight {
+  0% {
+    background-color: orange;
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+option {
+  color: var(--text-input);
 }

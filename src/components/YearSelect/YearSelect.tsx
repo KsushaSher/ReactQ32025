@@ -13,17 +13,17 @@ const YearSelect = () => {
   };
 
   return (
-    <>
+    <div>
       <label htmlFor={'years'}>Select year:</label>
       <select id={'years'} value={year} onChange={handleOnChange}>
-        <option value="">All years:</option>
+        <option value="">all years</option>
         {years.map((year) => (
           <option key={year} value={year}>
             {year}
           </option>
         ))}
       </select>
-    </>
+    </div>
   );
 };
 

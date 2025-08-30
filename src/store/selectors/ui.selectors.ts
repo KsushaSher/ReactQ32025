@@ -9,3 +9,10 @@ export const selectColumns = createSelector(
 );
 
 export const selectYear = createSelector(selectUi, (ui) => ui.selectedYear);
+
+export const selectSearchQuery = createSelector(
+  selectUi,
+  (ui) => ui.searchQuery
+);
+
+export const selectSortOption = createSelector(selectUi, (ui) => ui.sortOption);

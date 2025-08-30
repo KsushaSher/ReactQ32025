@@ -20,7 +20,7 @@ const AdditionalParameters = () => {
   return (
     <>
       <button className={'add-btn'} onClick={handleOpen}>
-        &#43;
+        add parameters
       </button>
       {click && <Modal onClose={handleClose} />}
     </>

@@ -7,7 +7,6 @@ import s from './CountryCard.module.scss';
 export interface CountryCardProps {
   countryName: string;
   countryData: Country;
-  key: number;
   id: number;
 }
 
@@ -19,19 +18,22 @@ const CountryCard = ({ countryName, countryData, id }: CountryCardProps) => {
     ? countryData.data.find((item) => item.year === Number(year))
     : countryData.data.at(-1);
 
-  if (countryName === 'Afghanistan')
-    console.log({ year, dataByYear, countryData });
-
   return (
     <div className={s['card']} id={String(id)}>
       <div className={s['card-information']}>
-        <div className={s.accent}>{countryName}</div>
-        {isoCode && <div>{`(${isoCode})`}</div>}
-        <div>population: {`${dataByYear?.population || 'N/A'}`}</div>
+        <div className={s['main-accent']}>{countryName}</div>
+        <div>
+          ISO:{' '}
+          <span className={s.accent}>{isoCode ? `(${isoCode})` : '(N/A)'}</span>
+        </div>
+        <div>
+          population:{' '}
+          <span className={`highlight ${s.accent}`}>
+            {dataByYear?.population || 'N/A'}
+          </span>
+        </div>
       </div>
-      <div className={s['table-cards']}>
-        <CountryTable data={countryData.data} />
-      </div>
+      <CountryTable data={countryData.data} />
     </div>
   );
 };
