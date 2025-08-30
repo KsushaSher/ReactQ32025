@@ -1,6 +1,6 @@
 import type { CountryData } from '../../models';
 import { useAppSelector } from '../../store/hooks';
-import { selectColumns } from '../../store/selectors/ui.selectors';
+import { selectColumns, selectYear } from '../../store/selectors/ui.selectors';
 import s from './CountryTable.module.scss';
 
 interface CountryTableProps {
@@ -9,6 +9,8 @@ interface CountryTableProps {
 
 const CountryTable = ({ data }: CountryTableProps) => {
   const columns = useAppSelector(selectColumns);
+  const year = useAppSelector(selectYear);
+  const dataByYear = data.find((item) => item.year === Number(year));
 
   return (
     <div className={s['table-wrapper']}>
@@ -21,39 +23,21 @@ const CountryTable = ({ data }: CountryTableProps) => {
           </tr>
         </thead>
         <tbody>
-          {data?.length ? (
-            Object.values(data).map((_, i) => (
-              <tr key={i}>
+          {year ? (
+            <tr key={dataByYear?.year} className={s.highlight}>
+              {columns.map((col) => (
+                <td key={`column-${col}`}>{dataByYear?.[col] ?? 'N/A'}</td>
+              ))}
+            </tr>
+          ) : (
+            data.map((item) => (
+              <tr key={item.year}>
                 {columns.map((col) => (
-                  <td key={`column-${col}`}>{data[i][col] ?? 'N/A'}</td>
+                  <td key={`column-${col}`}>{item[col] ?? 'N/A'}</td>
                 ))}
               </tr>
             ))
-          ) : (
-            <tr>
-              <td colSpan={4}>No data available</td>
-            </tr>
           )}
-
-          {/* <tr>
-            <td>{data[0].year}</td>
-            <td>{data[0].population}</td>
-            <td>{data[0].cement_co2}</td>
-            <td>{data[0].cement_co2_per_capita}</td>
-          </tr>
-          <tr>
-            <td>{data[1].year}</td>
-            <td>{data[1].population}</td>
-            <td>{data[1].cement_co2}</td>
-            <td>{data[1].cement_co2_per_capita}</td>
-          </tr>
-          <tr>
-            <td>{data[2].year}</td>
-            <td>{data[2].population}</td>
-            <td>{data[2].cement_co2}</td>
-            <td>{data[2].cement_co2_per_capita}</td>
-          </tr>
-           */}
         </tbody>
       </table>
     </div>

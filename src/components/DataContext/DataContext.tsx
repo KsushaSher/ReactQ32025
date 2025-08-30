@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import type { ResponseData } from '../../utils/hooks/getCO2Data';
+import type { ResponseData } from '../../utils/hooks/get-co2-data';
 
 const DEFAULT_DATA: ResponseData = {};
 

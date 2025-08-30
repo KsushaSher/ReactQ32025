@@ -71,3 +71,17 @@ td:last-of-type {
 tbody > tr:nth-of-type(even) {
   background-color: rgb(237 238 242 / 46.3%);
 }
+
+.highlight {
+  animation: highlight 1s ease-out;
+}
+
+@keyframes highlight {
+  0% {
+    background-color: orange;
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}

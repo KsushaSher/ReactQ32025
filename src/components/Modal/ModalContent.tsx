@@ -1,4 +1,5 @@
 import { type AdditionalColumns } from '../../store/slices/uiSlice';
+import s from './Modal.module.scss';
 
 const additionalColumns: AdditionalColumns[] = [
   'methane',
@@ -26,22 +27,20 @@ export const ModalContent = ({
   };
 
   return (
-    <div>
+    <div className={s['wrapper-content']}>
       <div>Select additional columns:</div>
       <div>
         {additionalColumns.map((column) => (
-          <>
-            <label key={column} htmlFor={column}>
-              {column}
-            </label>
+          <div key={`additional-${column}`} className={s['additional-column']}>
             <input
               type="checkbox"
-              id={column}
+              id={`additional-${column}`}
               name={column}
               checked={selectedColumns.includes(column)}
               onChange={() => handleCheckboxChange(column)}
             />
-          </>
+            <label htmlFor={`additional-${column}`}>{column}</label>
+          </div>
         ))}
       </div>
     </div>

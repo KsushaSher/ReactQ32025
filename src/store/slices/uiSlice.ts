@@ -13,6 +13,7 @@ export type AdditionalColumns =
 
 interface InitialState {
   selectedColumns: AdditionalColumns[];
+  selectedYear: string;
 }
 
 const initialState: InitialState = {
@@ -22,6 +23,7 @@ const initialState: InitialState = {
     'cement_co2',
     'cement_co2_per_capita',
   ],
+  selectedYear: '',
 };
 
 const uiSlice = createSlice({
@@ -31,9 +33,12 @@ const uiSlice = createSlice({
     setSelectedColumns(state, action: PayloadAction<AdditionalColumns[]>) {
       state.selectedColumns = action.payload;
     },
+    setSelectedYear(state, action: PayloadAction<string>) {
+      state.selectedYear = action.payload;
+    },
   },
 });
 
-export const { setSelectedColumns } = uiSlice.actions;
+export const { setSelectedColumns, setSelectedYear } = uiSlice.actions;
 
 export default uiSlice.reducer;

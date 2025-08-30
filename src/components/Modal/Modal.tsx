@@ -56,7 +56,12 @@ const Modal = ({ onClose }: Args) => {
           selectedColumns={selectedColumns}
           setSelectedColumns={setSelectedColumns}
         />
-        <button type="button" className="button btn-light" onClick={handleSave}>
+        <button
+          type="button"
+          className="button light-btn"
+          style={{ marginTop: '16px' }}
+          onClick={handleSave}
+        >
           {'save'}
         </button>
       </div>

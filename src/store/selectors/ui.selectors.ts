@@ -7,3 +7,5 @@ export const selectColumns = createSelector(
   selectUi,
   (ui) => ui.selectedColumns
 );
+
+export const selectYear = createSelector(selectUi, (ui) => ui.selectedYear);

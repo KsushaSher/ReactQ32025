@@ -1,7 +1,7 @@
 import { DataContext } from './DataContext';
 import { Suspense } from 'react';
 import Spinner from '../Spinner';
-import getCO2Data from '../../utils/hooks/getCO2Data';
+import getCO2Data from '../../utils/hooks/get-co2-data';
 
 interface DataProviderProps {
   children: React.ReactNode;

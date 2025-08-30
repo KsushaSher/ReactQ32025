@@ -1,1 +1,1 @@
-export { selectCountries } from './ui.selectors';
+export { selectColumns, selectYear } from './ui.selectors';
