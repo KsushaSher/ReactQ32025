@@ -28,9 +28,7 @@ const CountryCard = ({ countryName, countryData, id }: CountryCardProps) => {
         </div>
         <div>
           population:{' '}
-          <span className={`highlight ${s.accent}`}>
-            {dataByYear?.population || 'N/A'}
-          </span>
+          <span className={s.accent}>{dataByYear?.population || 'N/A'}</span>
         </div>
       </div>
       <CountryTable data={countryData.data} />

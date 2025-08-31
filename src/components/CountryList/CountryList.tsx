@@ -20,8 +20,6 @@ const CountryList = () => {
     return <>such country not found</>;
   }
 
-  console.log('data---', data);
-
   return (
     <div className={s['card-list']}>
       {Object.values(finalData).map((item, index) => (
