@@ -1,3 +1,4 @@
+import React, { useMemo } from 'react';
 import type { CountryData } from '../../models';
 import { useAppSelector } from '../../store/hooks';
 import { selectColumns, selectYear } from '../../store/selectors/ui.selectors';
@@ -10,7 +11,10 @@ interface CountryTableProps {
 const CountryTable = ({ data }: CountryTableProps) => {
   const columns = useAppSelector(selectColumns);
   const year = useAppSelector(selectYear);
-  const dataByYear = data.find((item) => item.year === Number(year));
+  const dataByYear = useMemo(
+    () => data.find((item) => item.year === Number(year)),
+    [data, year]
+  );
 
   return (
     <div className={s['table-wrapper']}>
@@ -44,4 +48,4 @@ const CountryTable = ({ data }: CountryTableProps) => {
   );
 };
 
-export default CountryTable;
+export default React.memo(CountryTable);

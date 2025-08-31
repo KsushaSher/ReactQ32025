@@ -4,10 +4,11 @@ import { selectYear } from '../../store/selectors';
 import { getListYears } from '../../utils';
 import s from './YearSelect.module.scss';
 
+const YEARS = getListYears(1750, 2023);
+
 const YearSelect = () => {
   const dispatch = useAppDispatch();
   const year = useAppSelector(selectYear);
-  const years = getListYears(1750, 2023);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setSelectedYear(event.target.value));
@@ -18,7 +19,7 @@ const YearSelect = () => {
       <label htmlFor={'years'}>Select year:</label>
       <select id={'years'} value={year} onChange={handleOnChange}>
         <option value="">all years</option>
-        {years.map((year) => (
+        {YEARS.map((year) => (
           <option key={year} value={year}>
             {year}
           </option>

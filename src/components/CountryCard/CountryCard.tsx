@@ -1,3 +1,4 @@
+import React, { useMemo } from 'react';
 import type { Country } from '../../models';
 import { useAppSelector } from '../../store/hooks';
 import { selectYear } from '../../store/selectors';
@@ -14,9 +15,13 @@ const CountryCard = ({ countryName, countryData, id }: CountryCardProps) => {
   const isoCode = countryData.iso_code;
   const year = useAppSelector(selectYear);
 
-  const dataByYear = year
-    ? countryData.data.find((item) => item.year === Number(year))
-    : countryData.data.at(-1);
+  const dataByYear = useMemo(
+    () =>
+      year
+        ? countryData.data.find((item) => item.year === Number(year))
+        : countryData.data.at(-1),
+    [countryData.data, year]
+  );
 
   return (
     <div className={s['card']} id={String(id)}>
@@ -26,7 +31,7 @@ const CountryCard = ({ countryName, countryData, id }: CountryCardProps) => {
           ISO:{' '}
           <span className={s.accent}>{isoCode ? `(${isoCode})` : '(N/A)'}</span>
         </div>
-        <div>
+        <div key={dataByYear?.population} className={'highlight'}>
           population:{' '}
           <span className={s.accent}>{dataByYear?.population || 'N/A'}</span>
         </div>
@@ -36,4 +41,4 @@ const CountryCard = ({ countryName, countryData, id }: CountryCardProps) => {
   );
 };
 
-export default CountryCard;
+export default React.memo(CountryCard);

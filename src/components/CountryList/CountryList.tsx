@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import type { ResponseData } from '../../models';
 import { useAppSelector } from '../../store/hooks';
 import {
@@ -13,20 +14,24 @@ const CountryList = () => {
   const data: ResponseData = useData();
   const search = useAppSelector(selectSearchQuery);
   const sortType = useAppSelector(selectSortOption);
-  const searchData = search ? filterCountries(data, search) : data;
-  const finalData = sortCountries(searchData, sortType);
 
-  if (Object.entries(searchData).length === 0) {
+  const finalData = useMemo(() => {
+    const searchData = search ? filterCountries(data, search) : data;
+
+    return sortCountries(searchData, sortType);
+  }, [data, search, sortType]);
+
+  if (finalData.length === 0) {
     return <>such country not found</>;
   }
 
   return (
     <div className={s['card-list']}>
-      {Object.values(finalData).map((item, index) => (
+      {finalData.map(([key, item], index) => (
         <CountryCard
-          countryName={Object.keys(finalData)[index]}
+          countryName={key}
           countryData={item}
-          key={`${Object.keys(finalData)[index]}-card`}
+          key={`${key}-card`}
           id={index}
         />
       ))}

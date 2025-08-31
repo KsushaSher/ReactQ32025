@@ -1,6 +1,8 @@
 import type { ResponseData } from '../models';
 
 export const filterCountries = (data: ResponseData, search: string) => {
+  if (!search) return data;
+
   const filtered: ResponseData = {};
 
   for (const key in data) {
