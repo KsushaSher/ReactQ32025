@@ -1,7 +1,10 @@
 import type { ResponseData } from '../../models';
 import { useAppSelector } from '../../store/hooks';
-import { selectSearchQuery } from '../../store/selectors/ui.selectors';
-import { getSortedCountries } from '../../utils';
+import {
+  selectSearchQuery,
+  selectSortOption,
+} from '../../store/selectors/ui.selectors';
+import { filterCountries, sortCountries } from '../../utils';
 import CountryCard from '../CountryCard';
 import { useData } from '../DataContext/Hooks';
 import s from './CountryList.module.scss';
@@ -9,9 +12,11 @@ import s from './CountryList.module.scss';
 const CountryList = () => {
   const data: ResponseData = useData();
   const search = useAppSelector(selectSearchQuery);
-  const finalData = search ? getSortedCountries(data, search) : data;
+  const sortType = useAppSelector(selectSortOption);
+  const searchData = search ? filterCountries(data, search) : data;
+  const finalData = sortCountries(data, sortType);
 
-  if (Object.entries(finalData).length === 0) {
+  if (Object.entries(searchData).length === 0) {
     return <>such country not found</>;
   }
 

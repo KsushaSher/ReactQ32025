@@ -1,6 +1,7 @@
 import AdditionalParameters from '../../components/AdditionalParameters';
 import ListCountries from '../../components/CountryList';
 import CountrySearch from '../../components/CountrySearch';
+import SortingCountries from '../../components/SortingCountries';
 import YearSelect from '../../components/YearSelect';
 import s from './MainPage.module.scss';
 
@@ -13,6 +14,7 @@ function MainPage() {
           <YearSelect />
           <CountrySearch />
           <AdditionalParameters />
+          <SortingCountries />
         </div>
       </header>
       <main>

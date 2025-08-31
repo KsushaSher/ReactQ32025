@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setSelectedYear } from '../../store/slices/uiSlice';
 import { selectYear } from '../../store/selectors';
 import { getListYears } from '../../utils';
+import s from './YearSelect.module.scss';
 
 const YearSelect = () => {
   const dispatch = useAppDispatch();
@@ -13,7 +14,7 @@ const YearSelect = () => {
   };
 
   return (
-    <div>
+    <div className={s['year-select-wrapper']}>
       <label htmlFor={'years'}>Select year:</label>
       <select id={'years'} value={year} onChange={handleOnChange}>
         <option value="">all years</option>

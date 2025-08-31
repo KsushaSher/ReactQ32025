@@ -14,6 +14,8 @@ export type AdditionalColumns =
 interface InitialState {
   selectedColumns: AdditionalColumns[];
   selectedYear: string;
+  searchQuery: string;
+  sortOption: string;
 }
 
 const initialState: InitialState = {
@@ -24,6 +26,8 @@ const initialState: InitialState = {
     'cement_co2_per_capita',
   ],
   selectedYear: '',
+  searchQuery: '',
+  sortOption: 'asc',
 };
 
 const uiSlice = createSlice({
@@ -36,9 +40,20 @@ const uiSlice = createSlice({
     setSelectedYear(state, action: PayloadAction<string>) {
       state.selectedYear = action.payload;
     },
+    setSearchQuery(state, action: PayloadAction<string>) {
+      state.searchQuery = action.payload;
+    },
+    setSortOption(state, action: PayloadAction<string>) {
+      state.sortOption = action.payload;
+    },
   },
 });
 
-export const { setSelectedColumns, setSelectedYear } = uiSlice.actions;
+export const {
+  setSelectedColumns,
+  setSelectedYear,
+  setSearchQuery,
+  setSortOption,
+} = uiSlice.actions;
 
 export default uiSlice.reducer;

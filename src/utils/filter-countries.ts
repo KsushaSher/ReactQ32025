@@ -1,6 +1,6 @@
 import type { ResponseData } from '../models';
 
-export const getSortedCountries = (data: ResponseData, search: string) => {
+export const filterCountries = (data: ResponseData, search: string) => {
   const filtered: ResponseData = {};
 
   for (const key in data) {

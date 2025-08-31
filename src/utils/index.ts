@@ -1,2 +1,3 @@
 export { getListYears } from './get-list-years';
-export { getSortedCountries } from './get-sorted-countries';
+export { filterCountries } from './filter-countries';
+export { sortCountries } from './sort-countries';

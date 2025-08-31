@@ -35,7 +35,7 @@ form {
 }
 
 select,
-input:not([type='checkbox']) {
+input:not([type='checkbox'], [type='radio']) {
   grid-area: content;
 
   box-sizing: border-box;

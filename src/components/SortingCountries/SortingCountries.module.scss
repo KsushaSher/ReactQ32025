@@ -1,0 +1,23 @@
+@use '../../styles/variables' as *;
+
+.radio-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+fieldset {
+  padding: 0 10px;
+  border: 1px solid var(--shadow-btn-default);
+  border-radius: 4px;
+}
+
+.radio-item {
+  display: flex;
+  gap: 4px;
+
+  :hover {
+    cursor: pointer;
+  }
+}
