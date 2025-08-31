@@ -1,69 +1,154 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Performance Profiling
 
-Currently, two official plugins are available:
+- **Tested interactions:**
+  - Sorting a column by population
+  - Sorting a column by name (desc)
+  - Searching for a country
+  - Selecting a year
+  - Adding/removing columns
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Before optimization
 
-## Expanding the ESLint configuration
+### Sorting a column by population:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Commit Duration: 2.3s**
+- **Render Duration: 1038.6ms**
+- **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Flame Graph for sorting by population**
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+![Profiler Flame Graph](docs/images/flame-sortPopulation-before.png)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+- **Ranked Chart for sorting by population**
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+![Profiler Ranked Chart](docs/images/ranked-sortPopulation-before.png)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+### Sorting a column by name (desc):
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+- **Commit Duration: 2.9s**
+- **Render Duration: 1107.4ms**
+- **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
+
+- **Flame Graph for sorting by name (desc)**
+
+![Profiler Flame Graph](docs/images/flame-sortName-before.png)
+
+- **Ranked Chart for sorting by name (desc)**
+
+![Profiler Ranked Chart](docs/images/ranked-sortName-before.png)
+
+### Searching for a country:
+
+- **Commit Duration: 4.3s**
+- **Render Duration: 1004.5ms**
+- **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
+
+- **Flame Graph for search**
+
+![Profiler Flame Graph](docs/images/flame-search-before.png)
+
+- **Ranked Chart for search**
+
+![Profiler Ranked Chart](docs/images/ranked-search-before.png)
+
+### Selecting a year:
+
+- **Commit Duration: 4.9s**
+- **Render Duration: 25.1ms**
+- **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
+
+- **Flame Graph for year**
+
+![Profiler Flame Graph](docs/images/flame-selectYear-before.png)
+
+- **Ranked Chart for year**
+
+![Profiler Ranked Chart](docs/images/ranked-selectYear-before.png)
+
+### Adding/removing columns:
+
+- **Commit Duration: 0.8s**
+- **Render Duration: 1182.4ms**
+- **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
+
+- **Flame Graph for columns**
+
+![Profiler Flame Graph](docs/images/flame-add-before.png)
+
+- **Ranked Chart for columns**
+
+![Profiler Ranked Chart](docs/images/ranked-add-beforee.png)
+
+## After optimization
+
+### Sorting a column by population:
+
+- **Commit Duration: 1.9s**
+- **Render Duration: 166.2ms**
+- **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
+
+- **Flame Graph for sorting by population**
+
+![Profiler Flame Graph](docs/images/flame-sortPopulation-after.png)
+
+- **Ranked Chart for sorting by population**
+
+![Profiler Ranked Chart](docs/images/ranked-sortPopulation-after.png)
+
+### Sorting a column by name (desc):
+
+- **Commit Duration: 1.7s**
+- **Render Duration: 158.8ms**
+- **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
+
+- **Flame Graph for sorting by name (desc)**
+
+![Profiler Flame Graph](docs/images/flame-sortName-after.png)
+
+- **Ranked Chart for sorting by name (desc)**
+
+![Profiler Ranked Chart](docs/images/ranked-sortName-after.png)
+
+### Searching for a country:
+
+- **Commit Duration: 1.7s**
+- **Render Duration: 137.4ms**
+- **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
+
+- **Flame Graph for sorting**
+
+![Profiler Flame Graph](docs/images/flame-search-after.png)
+
+- **Ranked Chart for search**
+
+![Profiler Ranked Chart](docs/images/ranked-search-after.png)
+
+### Selecting a year:
+
+- **Commit Duration: 3.9s**
+- **Render Duration: 24.3ms**
+- **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
+
+- **Flame Graph for year**
+
+![Profiler Flame Graph](docs/images/flame-selectYear-after.png)
+
+- **Ranked Chart for year**
+
+![Profiler Ranked Chart](docs/images/ranked-selectYear-after.png)
+
+### Adding/removing columns:
+
+- **Commit Duration: 0.8s**
+- **Render Duration: 1414.8ms**
+- **Interactions:** Not recorded (Profiler did not capture explicit interactions, but commit and render times were analyzed instead)
+
+- **Flame Graph for columns**
+
+![Profiler Flame Graph](docs/images/flame-add-after.png)
+
+- **Ranked Chart for columns**
+
+![Profiler Ranked Chart](docs/images/ranked-add-after.png)
