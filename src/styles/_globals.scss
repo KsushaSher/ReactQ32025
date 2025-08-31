@@ -1,0 +1,271 @@
+@use './_variables.scss' as *;
+
+*,
+h1 {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#root,
+#modal {
+  font-family: Montserrat, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.wrapper-app {
+  background-color: var(--bg-body);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
+select,
+input:not([type='checkbox'], [type='radio']) {
+  grid-area: content;
+
+  box-sizing: border-box;
+  height: 32px;
+  padding: 4px 8px;
+  border: 1px solid var(--border-input);
+  border-radius: 4px;
+
+  font-weight: 500;
+  color: var(--text-color-accent);
+
+  background-color: rgb(191 192 167);
+  box-shadow:
+    inset 0 3px 6px rgb(0 0 0 / 25%),
+    inset 0 -2px 4px rgb(255 255 255 / 15%);
+
+  transition: border-color 0.25s;
+}
+
+label[for='termsAccepted'] {
+  flex: 0 0 auto;
+}
+
+input[id='termsAccepted'] {
+  flex: 0 0 auto;
+}
+
+.error-field {
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  grid-area: error;
+  flex: 0 0 70%;
+
+  font-size: 14px;
+  line-height: 16px;
+  color: var(--text-error);
+}
+
+.accept-terms {
+  place-self: center start;
+}
+
+.gender-content {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.select {
+  overflow: scroll;
+  width: 100%;
+}
+
+.button {
+  cursor: pointer;
+
+  padding: 4px 12px;
+  border-radius: 4px;
+
+  font-size: 1em;
+  font-weight: 500;
+
+  transition: border-color 0.25s;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.default-btn {
+  border: 1px solid var(--border-bnt-default);
+
+  color: var(--text-bnt-default);
+
+  background: var(--bg-btn-default);
+  box-shadow: 3px 3px 0 var(--shadow-btn-default);
+
+  transition: all 0.2s ease;
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 var(--shadow-btn-default);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    border: 1px solid var(--border-btn-disabled);
+    color: var(--text-btn-disabled);
+    background: var(--bg-btn-disabled);
+  }
+
+  &:not(:disabled):hover {
+    border-color: var(--btn-hover);
+    color: var(--btn-hover);
+  }
+}
+
+.light-btn {
+  border: 1px solid var(--border-btn-light);
+
+  color: var(--text-btn-light);
+
+  background: var(--bg-btn-light);
+  box-shadow: 3px 3px 0 var(--shadow-btn-light);
+
+  transition: all 0.2s ease;
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 var(--shadow-btn-light);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    border: 1px solid var(--border-btn-disabled);
+    color: var(--text-btn-disabled);
+    background: var(--bg-btn-disabled);
+  }
+
+  &:not(:disabled):hover {
+    border-color: var(--btn-hover);
+    color: var(--btn-hover);
+  }
+}
+
+.add-btn {
+  cursor: pointer;
+
+  padding: 4px 9px;
+  border: 1px solid rgb(140 140 140);
+  border-radius: 4px;
+
+  color: var(--text-btn-light);
+
+  background: rgb(191 192 167);
+  box-shadow: 3px 3px 0 rgb(140 140 140);
+
+  transition: all 0.2s ease;
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 var(--shadow-btn-light);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    border: 1px solid var(--border-btn-disabled);
+    color: var(--text-btn-disabled);
+    background: var(--bg-btn-disabled);
+  }
+
+  &:not(:disabled):hover {
+    border-color: var(--btn-hover);
+    color: var(--btn-hover);
+  }
+}
+
+.error-btn {
+  border: 1px solid var(--border-btn-error);
+
+  color: var(--text-btn-error);
+
+  background: var(--bg-btn-error);
+  box-shadow: 3px 3px 0 var(--shadow-btn-error);
+
+  transition: all 0.2s ease;
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 var(--shadow-btn-error);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    border: 1px solid var(--border-btn-disabled);
+    color: var(--text-btn-disabled);
+    background: var(--bg-btn-disabled);
+  }
+
+  &:not(:disabled):hover {
+    border-color: var(--btn-hover);
+    color: var(--btn-hover);
+  }
+}
+
+.refresh-btn {
+  border: 1px solid var(--border-btn-error);
+
+  color: var(--text-btn-error);
+
+  background: var(--bg-btn-error);
+  box-shadow: 3px 3px 0 var(--shadow-btn-error);
+
+  transition: all 0.2s ease;
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 var(--shadow-btn-error);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    border: 1px solid var(--border-btn-disabled);
+    color: var(--text-btn-disabled);
+    background: var(--bg-btn-disabled);
+  }
+
+  &:not(:disabled):hover {
+    border-color: var(--btn-hover);
+    color: var(--btn-hover);
+  }
+}
+
+.highlight {
+  animation: highlight 1s ease-out;
+}
+
+@keyframes highlight {
+  0% {
+    background-color: orange;
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+option {
+  color: var(--text-input);
+}

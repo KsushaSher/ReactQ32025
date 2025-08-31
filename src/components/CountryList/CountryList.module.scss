@@ -1,0 +1,15 @@
+@use '../../styles/variables' as *;
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 10px;
+  border-radius: 4px;
+
+  color: var(--text-color-neutral);
+
+  background-color: var(--bg-card);
+  box-shadow: 3px 3px 4px var(--bg-card-shadow);
+}
