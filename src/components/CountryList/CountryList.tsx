@@ -14,7 +14,7 @@ const CountryList = () => {
   const search = useAppSelector(selectSearchQuery);
   const sortType = useAppSelector(selectSortOption);
   const searchData = search ? filterCountries(data, search) : data;
-  const finalData = sortCountries(data, sortType);
+  const finalData = sortCountries(searchData, sortType);
 
   if (Object.entries(searchData).length === 0) {
     return <>such country not found</>;
