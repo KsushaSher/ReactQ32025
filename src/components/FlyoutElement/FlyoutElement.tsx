@@ -1,19 +1,19 @@
 import { resetSelectedСharacter } from '../../store/slices/charactersSlice';
 import s from './FlyoutElement.module.scss';
 import { selectSelectedCharacters, selectCount } from '../../store/selectors';
-import { convertToCSV } from '../../utils/convertToCSV';
-import { getCharactersData } from '../../utils/getCharactersData';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { useLazyGetCharacterByIdQuery } from '../../store/api/charactersApi';
 import { useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+import { Link } from '../../i18n/navigation';
 
 const FlyoutElement = () => {
   const dispatch = useAppDispatch();
   const count = useAppSelector(selectCount);
   const ids = useAppSelector(selectSelectedCharacters);
-  const [getCharacterById] = useLazyGetCharacterByIdQuery();
   const [downloadUrl, setDownloadUrl] = useState('');
   const downloadRef = useRef<HTMLAnchorElement | null>(null);
+  const t = useTranslations();
 
   const downloadCSV = (csv: string) => {
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -32,8 +32,15 @@ const FlyoutElement = () => {
 
   const handleClickDownload = async () => {
     try {
-      const сharacterData = await getCharactersData(ids, getCharacterById);
-      const csv = convertToCSV(сharacterData);
+      const res = await fetch('/api/csv', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids }),
+      });
+
+      if (!res.ok) throw new Error('Download error');
+
+      const csv = await res.text();
 
       downloadCSV(csv);
     } catch (error) {
@@ -52,15 +59,16 @@ const FlyoutElement = () => {
   return (
     <div className={s['wrapper-flyout']}>
       <p>
-        {count} item{count === 1 ? '' : 's'} are selected:
+        {t('flyoutElement.text')}
+        {count}
       </p>
       <button onClick={handleClickReset} className="button light-btn">
-        Unselect all
+        {t('flyoutElement.unselect')}
       </button>
       <button onClick={handleClickDownload} className="button light-btn">
-        Download
+        {t('flyoutElement.download')}
       </button>
-      <a
+      <Link
         ref={downloadRef}
         href={downloadUrl}
         download={`${count}_items.csv`}

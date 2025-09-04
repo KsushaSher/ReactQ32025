@@ -1,31 +1,44 @@
+'use client';
+import { useSearchParams } from 'next/navigation';
+import { useRouter } from '../../i18n/navigation';
 import s from './Pagination.module.scss';
-import { useSearchParams } from 'react-router';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 interface Pagination {
   pages: number | undefined;
 }
 
 const Pagination = ({ pages }: Pagination) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const currentPage = Number(searchParams.get('page')) || 1;
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const t = useTranslations();
+
+  const currentPage = Number(searchParams?.get('page')) || 1;
+  const currentSearch = searchParams?.get('search') || '';
 
   const handlePrev = () => {
-    setSearchParams({ page: String(currentPage - 1) });
+    if (currentPage > 1) {
+      router.replace(`?page=${currentPage - 1}&search=${currentSearch}`);
+    }
   };
+
   const handleNext = () => {
-    setSearchParams({ page: String(currentPage + 1) });
+    if (pages && currentPage < pages) {
+      router.replace(`?page=${currentPage + 1}&search=${currentSearch}`);
+    }
   };
 
   return (
     <div className={s['pagination-wrapper']}>
       <button className="button light-btn" onClick={handlePrev}>
-        Prev
+        {t('mainPage.cardsSection.paginationPrev')}
       </button>
       <span className={s['current-page']}>
         {currentPage}/{pages}
       </span>
       <button className="button light-btn" onClick={handleNext}>
-        Next
+        {t('mainPage.cardsSection.paginationNext')}
       </button>
     </div>
   );

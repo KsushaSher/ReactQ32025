@@ -1,44 +1,51 @@
+import { useSearchParams } from 'next/navigation';
 import type { CharacterItem } from '../../models';
-import { ROUTES } from '../../shared/constants/routes';
 import { useAppDispatch } from '../../store/hooks';
 import { toggleSelectedСharacter } from '../../store/slices/charactersSlice';
 import { useIsCardSelected } from '../../utils/hooks/is-card-selected';
 import s from './Card.module.scss';
-import { NavLink, useSearchParams } from 'react-router';
+import { Link } from '../../i18n/navigation';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+import Image from 'next/image';
 export interface Card {
   item: CharacterItem;
 }
 
 const Card = ({ item }: Card) => {
-  const [searchParams] = useSearchParams();
   const dispatch = useAppDispatch();
   const id = String(item.id);
   const isCardSelected = useIsCardSelected(id);
   const handleToggle = () => dispatch(toggleSelectedСharacter(id));
+  const searchParams = useSearchParams();
+  const page = searchParams?.get('page') ?? 1;
+  const t = useTranslations();
 
   return (
     <div className={s['card']} data-testid="card">
       <div className={s['img-wrapper']}>
-        <img
+        <Image
           src={item.image}
           alt={`${item.name} avatar`}
           className={s.img}
-        ></img>
+          width={220}
+          height={220}
+          priority
+        />
       </div>
       <div className={`${s.name} ${s.neutral}`}>
-        Name: <span className={s['accent']}>{item.name}</span>
+        {t('mainPage.cardsSection.name')}{' '}
+        <span className={s['accent']}>{item.name}</span>
       </div>
       <div className={`${s.species} ${s.neutral}`}>
-        Species: <span className={s['accent']}>{item.species}</span>
+        {t('mainPage.cardsSection.species')}{' '}
+        <span className={s['accent']}>{item.species}</span>
       </div>
-      <NavLink
+      <Link
         className={s['details-button']}
-        to={{
-          pathname: `${ROUTES.CHARACTER.ROOT}/${item.id}`,
-          search: searchParams.toString(),
-        }}
+        href={`/?page=${page}&details=${item.id}`}
         onMouseDown={(e) => e.stopPropagation()}
-      ></NavLink>
+      ></Link>
       <input
         type="checkbox"
         className={s['checkbox-card']}

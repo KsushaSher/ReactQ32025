@@ -1,3 +1,5 @@
+'use client';
+
 import { useTheme, useThemeToggle } from '../Context/Hooks';
 import s from './ThemeButton.module.scss';
 

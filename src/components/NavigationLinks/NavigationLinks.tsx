@@ -1,29 +1,35 @@
+'use client';
+
+import { Link } from '../../i18n/navigation';
 import { ROUTES } from '../../shared/constants/routes';
 import s from './NavigationLinks.module.scss';
-import { NavLink } from 'react-router';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+import { usePathname } from '../../i18n/navigation';
 
 const NavigationLinks = () => {
+  const t = useTranslations();
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    return pathname === href || pathname?.startsWith(href + '/');
+  };
+
   return (
     <nav className={s.nav}>
-      <NavLink
-        to={ROUTES.ROOT}
-        end
-        className={({ isActive }) =>
-          isActive ? `${s.link} ${s.active}` : s.link
-        }
+      <Link
+        href={ROUTES.ROOT}
+        className={isActive(ROUTES.ROOT) ? `${s.link} ${s.active}` : s.link}
       >
-        Home
-      </NavLink>
-      <NavLink
-        to={ROUTES.ABOUT}
-        end
-        className={({ isActive }) =>
-          isActive ? `${s.link} ${s.active}` : s.link
-        }
+        {t('mainPage.header.home')}
+      </Link>
+      <Link
+        href={ROUTES.ABOUT}
+        className={isActive(ROUTES.ABOUT) ? `${s.link} ${s.active}` : s.link}
         data-testid="about-link"
       >
-        About
-      </NavLink>
+        {t('mainPage.header.about')}
+      </Link>
     </nav>
   );
 };

@@ -1,29 +1,26 @@
-import { useCallback, useEffect, useRef } from 'react';
+'use client';
+
 import '../../styles/main.scss';
 import { Spinner } from '../Spinner';
-import { useNavigate, useParams, useSearchParams } from 'react-router';
 import CardDetailContent from '../CardDetailContent';
-import { ROUTES } from '../../shared/constants/routes';
 import { useGetCharacterByIdQuery } from '../../store/api/charactersApi';
+import { useRouter } from '../../i18n/navigation';
+import { ROUTES } from '../../shared/constants/routes';
+import { useCallback, useEffect, useRef } from 'react';
+import React from 'react';
 
-const CardDetail = () => {
-  const [searchParams] = useSearchParams();
-  const search = searchParams.toString();
-  const navigate = useNavigate();
-  const params = useParams();
-  const id = params.id || '';
-
+const CardDetail = ({ id }: { id: string }) => {
+  const router = useRouter();
   const cardRef = useRef<HTMLDivElement>(null);
-
   const { data, error, isLoading } = useGetCharacterByIdQuery(id);
 
   const handleClickOutside = useCallback(
     (event: MouseEvent) => {
       if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
-        navigate({ pathname: ROUTES.ROOT, search });
+        router.push(ROUTES.ROOT);
       }
     },
-    [navigate, search]
+    [router]
   );
 
   useEffect(() => {
@@ -44,7 +41,7 @@ const CardDetail = () => {
   ) : !data ? (
     <div>No result</div>
   ) : (
-    <CardDetailContent item={data} search={search} cardRef={cardRef} />
+    <CardDetailContent item={data} ref={cardRef} />
   );
 };
 

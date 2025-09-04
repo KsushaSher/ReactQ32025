@@ -1,9 +1,20 @@
+import { useState, useEffect } from 'react';
+
 type Return = [string, (value: string) => void];
 
 export const useLocalStorage = (key: string): Return => {
-  const search = localStorage.getItem(key) || '';
+  const [value, setValue] = useState('');
 
-  const handleSetValue = (value: string) => localStorage.setItem(key, value);
+  useEffect(() => {
+    const search = localStorage.getItem(key) || '';
 
-  return [search, handleSetValue];
+    setValue(search);
+  }, [key]);
+
+  const handleSetValue = (value: string) => {
+    localStorage.setItem(key, value);
+    setValue(value);
+  };
+
+  return [value, handleSetValue];
 };
