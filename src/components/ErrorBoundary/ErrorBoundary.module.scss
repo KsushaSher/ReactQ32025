@@ -1,8 +1,11 @@
+@use './_variables.scss' as *;
+@use '../../styles/variables' as *;
+
 .details {
   white-space: pre-wrap;
 }
 
-.wrapper-error-message {
+.error-message-wrapper {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -10,4 +13,20 @@
   justify-content: center;
 
   padding-top: 70px;
+
+  font-family: Montserrat, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+
+  background-color: var(--bg-body);
+}
+
+.wrapper-app {
+  font-family: Montserrat, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+
+  background-color: var(--bg-body);
 }

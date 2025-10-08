@@ -1,6 +1,6 @@
-import type { Item } from '../models';
+import type { CharacterItem } from '../models';
 
-export const convertToCSV = (items: Item[]) => {
+export const convertToCSV = (items: CharacterItem[]) => {
   if (items.length === 0) return '';
 
   const headers = Object.keys(items[0]).join(',');

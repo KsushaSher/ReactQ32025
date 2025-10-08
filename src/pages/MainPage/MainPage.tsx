@@ -1,15 +1,16 @@
 import { Section } from '../../components/Section';
 import { Search } from '../../components/Search';
 import { CardList } from '../../components/CardList';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Pagination from '../../components/Pagination';
 import { Navigate, Outlet, useSearchParams } from 'react-router';
 import s from './MainPage.module.scss';
-import { useLocalStorage } from '../../utils/hooks/useLocalStorage';
+import { useLocalStorage } from '../../utils/hooks/local-storage';
 import { LS_SEARCH_KEY } from '../../shared/constants/ls-keys';
-import { charactersAPI } from '../../services/characters-api';
 import { ROUTES } from '../../shared/constants/routes';
 import FlyoutElement from '../../components/FlyoutElement';
+import { useGetCharactersQuery } from '../../store/api/charactersApi';
+import RefreshButton from '../../components/RefreshButton';
 
 const MainPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,10 +19,11 @@ const MainPage = () => {
   const currentPage = searchParams.get('page');
   const search = searchParams.get('search') || searchLS;
 
-  const [items, setItems] = useState([]);
-  const [pages, setPages] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const { data, error, isLoading } = useGetCharactersQuery({
+    page: currentPage,
+    name: search,
+  });
+  const { info, results } = data || {};
 
   const handleSubmit = (value: string) => {
     const search = value.trim();
@@ -38,31 +40,6 @@ const MainPage = () => {
       );
   }, [setSearchParams, currentPage, search]);
 
-  useEffect(() => {
-    const fetchResults = async () => {
-      if (currentPage) {
-        setLoading(true);
-        try {
-          const data = await charactersAPI.fetchCharacters(
-            currentPage,
-            search || ''
-          );
-
-          setError('');
-          setItems(data.results);
-          setPages(data.info.pages);
-        } catch (error) {
-          setError(error instanceof Error ? error.message : String(error));
-          console.error(error);
-        } finally {
-          setLoading(false);
-        }
-      }
-    };
-
-    fetchResults();
-  }, [search, currentPage]);
-
   if (currentPage && !/^\d+$/.test(currentPage)) {
     return <Navigate to={ROUTES.NOT_FOUND} />;
   }
@@ -70,11 +47,15 @@ const MainPage = () => {
   return (
     <>
       <main data-testid="main-page">
-        <Search search={searchLS} onSubmit={handleSubmit} />
-        <Section loading={loading} error={error}>
-          <Pagination pages={pages} />
+        <div className={s['option-wrapper']}>
+          <Search search={searchLS} onSubmit={handleSubmit} />
+          <RefreshButton />
+        </div>
+
+        <Section loading={isLoading} error={error}>
+          <Pagination pages={info?.pages} />
           <div className={s['content-wrapper']}>
-            <CardList items={items} />
+            <CardList items={results} />
             <Outlet />
           </div>
         </Section>

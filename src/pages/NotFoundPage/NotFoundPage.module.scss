@@ -1,12 +1,17 @@
+@use '../../styles/variables' as *;
+
 .error-page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
+  height: 100vh;
   padding-top: 30px;
 
-  color: rgb(79 65 59);
+  color: var(--text-color-dark);
+
+  background-color: var(--bg-body);
 }
 
 .error404 {
@@ -15,11 +20,11 @@
 
 .link {
   padding-top: 20px;
-  color: rgb(79 65 59);
+  color: var(--text-color-dark);
   text-decoration: none;
   text-decoration: underline;
 
   &:hover {
-    color: rgb(196 111 1);
+    color: var(--border-input);
   }
 }

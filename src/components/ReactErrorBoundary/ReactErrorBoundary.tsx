@@ -11,7 +11,7 @@ export const ReactErrorBoundary = () => {
   ) : error instanceof Error ? (
     <ReactError error={error} />
   ) : (
-    <div className={s['wrapper-error-message']}>
+    <div className={`${s['error-message-wrapper']} light`}>
       <h1>Unknown Error</h1>
     </div>
   );

@@ -2,4 +2,4 @@ export {
   selectCount,
   selectIsSelected,
   selectSelectedCharacters,
-} from './selectors';
+} from './characters.selectors';

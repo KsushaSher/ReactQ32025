@@ -8,7 +8,7 @@ interface RouteErrorProps {
 
 export const RouteError = ({ error }: RouteErrorProps) => {
   return (
-    <div className={s['wrapper-error-message']}>
+    <div className={`${s['error-message-wrapper']} light`}>
       <h2>Something went wrong...</h2>
       <details className={s.details}>
         {<summary>Details</summary>}

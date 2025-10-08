@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import Section from './Section';
+import { mockError } from '../../test-utils/mocks/data';
 
 describe('Rendering Tests', () => {
   it('Shows loading state while fetching data', () => {
@@ -25,7 +26,7 @@ describe('Rendering Tests', () => {
 describe('Error Handling Tests', () => {
   it('Displays error message when API call fails', () => {
     render(
-      <Section loading={false} error={'error'}>
+      <Section loading={false} error={mockError}>
         <div>Children</div>
       </Section>
     );

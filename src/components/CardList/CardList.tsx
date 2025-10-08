@@ -1,11 +1,14 @@
-import type { Item } from '../../models';
+import type { CharacterItem } from '../../models';
 import s from './CardList.module.scss';
 import Card from '../Card';
 
 export interface CardList {
-  items: Item[];
+  items: CharacterItem[] | undefined;
 }
+
 const CardList = ({ items }: CardList) => {
+  if (!items) return;
+
   return items.length === 0 ? (
     <div className={s.wrapper}>No results</div>
   ) : (

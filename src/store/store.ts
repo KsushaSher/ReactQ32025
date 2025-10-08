@@ -1,11 +1,23 @@
 import { configureStore } from '@reduxjs/toolkit';
-import charactersReducer from './slices/charactersSlice';
+import charactersReducer, { type InitialState } from './slices/charactersSlice';
+import { charactersApi } from './api/charactersApi';
 
-export const store = configureStore({
-  reducer: {
-    characters: charactersReducer,
-  },
-});
+export interface RootStateSchema {
+  characters: InitialState;
+  [charactersApi.reducerPath]: ReturnType<typeof charactersApi.reducer>;
+}
 
-export type RootState = ReturnType<typeof store.getState>;
+export const createStore = () =>
+  configureStore({
+    reducer: {
+      characters: charactersReducer,
+      [charactersApi.reducerPath]: charactersApi.reducer,
+    },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(charactersApi.middleware),
+  });
+
+export const store = createStore();
+
+export type RootState = RootStateSchema;
 export type AppDispatch = typeof store.dispatch;

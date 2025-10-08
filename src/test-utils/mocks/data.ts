@@ -1,12 +1,18 @@
 import { vi } from 'vitest';
-import type { Item } from '../../models';
+import type { CharacterItem } from '../../models';
+import type { SerializedError } from '@reduxjs/toolkit';
 
 export const mockOnSubmit = vi.fn();
 
 export const BrokenComponent = () => {
   throw new Error('Error!');
 };
-export const mockItems: Item[] = [
+
+export const mockError: SerializedError = {
+  name: 'Error',
+  message: 'Something went wrong',
+};
+export const mockItems: CharacterItem[] = [
   {
     id: 1,
     name: 'Rick Sanchez',
@@ -27,7 +33,7 @@ export const mockItems: Item[] = [
   },
 ];
 
-export const mockItem: Item = {
+export const mockItem: CharacterItem = {
   id: 1,
   name: 'Rick Sanchez',
   status: 'Alive',
@@ -36,3 +42,6 @@ export const mockItem: Item = {
   image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
   url: 'https://rickandmortyapi.com/api/character/1',
 };
+
+export const getCharacterMock = vi.fn().mockResolvedValue({ data: mockItem });
+export const getEmptyCharacterMock = vi.fn().mockResolvedValue({});

@@ -2,7 +2,7 @@ import s from './Pagination.module.scss';
 import { useSearchParams } from 'react-router';
 
 interface Pagination {
-  pages: number | null;
+  pages: number | undefined;
 }
 
 const Pagination = ({ pages }: Pagination) => {
